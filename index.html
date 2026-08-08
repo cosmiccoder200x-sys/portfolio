@@ -3,1086 +3,853 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Sreerang P — Electrical & Computer Engineering student and IIT Madras BS in Data Science student. Projects, skills, education and GitHub." />
-  <title>Sreerang P | Student Portfolio</title>
+  <meta name="description" content="Sreerang P — Electrical & Computer Engineering student and IIT Madras BS Data Science scholar. Full-stack developer, ML engineer, and open source contributor." />
+  <meta property="og:title" content="Sreerang P | Portfolio" />
+  <meta property="og:description" content="ECE Student · IIT Madras DS · Builder of things that matter." />
+  <title>Sreerang P | Portfolio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
 
   <style>
     :root {
-      --bg: #07090d;
-      --surface: #0d1118;
-      --surface-2: #111722;
-      --text: #f4f7fb;
-      --muted: #9aa6b5;
-      --line: rgba(255,255,255,.09);
-      --accent: #8ab4ff;
-      --accent-2: #b8d1ff;
-      --max: 1120px;
-      --radius: 20px;
+      --bg:        #04050a;
+      --surface:   rgba(255,255,255,0.038);
+      --surface-2: rgba(255,255,255,0.062);
+      --border:    rgba(255,255,255,0.08);
+      --border-h:  rgba(108,140,255,0.35);
+      --text:      #f0f4ff;
+      --text-2:    #a8b4c8;
+      --text-3:    #6b7a92;
+      --accent:    #6c8cff;
+      --accent-2:  #a78bfa;
+      --accent-3:  #34d399;
+      --radius:    18px;
+      --radius-lg: 26px;
+      --radius-xl: 36px;
+      --max:       1160px;
+      --mono:      'JetBrains Mono', monospace;
     }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at 78% 8%, rgba(130, 170, 255, .16), transparent 25%),
-        radial-gradient(circle at 15% 24%, rgba(190, 140, 255, .09), transparent 22%),
-        linear-gradient(180deg, #07090d 0%, #090c12 52%, #07090d 100%);
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
       color: var(--text);
       line-height: 1.65;
+      overflow-x: hidden;
     }
     a { color: inherit; text-decoration: none; }
     img { max-width: 100%; display: block; }
-    .container { width: min(var(--max), calc(100% - 40px)); margin: auto; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+    .container { width: min(var(--max), calc(100% - 48px)); margin: auto; }
 
-    /* Navigation */
-    nav {
-      position: fixed;
-      inset: 0 0 auto 0;
-      z-index: 100;
-      backdrop-filter: blur(18px);
-      background: rgba(7,9,13,.72);
-      border-bottom: 1px solid var(--line);
+    /* ── Canvas & Background ── */
+    #particle-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+    .ambient-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+    .ambient-bg::before {
+      content: '';
+      position: absolute;
+      width: 900px; height: 900px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(108,140,255,.12), transparent 70%);
+      top: -20%; left: -10%;
+      animation: drift1 20s ease-in-out infinite alternate;
     }
-    .nav-inner {
-      height: 72px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
+    .ambient-bg::after {
+      content: '';
+      position: absolute;
+      width: 700px; height: 700px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(167,139,250,.09), transparent 70%);
+      bottom: -10%; right: -5%;
+      animation: drift2 25s ease-in-out infinite alternate;
     }
-    .logo { font-weight: 800; letter-spacing: -.03em; }
+    @keyframes drift1 { from { transform: translate(0,0) scale(1); } to { transform: translate(6%,8%) scale(1.15); } }
+    @keyframes drift2 { from { transform: translate(0,0) scale(1); } to { transform: translate(-5%,-6%) scale(1.12); } }
+
+    #cursor-glow {
+      position: fixed; width: 320px; height: 320px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(108,140,255,.10), transparent 65%);
+      pointer-events: none; z-index: 1;
+      transform: translate(-50%,-50%);
+      transition: opacity .4s ease;
+      will-change: left, top;
+    }
+
+    #scroll-progress {
+      position: fixed; top: 0; left: 0; height: 2px; z-index: 1000; width: 0%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 8px var(--accent);
+      transition: width .1s linear;
+    }
+
+    /* ── Nav ── */
+    nav#main-nav {
+      position: fixed; inset: 0 0 auto 0; z-index: 200;
+      backdrop-filter: blur(24px) saturate(180%);
+      background: rgba(4,5,10,.78);
+      border-bottom: 1px solid var(--border);
+      transition: transform .4s cubic-bezier(.2,.8,.2,1);
+    }
+    nav#main-nav.hide { transform: translateY(-100%); }
+    .nav-inner { height: 68px; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-size: 1.3rem; font-weight: 900; letter-spacing: -.05em; display: flex; align-items: center; gap: 8px; }
+    .logo-dot {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--accent);
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(108,140,255,.5); } 50% { box-shadow: 0 0 0 8px rgba(108,140,255,0); } }
     .logo span { color: var(--accent); }
-    .nav-links { display: flex; gap: 24px; list-style: none; }
-    .nav-links a {
-      color: var(--muted);
-      font-size: .92rem;
-      transition: .2s;
+    .nav-links { display: flex; gap: 6px; list-style: none; align-items: center; }
+    .nav-links a { padding: 7px 14px; border-radius: 999px; font-size: .87rem; font-weight: 500; color: var(--text-2); transition: color .2s, background .2s; }
+    .nav-links a:hover { color: var(--text); background: var(--surface-2); }
+    .nav-links a.active { color: var(--accent); background: rgba(108,140,255,.1); }
+    .nav-cta { display: inline-flex; align-items: center; gap: 7px; padding: 9px 18px; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 700; font-size: .87rem; transition: transform .2s, box-shadow .2s; }
+    .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(108,140,255,.45); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; padding: 8px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: .3s; }
+    .mobile-nav {
+      display: none; position: fixed; inset: 0; z-index: 190;
+      background: rgba(4,5,10,.97); backdrop-filter: blur(20px);
+      flex-direction: column; align-items: center; justify-content: center; gap: 24px;
+      opacity: 0; pointer-events: none; transition: opacity .3s;
     }
-    .nav-links a:hover { color: var(--text); }
+    .mobile-nav.open { opacity: 1; pointer-events: auto; }
+    .mobile-nav a { font-size: 1.8rem; font-weight: 800; color: var(--text-2); letter-spacing: -.04em; transition: color .2s; }
+    .mobile-nav a:hover { color: var(--accent); }
 
-    /* Hero */
-    .hero {
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 130px 0 80px;
-    }
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.35fr .65fr;
-      gap: 70px;
-      align-items: center;
-    }
+    /* ── Hero ── */
+    .hero { position: relative; z-index: 10; min-height: 100svh; display: grid; place-items: center; padding: 120px 0 80px; }
+    .hero-inner { display: grid; grid-template-columns: 1fr auto; gap: 80px; align-items: center; }
     .eyebrow {
-      color: var(--accent);
-      font-size: .9rem;
-      font-weight: 700;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      margin-bottom: 18px;
-    }
-    h1 {
-      font-size: clamp(3.2rem, 8vw, 6.6rem);
-      line-height: .95;
-      letter-spacing: -.065em;
-      max-width: 800px;
-    }
-    .hero h1 span { color: var(--accent); }
-    .hero-sub {
-      max-width: 680px;
-      margin: 28px 0;
-      font-size: 1.16rem;
-      color: var(--muted);
-    }
-    .buttons { display: flex; flex-wrap: wrap; gap: 12px; }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      border: 1px solid var(--line);
-      padding: 12px 18px;
-      border-radius: 999px;
-      font-weight: 700;
-      transition: transform .2s, border-color .2s, background .2s;
-    }
-    .btn:hover { transform: translateY(-2px); border-color: rgba(255,255,255,.2); }
-    .btn.primary { background: var(--text); color: var(--bg); border-color: transparent; }
-
-    .profile-card {
-      background: linear-gradient(145deg, rgba(255,255,255,.07), rgba(255,255,255,.025));
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      padding: 28px;
-      box-shadow: 0 30px 80px rgba(0,0,0,.3);
-    }
-    .avatar {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 22px;
-      border: 3px solid rgba(255,255,255,.12);
-    }
-    .profile-card h3 { font-size: 1.5rem; }
-    .profile-card p { color: var(--muted); margin-top: 4px; }
-    .profile-meta { margin-top: 20px; display: grid; gap: 10px; }
-    .meta {
-      padding: 12px 14px;
-      background: rgba(255,255,255,.035);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      color: var(--muted);
-      font-size: .9rem;
-    }
-    .meta strong { color: var(--text); }
-
-    section { padding: 110px 0; }
-    .section-head { margin-bottom: 42px; max-width: 720px; }
-    .section-kicker {
-      color: var(--accent);
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: .12em;
-      font-size: .78rem;
-    }
-    h2 {
-      font-size: clamp(2rem, 4vw, 3.5rem);
-      letter-spacing: -.045em;
-      line-height: 1.05;
-      margin: 10px 0 15px;
-    }
-    .section-head p { color: var(--muted); font-size: 1.05rem; }
-
-    /* Cards */
-    .grid { display: grid; gap: 18px; }
-    .grid-2 { grid-template-columns: repeat(2, 1fr); }
-    .grid-3 { grid-template-columns: repeat(3, 1fr); }
-    .card {
-      background: rgba(255,255,255,.035);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 26px;
-      transition: transform .2s, border-color .2s, background .2s;
-    }
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(138,180,255,.3);
-      background: rgba(255,255,255,.05);
-    }
-    .card h3 { margin-bottom: 8px; font-size: 1.2rem; }
-    .card p { color: var(--muted); }
-    .tag-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
-    .tag {
-      font-size: .78rem;
-      padding: 6px 10px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      color: var(--accent-2);
-      background: rgba(138,180,255,.06);
-    }
-    .card-actions { display: flex; gap: 10px; margin-top: 22px; }
-    .text-link { color: var(--accent); font-weight: 700; font-size: .9rem; }
-
-    /* About */
-    .about-copy {
-      font-size: 1.1rem;
-      color: var(--muted);
-      max-width: 850px;
-    }
-    .about-copy strong { color: var(--text); }
-
-    /* Timeline */
-    .timeline { position: relative; display: grid; gap: 20px; }
-    .timeline-item {
-      padding: 24px 26px;
-      border-left: 2px solid rgba(138,180,255,.35);
-      background: rgba(255,255,255,.025);
-      border-radius: 0 18px 18px 0;
-    }
-    .timeline-item .date { color: var(--accent); font-size: .85rem; font-weight: 800; }
-    .timeline-item h3 { margin: 5px 0; }
-    .timeline-item p { color: var(--muted); }
-
-    /* GitHub stats */
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
+      display: inline-flex; align-items: center; gap: 10px; padding: 6px 14px; border-radius: 999px;
+      background: rgba(108,140,255,.1); border: 1px solid rgba(108,140,255,.2);
+      color: var(--accent); font-size: .8rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
       margin-bottom: 28px;
+      opacity: 0; animation: fadeUp .8s .1s both cubic-bezier(.2,.8,.2,1);
     }
-    .stat {
-      padding: 22px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      border-radius: 16px;
+    .eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent-3); animation: pulse 2s ease-in-out infinite; }
+    h1 {
+      font-size: clamp(3.4rem, 8vw, 7rem); line-height: .93; letter-spacing: -.07em; font-weight: 900;
+      opacity: 0; animation: fadeUp 1s .18s both cubic-bezier(.2,.8,.2,1);
     }
-    .stat-number { font-size: 1.8rem; font-weight: 800; }
-    .stat-label { color: var(--muted); font-size: .85rem; }
-    .github-note { color: var(--muted); font-size: .86rem; margin-top: 18px; }
+    .h1-accent {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 50%, #f0a7ff 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      display: inline-block;
+    }
+    .h1-muted { color: var(--text-2); }
+    .hero-sub { margin: 28px 0 36px; font-size: 1.18rem; color: var(--text-2); max-width: 580px; line-height: 1.7; opacity: 0; animation: fadeUp .9s .26s both cubic-bezier(.2,.8,.2,1); }
+    .hero-sub strong { color: var(--text); }
+    .hero-btns { display: flex; flex-wrap: wrap; gap: 12px; opacity: 0; animation: fadeUp .8s .34s both cubic-bezier(.2,.8,.2,1); }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 24px; border-radius: 999px; font-weight: 700; font-size: .93rem; transition: transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s; border: 1px solid var(--border); }
+    .btn:hover { transform: translateY(-3px); }
+    .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent-2)); border-color: transparent; color: #fff; }
+    .btn-primary:hover { box-shadow: 0 12px 32px rgba(108,140,255,.4); }
+    .btn-ghost { background: var(--surface); color: var(--text-2); }
+    .btn-ghost:hover { background: var(--surface-2); color: var(--text); border-color: var(--border-h); }
 
-    /* Contact */
-    .contact {
-      border: 1px solid var(--line);
-      background: linear-gradient(145deg, rgba(138,180,255,.09), rgba(255,255,255,.025));
-      border-radius: 28px;
-      padding: 45px;
-      text-align: center;
-    }
-    .contact p { color: var(--muted); max-width: 650px; margin: 0 auto 25px; }
+    #typed { color: var(--accent-3); font-weight: 700; }
+    .cursor-blink { display: inline-block; width: 2px; height: 1.1em; background: var(--accent-3); margin-left: 2px; vertical-align: text-bottom; animation: blink .9s step-end infinite; }
+    @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0; } }
 
-    footer {
-      border-top: 1px solid var(--line);
-      padding: 28px 0 40px;
-      color: var(--muted);
-      font-size: .86rem;
+    /* Profile card */
+    .profile-card {
+      background: linear-gradient(145deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
+      border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 32px 28px;
+      min-width: 260px; text-align: center; backdrop-filter: blur(12px);
+      box-shadow: 0 40px 80px rgba(0,0,0,.35), 0 0 0 1px rgba(255,255,255,.06) inset;
+      opacity: 0; animation: slideLeft .9s .4s both cubic-bezier(.2,.8,.2,1);
+      position: relative; overflow: hidden;
     }
-    .footer-inner { display: flex; justify-content: space-between; gap: 20px; }
+    .profile-card::before {
+      content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+      background: conic-gradient(transparent 270deg, rgba(108,140,255,.12) 360deg);
+      animation: rotateBorder 6s linear infinite; z-index: -1;
+    }
+    @keyframes rotateBorder { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .avatar-wrap { position: relative; display: inline-block; margin-bottom: 18px; }
+    .avatar { width: 110px; height: 110px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(108,140,255,.3); }
+    .avatar-ring {
+      position: absolute; inset: -6px; border-radius: 50%; border: 2px solid transparent;
+      background: linear-gradient(var(--bg), var(--bg)) padding-box, linear-gradient(135deg, var(--accent), var(--accent-2), var(--accent-3)) border-box;
+      animation: spinRing 4s linear infinite;
+    }
+    @keyframes spinRing { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .profile-name { font-size: 1.25rem; font-weight: 800; margin-bottom: 4px; }
+    .profile-role { color: var(--text-3); font-size: .86rem; }
+    .profile-badges { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 18px; justify-content: center; }
+    .badge { font-size: .75rem; font-weight: 600; padding: 5px 10px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--text-2); }
+    .profile-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 18px; }
+    .pstat { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 12px 8px; }
+    .pstat-n { font-size: 1.4rem; font-weight: 900; color: var(--text); }
+    .pstat-l { font-size: .72rem; color: var(--text-3); margin-top: 2px; }
 
-    .loading { color: var(--muted); padding: 20px 0; }
-    .error { color: #ff9f9f; }
+    .scroll-hint { position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; opacity: 0; animation: fadeUp .8s 1.2s both; }
+    .scroll-hint span { font-size: .75rem; color: var(--text-3); letter-spacing: .08em; text-transform: uppercase; }
+    .scroll-mouse { width: 22px; height: 35px; border: 1.5px solid var(--border-h); border-radius: 11px; display: flex; justify-content: center; padding-top: 6px; }
+    .scroll-wheel { width: 3px; height: 6px; background: var(--accent); border-radius: 3px; animation: scrollWheel 2s ease-in-out infinite; }
+    @keyframes scrollWheel { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(10px); opacity: 0; } }
 
-    @media (max-width: 850px) {
-      .hero-grid, .grid-2, .grid-3 { grid-template-columns: 1fr; }
-      .hero-grid { gap: 40px; }
-      .stats { grid-template-columns: repeat(2, 1fr); }
-      .nav-links { display: none; }
-      h1 { font-size: clamp(3rem, 17vw, 5rem); }
-    }
+    /* ── Section Shared ── */
+    section { position: relative; z-index: 10; padding: 110px 0; }
+    .section-kicker { display: inline-flex; align-items: center; gap: 8px; font-size: .75rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+    .section-kicker::before { content: ''; display: block; width: 20px; height: 2px; background: var(--accent); border-radius: 2px; }
+    h2 { font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 900; letter-spacing: -.06em; line-height: 1.0; margin-bottom: 16px; }
+    .section-desc { color: var(--text-2); font-size: 1.05rem; max-width: 560px; line-height: 1.7; }
+    .section-head { margin-bottom: 56px; }
 
-    @media (max-width: 520px) {
-      .container { width: min(var(--max), calc(100% - 26px)); }
-      section { padding: 80px 0; }
-      .hero { padding-top: 105px; }
-      .stats { grid-template-columns: 1fr 1fr; }
-      .contact { padding: 30px 20px; }
-      .footer-inner { flex-direction: column; }
-    }
-  
-    /* ===== Motion system ===== */
-    html { scroll-behavior: smooth; }
-    body { overflow-x: hidden; }
-    body::before {
-      content: "";
-      position: fixed;
-      inset: -30%;
-      z-index: -2;
-      pointer-events: none;
-      background:
-        radial-gradient(circle at 20% 30%, rgba(138,180,255,.08), transparent 22%),
-        radial-gradient(circle at 80% 70%, rgba(190,140,255,.06), transparent 20%);
-      animation: ambientDrift 18s ease-in-out infinite alternate;
-    }
-    .cursor-glow {
-      position: fixed;
-      width: 280px;
-      height: 280px;
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: -1;
-      background: radial-gradient(circle, rgba(138,180,255,.10), transparent 68%);
-      transform: translate(-50%, -50%);
-      transition: opacity .3s ease;
-    }
-    @keyframes ambientDrift {
-      0% { transform: translate3d(-2%, -1%, 0) scale(1); }
-      100% { transform: translate3d(2%, 2%, 0) scale(1.08); }
-    }
-    @keyframes heroIn {
-      from { opacity: 0; transform: translateY(24px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .hero .eyebrow { animation: heroIn .8s .05s both cubic-bezier(.2,.8,.2,1); }
-    .hero h1 { animation: heroIn .9s .12s both cubic-bezier(.2,.8,.2,1); }
-    .hero .hero-sub { animation: heroIn .9s .22s both cubic-bezier(.2,.8,.2,1); }
-    .hero .buttons { animation: heroIn .9s .32s both cubic-bezier(.2,.8,.2,1); }
-    .hero .tag-list { animation: heroIn .9s .42s both cubic-bezier(.2,.8,.2,1); }
-    .profile-card { animation: heroIn 1s .2s both cubic-bezier(.2,.8,.2,1); }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity .75s ease, transform .75s cubic-bezier(.2,.8,.2,1);
-    }
+    .reveal { opacity: 0; transform: translateY(36px); transition: opacity .75s cubic-bezier(.2,.8,.2,1), transform .75s cubic-bezier(.2,.8,.2,1); }
     .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
 
-    .card {
-      position: relative;
-      overflow: hidden;
-    }
-    .card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,.035) 48%, transparent 65%);
-      transform: translateX(-120%);
-      transition: transform .8s ease;
-    }
-    .card:hover::after { transform: translateX(120%); }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes slideLeft { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: translateX(0); } }
 
-    .btn {
-      position: relative;
-      overflow: hidden;
-    }
-    .btn::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(110deg, transparent 25%, rgba(255,255,255,.18), transparent 75%);
-      transform: translateX(-120%);
-      transition: transform .55s ease;
-    }
-    .btn:hover::after { transform: translateX(120%); }
+    /* ── About ── */
+    #about { background: linear-gradient(180deg, transparent, rgba(108,140,255,.03) 50%, transparent); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+    .about-text p { color: var(--text-2); font-size: 1.07rem; line-height: 1.8; margin-bottom: 18px; }
+    .about-text strong { color: var(--text); }
+    .skills-cloud { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+    .skill-pill { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 999px; background: var(--surface); border: 1px solid var(--border); color: var(--text-2); font-size: .84rem; font-weight: 500; transition: background .2s, border-color .2s, transform .2s, color .2s; }
+    .skill-pill:hover { background: rgba(108,140,255,.1); border-color: rgba(108,140,255,.3); color: var(--accent); transform: translateY(-2px); }
+    .dot { width: 6px; height: 6px; border-radius: 50%; }
+    .dot-blue   { background: #6c8cff; }
+    .dot-purple { background: #a78bfa; }
+    .dot-green  { background: #34d399; }
+    .dot-orange { background: #fb923c; }
+    .dot-pink   { background: #f472b6; }
 
-    .scroll-progress {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 2px;
-      width: 0;
-      z-index: 200;
-      background: var(--accent);
-      box-shadow: 0 0 14px rgba(138,180,255,.55);
-    }
-    .nav-inner { transition: height .3s ease; }
-    nav.scrolled { background: rgba(7,9,13,.9); }
-    nav.scrolled .nav-inner { height: 62px; }
+    .timeline { display: grid; gap: 16px; }
+    .timeline-item { display: grid; grid-template-columns: auto 1fr; gap: 20px; align-items: start; }
+    .tl-dot-wrap { display: flex; flex-direction: column; align-items: center; padding-top: 6px; }
+    .tl-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); box-shadow: 0 0 0 3px rgba(108,140,255,.25); flex-shrink: 0; }
+    .tl-line { width: 2px; flex: 1; min-height: 40px; background: linear-gradient(to bottom, rgba(108,140,255,.3), transparent); margin-top: 4px; }
+    .tl-body { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 22px; transition: border-color .2s, background .2s; }
+    .tl-body:hover { border-color: var(--border-h); background: var(--surface-2); }
+    .tl-date { font-size: .78rem; font-weight: 700; color: var(--accent); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 6px; }
+    .tl-title { font-weight: 700; font-size: 1.05rem; margin-bottom: 4px; }
+    .tl-sub { color: var(--text-3); font-size: .88rem; }
 
-    .profile-card:hover .avatar {
-      transform: scale(1.035) rotate(1deg);
-    }
-    .avatar { transition: transform .5s cubic-bezier(.2,.8,.2,1); }
+    /* ── Projects ── */
+    .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .project-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; display: flex; flex-direction: column; transition: transform .3s cubic-bezier(.2,.8,.2,1), border-color .3s, background .3s, box-shadow .3s; position: relative; overflow: hidden; }
+    .project-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(108,140,255,.06), transparent 60%); opacity: 0; transition: opacity .3s; }
+    .project-card:hover { transform: translateY(-6px); border-color: var(--border-h); background: var(--surface-2); box-shadow: 0 20px 60px rgba(0,0,0,.3), 0 0 0 1px rgba(108,140,255,.1) inset; }
+    .project-card:hover::before { opacity: 1; }
+    .project-card.featured { grid-column: span 2; }
+    .project-icon { width: 48px; height: 48px; border-radius: 12px; background: var(--surface-2); border: 1px solid var(--border); display: grid; place-items: center; font-size: 1.4rem; margin-bottom: 18px; }
+    .project-title { font-size: 1.15rem; font-weight: 800; margin-bottom: 8px; }
+    .project-desc { color: var(--text-2); font-size: .92rem; line-height: 1.65; flex: 1; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 18px; }
+    .tag { font-size: .73rem; font-weight: 600; padding: 5px 10px; border-radius: 999px; background: rgba(108,140,255,.08); border: 1px solid rgba(108,140,255,.18); color: var(--accent); }
+    .project-links { display: flex; gap: 10px; margin-top: 22px; }
+    .proj-link { display: inline-flex; align-items: center; gap: 6px; font-size: .84rem; font-weight: 700; color: var(--text-2); padding: 7px 14px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); transition: color .2s, border-color .2s, background .2s; }
+    .proj-link:hover { color: var(--text); border-color: var(--border-h); background: var(--surface-2); }
+    .proj-link.primary { color: var(--accent); border-color: rgba(108,140,255,.3); }
 
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
-        transition-duration: .01ms !important;
-      }
-    }
+    /* ── GitHub Stats ── */
+    #github { background: linear-gradient(180deg, transparent, rgba(167,139,250,.03) 50%, transparent); }
+    .gh-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 44px; }
+    .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 32px; }
+    .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 20px; transition: border-color .2s, transform .2s, background .2s; }
+    .stat-card:hover { border-color: var(--border-h); transform: translateY(-3px); background: var(--surface-2); }
+    .stat-icon { font-size: 1.4rem; margin-bottom: 12px; }
+    .stat-number { font-size: 2rem; font-weight: 900; letter-spacing: -.04em; line-height: 1; margin-bottom: 6px; }
+    .stat-label { color: var(--text-3); font-size: .83rem; }
+    .repos-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .repo-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 22px; display: flex; flex-direction: column; gap: 10px; transition: border-color .2s, background .2s, transform .2s; }
+    .repo-card:hover { border-color: var(--border-h); background: var(--surface-2); transform: translateY(-2px); }
+    .repo-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+    .repo-name { font-weight: 700; font-size: .97rem; display: flex; align-items: center; gap: 6px; }
+    .repo-stars { font-size: .8rem; color: var(--text-3); display: flex; align-items: center; gap: 4px; }
+    .repo-desc { color: var(--text-2); font-size: .86rem; line-height: 1.55; }
+    .repo-lang { display: flex; align-items: center; gap: 6px; font-size: .78rem; color: var(--text-3); }
+    .lang-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .lang-py { background: #3572A5; } .lang-js { background: #f1e05a; } .lang-ts { background: #3178c6; } .lang-html { background: #e34c26; } .lang-c { background: #555; }
+    .gh-note { color: var(--text-3); font-size: .82rem; margin-top: 16px; text-align: center; }
+    .loading-skeleton { background: linear-gradient(90deg, var(--surface) 25%, var(--surface-2) 50%, var(--surface) 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 6px; }
+    @keyframes shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
 
+    /* ── Skills ── */
+    .skills-container { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+    .skills-group-title { font-size: .8rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-3); margin-bottom: 20px; }
+    .skill-bar-wrap { display: grid; gap: 14px; }
+    .skill-top { display: flex; justify-content: space-between; margin-bottom: 8px; }
+    .skill-name { font-size: .9rem; font-weight: 600; }
+    .skill-pct { font-size: .82rem; color: var(--text-3); font-family: var(--mono); }
+    .skill-track { height: 5px; background: var(--surface-2); border-radius: 5px; overflow: hidden; }
+    .skill-fill { height: 100%; border-radius: 5px; width: 0%; transition: width 1.4s cubic-bezier(.2,.8,.2,1); }
+    .fill-blue   { background: linear-gradient(90deg, var(--accent), var(--accent-2)); }
+    .fill-green  { background: linear-gradient(90deg, #34d399, #10b981); }
+    .fill-orange { background: linear-gradient(90deg, #fb923c, #f59e0b); }
+    .tools-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .tool-card { aspect-ratio: 1; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 16px 10px; transition: border-color .2s, background .2s, transform .2s; text-align: center; }
+    .tool-card:hover { border-color: var(--border-h); background: var(--surface-2); transform: translateY(-3px) scale(1.03); }
+    .tool-icon { font-size: 1.6rem; line-height: 1; }
+    .tool-name { font-size: .72rem; color: var(--text-3); font-weight: 600; }
+
+    /* ── Contact ── */
+    .contact-card { background: linear-gradient(135deg, rgba(108,140,255,.10), rgba(167,139,250,.08), rgba(52,211,153,.05)); border: 1px solid rgba(108,140,255,.2); border-radius: var(--radius-xl); padding: 72px 56px; text-align: center; position: relative; overflow: hidden; }
+    .contact-card::before { content: ''; position: absolute; top: -40%; left: -20%; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(108,140,255,.1), transparent 70%); pointer-events: none; }
+    .contact-card p { color: var(--text-2); max-width: 520px; margin: 18px auto 36px; font-size: 1.06rem; line-height: 1.7; }
+    .contact-links { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-bottom: 32px; }
+    .contact-link { display: inline-flex; align-items: center; gap: 9px; padding: 13px 22px; border-radius: 999px; font-weight: 700; font-size: .92rem; border: 1px solid var(--border); background: rgba(255,255,255,.05); backdrop-filter: blur(8px); transition: transform .25s, border-color .25s, background .25s, box-shadow .25s; }
+    .contact-link:hover { transform: translateY(-3px); border-color: var(--border-h); background: rgba(255,255,255,.09); box-shadow: 0 10px 30px rgba(0,0,0,.2); }
+    .contact-link.main { background: linear-gradient(135deg, var(--accent), var(--accent-2)); border-color: transparent; color: #fff; }
+    .contact-link.main:hover { box-shadow: 0 12px 36px rgba(108,140,255,.45); }
+    .contact-email { font-family: var(--mono); font-size: .88rem; color: var(--text-3); }
+
+    /* ── Footer ── */
+    footer { position: relative; z-index: 10; border-top: 1px solid var(--border); padding: 30px 0; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+    .footer-left { color: var(--text-3); font-size: .84rem; }
+    .footer-left span { color: var(--accent); }
+    .footer-right { display: flex; gap: 16px; }
+    .footer-link { font-size: .84rem; color: var(--text-3); transition: color .2s; }
+    .footer-link:hover { color: var(--text); }
+
+    /* ── Back to top ── */
+    #back-top { position: fixed; bottom: 28px; right: 28px; z-index: 300; width: 44px; height: 44px; border-radius: 50%; background: var(--accent); color: #fff; display: grid; place-items: center; box-shadow: 0 8px 24px rgba(108,140,255,.4); opacity: 0; transform: translateY(16px); transition: opacity .3s, transform .3s; pointer-events: none; }
+    #back-top.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    #back-top:hover { background: var(--accent-2); }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) { .projects-grid { grid-template-columns: repeat(2,1fr); } .project-card.featured { grid-column: span 2; } }
+    @media (max-width: 860px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .stats-row { grid-template-columns: repeat(2,1fr); }
+      .repos-grid { grid-template-columns: 1fr; }
+      .skills-container { grid-template-columns: 1fr; gap: 36px; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .project-card.featured { grid-column: span 1; }
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .mobile-nav { display: flex; }
+      .gh-header { flex-direction: column; align-items: flex-start; gap: 14px; }
+    }
+    @media (max-width: 520px) {
+      .container { width: calc(100% - 32px); }
+      section { padding: 80px 0; }
+      .contact-card { padding: 40px 24px; }
+      h1 { font-size: clamp(3rem,18vw,5rem); }
+      .footer-inner { flex-direction: column; text-align: center; }
+      .tools-grid { grid-template-columns: repeat(3,1fr); }
+    }
   </style>
 </head>
-
 <body>
-  <div class="scroll-progress" aria-hidden="true"></div>
-  <div class="cursor-glow" aria-hidden="true"></div>
-  <nav>
-    <div class="container nav-inner">
-      <a href="#home" class="logo">Sreerang<span>.</span></a>
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#profile">Profile</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#why">Why I Build</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#education">Education</a></li>
-        <li><a href="#github">GitHub</a></li>
-        <li><a href="#contact">Contact</a></li>
+
+<div id="scroll-progress" role="progressbar" aria-label="Page scroll progress"></div>
+<div class="ambient-bg" aria-hidden="true"></div>
+<canvas id="particle-canvas" aria-hidden="true"></canvas>
+<div id="cursor-glow" aria-hidden="true"></div>
+
+<button id="back-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 15l-6-6-6 6"/></svg>
+</button>
+
+<nav class="mobile-nav" id="mobile-nav" role="dialog" aria-label="Mobile navigation">
+  <a href="#about" onclick="closeMobileNav()">About</a>
+  <a href="#projects" onclick="closeMobileNav()">Projects</a>
+  <a href="#github" onclick="closeMobileNav()">GitHub</a>
+  <a href="#skills" onclick="closeMobileNav()">Skills</a>
+  <a href="#contact" onclick="closeMobileNav()">Contact</a>
+</nav>
+
+<!-- NAV -->
+<nav id="main-nav" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#" class="logo" id="nav-logo"><div class="logo-dot"></div><span>Sreerang</span> P</a>
+      <ul class="nav-links" role="list">
+        <li><a href="#about"    id="nav-about">About</a></li>
+        <li><a href="#projects" id="nav-projects">Projects</a></li>
+        <li><a href="#github"   id="nav-github">GitHub</a></li>
+        <li><a href="#skills"   id="nav-skills">Skills</a></li>
+        <li><a href="#contact"  id="nav-contact">Contact</a></li>
       </ul>
+      <a href="#contact" class="nav-cta" id="nav-hire">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013 4.18 2 2 0 015 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L9.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        Hire Me
+      </a>
+      <button class="hamburger" id="hamburger-btn" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-  </nav>
+  </div>
+</nav>
 
-  <main>
-    <section id="home" class="reveal" class="hero">
-      <div class="container hero-grid">
-        <div>
-          <div class="eyebrow">ENGINEERING × DATA × SOFTWARE</div>
-          <h1>Building my way into <span>software & data.</span></h1>
-          <p class="hero-sub">
-            I’m Sreerang — an Electrical & Computer Engineering student at TKM College
-            of Engineering and an IIT Madras BS in Data Science student. I like solving
-            problems with code, mathematics and data, then turning those ideas into
-            practical products.
-          </p>
-          <div class="buttons">
-            <a class="btn primary" href="#projects">Explore Projects</a>
-            <a class="btn" href="https://github.com/cosmiccoder200x-sys" target="_blank" rel="noopener">GitHub</a>
-            <a class="btn" href="https://www.linkedin.com/in/sreerang-p-3088552b3/" target="_blank" rel="noopener">LinkedIn</a>
-          </div>
-          <div class="tag-list" style="margin-top:28px;">
-            <span class="tag">Python</span>
-            <span class="tag">C/C++</span>
-            <span class="tag">DSA</span>
-            <span class="tag">Data Science</span>
-            <span class="tag">AI</span>
-            <span class="tag">Computer Vision</span>
-          </div>
-        </div>
-
-        <aside class="profile-card">
-          <img id="avatar" class="avatar" src="https://github.com/cosmiccoder200x-sys.png" alt="Sreerang profile photo" />
-          <h3>Sreerang P</h3>
-          <p>Engineering + Data Science</p>
-          <div class="profile-meta">
-            <div class="meta"><strong>TKM</strong> — Electrical & Computer Engineering</div>
-            <div class="meta"><strong>IIT Madras</strong> — BS in Data Science</div>
-            <div class="meta"><strong>Focus</strong> — Software, DSA, Data & AI</div>
-            <div class="meta"><strong>GitHub</strong> — @cosmiccoder200x-sys</div>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <section id="about" class="reveal">
-      <div class="container">
-        <div class="section-head">
-          <div class="section-kicker">01 / About Me</div>
-          <h2>Engineering mindset. Software ambition. Data-driven curiosity.</h2>
-          <p>
-            I’m building my career around the intersection of computer science,
-            software development and data science.
-          </p>
-        </div>
-
-        <p class="about-copy">
-          I’m <strong>Sreerang P</strong>, an undergraduate student pursuing
-          <strong>Electrical & Computer Engineering at TKM College of Engineering</strong>
-          while also pursuing a <strong>BS in Data Science from IIT Madras</strong>.
-          Although my engineering background gives me exposure to hardware and
-          engineering systems, my strongest professional interest is on the
-          <strong>computing and software side</strong> — programming, algorithms,
-          data, AI and building useful digital products.
+<!-- HERO -->
+<header class="hero" id="home">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="eyebrow"><span class="eyebrow-dot"></span>Open to Opportunities &amp; Collaborations</div>
+        <h1>
+          Hi, I'm<br>
+          <span class="h1-accent">Sreerang P</span><br>
+          <span class="h1-muted">I build </span><span id="typed"></span><span class="cursor-blink" aria-hidden="true"></span>
+        </h1>
+        <p class="hero-sub">
+          <strong>Electrical &amp; Computer Engineering</strong> student &amp;
+          <strong>IIT Madras BS Data Science</strong> scholar.
+          Turning complex problems into elegant, high-performance software.
         </p>
-
-        <div class="grid grid-2" style="margin-top:32px;">
-          <div class="card">
-            <h3>Who I am</h3>
-            <p>
-              I’m a curious engineering student who enjoys understanding how things
-              work and then trying to build them. I like mathematics, logical
-              problem solving, programming and experimenting with new technologies.
-              I learn particularly well when theory is followed by implementation.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Where I'm heading</h3>
-            <p>
-              I’m working toward software and data-oriented opportunities where I
-              can combine programming, DSA, mathematical thinking and data science.
-              My long-term direction is toward strong technical work in software,
-              data science and AI.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>How I learn</h3>
-            <p>
-              My preferred loop is simple: learn a concept, build something with it,
-              encounter problems, debug, understand the underlying reason, and
-              improve the implementation. Projects are a major part of how I turn
-              learning into practical skill.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>What I enjoy</h3>
-            <p>
-              I enjoy programming, mathematics, DSA, web development, data science,
-              AI, computer vision and productivity tools. I’m especially interested
-              in projects that turn a real-world problem into a clean technical
-              solution.
-            </p>
-          </div>
-        </div>
-
-        <div class="section-head" style="margin-top:80px; margin-bottom:28px;">
-          <div class="section-kicker">Professional Direction</div>
-          <h2>My current focus</h2>
-        </div>
-
-        <div class="grid grid-3">
-          <div class="card">
-            <h3>Software Engineering</h3>
-            <p>
-              Building practical applications, understanding software architecture,
-              working with APIs and databases, and improving development fundamentals.
-            </p>
-            <div class="tag-list">
-              <span class="tag">Python</span>
-              <span class="tag">C/C++</span>
-              <span class="tag">React</span>
-              <span class="tag">Flask</span>
-            </div>
-          </div>
-
-          <div class="card">
-            <h3>Data & Algorithms</h3>
-            <p>
-              Strengthening DSA, mathematical reasoning, statistics and the foundations
-              needed to work effectively with data.
-            </p>
-            <div class="tag-list">
-              <span class="tag">DSA</span>
-              <span class="tag">Mathematics</span>
-              <span class="tag">Statistics</span>
-              <span class="tag">Data Analysis</span>
-            </div>
-          </div>
-
-          <div class="card">
-            <h3>AI & Computer Vision</h3>
-            <p>
-              Exploring machine learning and computer vision through hands-on projects,
-              including gesture-based human-computer interaction.
-            </p>
-            <div class="tag-list">
-              <span class="tag">AI</span>
-              <span class="tag">ML</span>
-              <span class="tag">Computer Vision</span>
-              <span class="tag">OpenCV</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="section-head" style="margin-top:80px; margin-bottom:28px;">
-          <div class="section-kicker">Beyond Coursework</div>
-          <h2>Learning by doing.</h2>
-          <p>
-            My portfolio is not limited to classroom work. I use personal projects
-            and experiments to explore areas that interest me.
-          </p>
-        </div>
-
-        <div class="grid grid-2">
-          <div class="card">
-            <h3>Project-driven learning</h3>
-            <p>
-              I’ve worked on productivity platforms, student-focused tools,
-              web applications and experiments involving AI and computer vision.
-              Each project is an opportunity to learn a new technology and improve
-              my ability to ship working software.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Problem-solving mindset</h3>
-            <p>
-              DSA and mathematics are important parts of my development because
-              they train me to break complex problems down, reason about constraints,
-              compare approaches and think about efficiency.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Building with modern tools</h3>
-            <p>
-              I regularly experiment with GitHub, Replit, Vercel, Supabase,
-              AI-assisted development tools and modern frontend stacks to turn
-              ideas into prototypes quickly and then refine them.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>What I want to improve next</h3>
-            <p>
-              I’m focused on becoming stronger in DSA, backend development,
-              databases, data analysis, machine learning, computer vision,
-              software engineering practices and building more substantial projects.
-            </p>
-          </div>
-        </div>
-
-        <div class="section-head" style="margin-top:80px; margin-bottom:28px;">
-          <div class="section-kicker">Personal Statement</div>
-          <h2>Learn. Build. Solve. Repeat.</h2>
-        </div>
-
-        <p class="about-copy">
-          I don’t want my portfolio to be a list of technologies I have touched.
-          I want it to show a progression of <strong>what I learned, what I built,
-          how I solved problems, and how I improved</strong>. This website is a
-          living record of that journey.
-        </p>
-      </div>
-    </section>
-
-    <section id="projects" class="reveal">
-      <div class="container">
-        <div class="section-head">
-          <div class="section-kicker">02 / Selected Work</div>
-          <h2>Ideas turned into software.</h2>
-          <p>Selected projects from my GitHub and current development work.</p>
-        </div>
-
-        <div class="grid grid-2">
-          <article class="card">
-            <div class="section-kicker" style="margin-bottom:10px;">Productivity</div><h3>HabitOS 2.0</h3>
-            <p>
-              A productivity and habit-tracking project focused on helping users understand
-              their routines, track progress and improve consistency.
-            </p>
-            <div class="tag-list">
-              <span class="tag">Productivity</span>
-              <span class="tag">Habit Tracking</span>
-              <span class="tag">JavaScript</span>
-            </div>
-            <div class="card-actions">
-              <a class="text-link" href="https://github.com/cosmiccoder200x-sys/habitos2.0" target="_blank" rel="noopener">GitHub →</a>
-              <a class="text-link" href="https://hulking-chronos-flow-os.base44.app" target="_blank" rel="noopener">Live Demo →</a>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="section-kicker" style="margin-bottom:10px;">Web App</div><h3>Xboost</h3>
-            <p>
-              A smart bookmark and content-management platform for saving, organizing and
-              accessing links, videos and online resources from one centralized dashboard.
-            </p>
-            <div class="tag-list">
-              <span class="tag">React 18</span>
-              <span class="tag">TypeScript</span>
-              <span class="tag">Tailwind CSS</span>
-              <span class="tag">Supabase</span>
-              <span class="tag">PWA</span>
-            </div>
-            <div class="card-actions">
-              <a class="text-link" href="https://github.com/cosmiccoder200x-sys/xboostproductivity" target="_blank" rel="noopener">GitHub →</a>
-              <a class="text-link" href="https://xboostproductivity.vercel.app/" target="_blank" rel="noopener">Live Demo →</a>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="section-kicker" style="margin-bottom:10px;">Chrome Extension</div><h3>Focusflow</h3>
-            <p>
-              A Chrome extension concept focused on productivity, distraction control,
-              Pomodoro sessions, dark mode and a coding dashboard.
-            </p>
-            <div class="tag-list">
-              <span class="tag">JavaScript</span>
-              <span class="tag">Chrome Extension</span>
-              <span class="tag">Productivity</span>
-            </div>
-            <div class="card-actions">
-              <a class="text-link" href="https://github.com/cosmiccoder200x-sys/Focusflow" target="_blank" rel="noopener">GitHub →</a>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="section-kicker" style="margin-bottom:10px;">Student Tools</div><h3>StudyOS</h3>
-            <p>
-              A student-focused project exploring digital study workflows and tools
-              for organizing learning.
-            </p>
-            <div class="tag-list">
-              <span class="tag">TypeScript</span>
-              <span class="tag">Education</span>
-              <span class="tag">Productivity</span>
-            </div>
-            <div class="card-actions">
-              <a class="text-link" href="https://github.com/cosmiccoder200x-sys/studyos" target="_blank" rel="noopener">GitHub →</a>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="section-kicker" style="margin-bottom:10px;">Education</div><h3>TKM Notes</h3>
-            <p>
-              A project aimed at making academic resources and study material easier
-              for engineering students to organize and access.
-            </p>
-            <div class="tag-list">
-              <span class="tag">TypeScript</span>
-              <span class="tag">Education</span>
-              <span class="tag">Student Tools</span>
-            </div>
-            <div class="card-actions">
-              <a class="text-link" href="https://github.com/cosmiccoder200x-sys/TKM-notes" target="_blank" rel="noopener">GitHub →</a>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="section-kicker" style="margin-bottom:10px;">AI / Vision</div><h3>Computer Vision Controller</h3>
-            <p>
-              An ongoing exploration of controlling a computer through hand gestures,
-              using camera-based hand tracking and gesture recognition.
-            </p>
-            <div class="tag-list">
-              <span class="tag">Python</span>
-              <span class="tag">Computer Vision</span>
-              <span class="tag">Hand Tracking</span>
-              <span class="tag">HCI</span>
-            </div>
-            <div class="card-actions">
-              <span class="text-link">In Development</span>
-            </div>
-          </article>
+        <div class="hero-btns">
+          <a href="#projects" class="btn btn-primary" id="hero-projects-btn">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M3 6l9-4 9 4v12l-9 4-9-4z"/></svg>
+            View Projects
+          </a>
+          <a href="https://github.com/cosmiccoder200x-sys" target="_blank" rel="noopener" class="btn btn-ghost" id="hero-github-btn">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+            GitHub
+          </a>
+          <a href="#contact" class="btn btn-ghost" id="hero-contact-btn">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Contact
+          </a>
         </div>
       </div>
-    </section>
 
-    <section id="why" class="reveal">
-      <div class="container">
-        <div class="section-head">
-          <div class="section-kicker">Why I Build</div>
-          <h2>I’m more interested in capability than labels.</h2>
-          <p>
-            I want this portfolio to show evidence of how I think, learn and build.
-          </p>
+      <div class="profile-card" id="profile-card">
+        <div class="avatar-wrap">
+          <img src="https://avatars.githubusercontent.com/u/230580457?v=4" alt="Sreerang P avatar" class="avatar" id="profile-avatar" loading="eager"
+            onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'110\' height=\'110\'%3E%3Crect width=\'110\' height=\'110\' rx=\'55\' fill=\'%23111722\'/%3E%3Ctext x=\'50%25\' y=\'55%25\' text-anchor=\'middle\' dominant-baseline=\'middle\' font-size=\'36\' fill=\'%236c8cff\'%3ESP%3C/text%3E%3C/svg%3E'" />
+          <div class="avatar-ring" aria-hidden="true"></div>
         </div>
-
-        <div class="grid grid-2">
-          <div class="card">
-            <h3>Strong fundamentals</h3>
-            <p>
-              I’m deliberately investing in programming, DSA and mathematics because
-              I want the ability to understand problems deeply rather than depend
-              only on frameworks or tools.
-            </p>
-          </div>
-          <div class="card">
-            <h3>Real projects</h3>
-            <p>
-              I use projects as experiments. A project gives me a reason to learn
-              APIs, databases, interfaces, deployment, debugging and system design
-              instead of studying them in isolation.
-            </p>
-          </div>
-          <div class="card">
-            <h3>Data + software</h3>
-            <p>
-              My IIT Madras Data Science studies complement my engineering degree
-              by giving me a path into statistics, computation, data analysis and
-              machine learning.
-            </p>
-          </div>
-          <div class="card">
-            <h3>Long-term direction</h3>
-            <p>
-              I’m working toward becoming a technically strong software and
-              data-focused professional who can take a problem from idea to
-              working implementation.
-            </p>
-          </div>
+        <div class="profile-name">Sreerang P</div>
+        <div class="profile-role">ECE × Data Science</div>
+        <div class="profile-badges">
+          <span class="badge">🎓 IIT Madras</span>
+          <span class="badge">💻 Open Source</span>
+          <span class="badge">🚀 Builder</span>
+        </div>
+        <div class="profile-stats">
+          <div class="pstat"><div class="pstat-n" id="stat-repos">—</div><div class="pstat-l">Repos</div></div>
+          <div class="pstat"><div class="pstat-n" id="stat-followers">—</div><div class="pstat-l">Followers</div></div>
         </div>
       </div>
-    </section>
-
-    <section id="skills" class="reveal">
-      <div class="container">
-        <div class="section-head">
-          <div class="section-kicker">03 / Skills</div>
-          <h2>What I'm learning and using.</h2>
-          <p>My current technical stack and areas of active development.</p>
-        </div>
-
-        <div class="grid grid-3">
-          <div class="card">
-            <h3>Programming</h3>
-            <div class="tag-list">
-              <span class="tag">Python</span>
-              <span class="tag">C</span>
-              <span class="tag">C++</span>
-              <span class="tag">JavaScript</span>
-              <span class="tag">TypeScript</span>
-            </div>
-          </div>
-
-          <div class="card">
-            <h3>Computer Science</h3>
-            <div class="tag-list">
-              <span class="tag">DSA</span>
-              <span class="tag">Problem Solving</span>
-              <span class="tag">Git</span>
-              <span class="tag">GitHub</span>
-            </div>
-          </div>
-
-          <div class="card">
-            <h3>Web Development</h3>
-            <div class="tag-list">
-              <span class="tag">React</span>
-              <span class="tag">Vite</span>
-              <span class="tag">Tailwind CSS</span>
-              <span class="tag">Flask</span>
-              <span class="tag">Supabase</span>
-            </div>
-          </div>
-
-          <div class="card">
-            <h3>Data Science</h3>
-            <div class="tag-list">
-              <span class="tag">Python for Data Science</span>
-              <span class="tag">Statistics</span>
-              <span class="tag">Mathematics</span>
-              <span class="tag">Data Analysis</span>
-            </div>
-          </div>
-
-          <div class="card">
-            <h3>AI & Computer Vision</h3>
-            <div class="tag-list">
-              <span class="tag">Machine Learning</span>
-              <span class="tag">Computer Vision</span>
-              <span class="tag">AI Applications</span>
-            </div>
-          </div>
-
-          <div class="card">
-            <h3>Development Tools</h3>
-            <div class="tag-list">
-              <span class="tag">VS Code</span>
-              <span class="tag">Replit</span>
-              <span class="tag">Vercel</span>
-              <span class="tag">OpenRouter</span>
-              <span class="tag">AI Coding Tools</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="profile" class="reveal">
-      <div class="container">
-        <div class="section-head">
-          <div class="section-kicker">Profile Snapshot</div>
-          <h2>At a glance.</h2>
-        </div>
-
-        <div class="grid grid-3">
-          <div class="card">
-            <h3>Academic Profile</h3>
-            <p>
-              Dual academic path combining Electrical & Computer Engineering
-              with a BS in Data Science.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Primary Interests</h3>
-            <p>
-              Software engineering, DSA, mathematics, data science,
-              artificial intelligence and computer vision.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Career Direction</h3>
-            <p>
-              Building toward software, data science and AI-focused roles,
-              with an emphasis on strong technical fundamentals.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Programming</h3>
-            <p>
-              Python, C/C++, JavaScript and TypeScript, with an ongoing focus
-              on writing cleaner and more efficient code.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Current Development</h3>
-            <p>
-              Building web applications, experimenting with AI-assisted development,
-              and developing computer-vision projects.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Portfolio Goal</h3>
-            <p>
-              Demonstrate real skills through projects, code, technical learning
-              and consistent progress rather than only listing credentials.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="education" class="reveal">
-      <div class="container">
-        <div class="section-head">
-          <div class="section-kicker">04 / Education</div>
-          <h2>My academic path.</h2>
-        </div>
-
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="date">2025 — 2029</div>
-            <h3>TKM College of Engineering</h3>
-            <p>Electrical & Computer Engineering</p>
-          </div>
-
-          <div class="timeline-item">
-            <div class="date">Current</div>
-            <h3>Indian Institute of Technology Madras</h3>
-            <p>BS in Data Science</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="github" class="reveal">
-      <div class="container">
-        <div class="section-head">
-          <div class="section-kicker">05 / GitHub</div>
-          <h2>Open-source footprint.</h2>
-          <p>This section is automatically populated from my public GitHub profile.</p>
-        </div>
-
-        <div class="stats">
-          <div class="stat"><div class="stat-number" id="repoCount">—</div><div class="stat-label">Public repositories</div></div>
-          <div class="stat"><div class="stat-number" id="followers">—</div><div class="stat-label">Followers</div></div>
-          <div class="stat"><div class="stat-number" id="following">—</div><div class="stat-label">Following</div></div>
-          <div class="stat"><div class="stat-number" id="stars">—</div><div class="stat-label">Repository stars</div></div>
-        </div>
-
-        <div id="githubRepos" class="grid grid-3">
-          <div class="loading">Loading GitHub repositories…</div>
-        </div>
-
-        <p class="github-note">
-          Live GitHub data is loaded from the public GitHub API for
-          <a class="text-link" href="https://github.com/cosmiccoder200x-sys" target="_blank" rel="noopener">@cosmiccoder200x-sys</a>.
-        </p>
-      </div>
-    </section>
-
-    <section id="contact" class="reveal">
-      <div class="container">
-        <div class="contact">
-          <div class="section-kicker">06 / Contact</div>
-          <h2>Let's connect.</h2>
-          <p>
-            I'm interested in learning, building, collaborating on student projects,
-            exploring AI and data science, and connecting with people who enjoy solving
-            interesting technical problems.
-          </p>
-          <div class="buttons" style="justify-content:center;">
-            <a class="btn primary" href="https://www.linkedin.com/in/sreerang-p-3088552b3/" target="_blank" rel="noopener">Connect on LinkedIn</a>
-            <a class="btn" href="https://github.com/cosmiccoder200x-sys" target="_blank" rel="noopener">View GitHub</a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container footer-inner">
-      <div>© 2026 Sreerang P</div>
-      <div>Electrical & Computer Engineering · IIT Madras BS in Data Science · Software & Data</div>
     </div>
-  </footer>
+  </div>
+  <div class="scroll-hint" aria-hidden="true">
+    <span>Scroll</span>
+    <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+  </div>
+</header>
 
-  <script>
-    const username = "cosmiccoder200x-sys";
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <div class="section-head reveal">
+          <div class="section-kicker">About me</div>
+          <h2>Passionate about<br><span class="h1-accent">crafting solutions</span></h2>
+          <p class="section-desc">Student, builder, and lifelong learner at the intersection of hardware and software.</p>
+        </div>
+        <div class="about-text reveal reveal-delay-1">
+          <p>I'm <strong>Sreerang P</strong>, an Electrical &amp; Computer Engineering student also pursuing a BS in Data Science at <strong>IIT Madras</strong>. I love building things at the crossroads of hardware and software — from embedded systems to full-stack applications.</p>
+          <p>My passion lies in <strong>machine learning</strong>, <strong>computer vision</strong>, and <strong>systems programming</strong>. I enjoy open-source collaboration and constantly learning new technologies to tackle real-world problems.</p>
+        </div>
+        <div class="skills-cloud reveal reveal-delay-2">
+          <span class="skill-pill"><span class="dot dot-blue"></span>Python</span>
+          <span class="skill-pill"><span class="dot dot-blue"></span>C/C++</span>
+          <span class="skill-pill"><span class="dot dot-purple"></span>Machine Learning</span>
+          <span class="skill-pill"><span class="dot dot-green"></span>JavaScript</span>
+          <span class="skill-pill"><span class="dot dot-orange"></span>React</span>
+          <span class="skill-pill"><span class="dot dot-blue"></span>Linux</span>
+          <span class="skill-pill"><span class="dot dot-purple"></span>TensorFlow</span>
+          <span class="skill-pill"><span class="dot dot-green"></span>Node.js</span>
+          <span class="skill-pill"><span class="dot dot-pink"></span>VHDL</span>
+          <span class="skill-pill"><span class="dot dot-orange"></span>Arduino</span>
+        </div>
+      </div>
 
-    async function loadGitHub() {
-      const repoBox = document.getElementById("githubRepos");
-
-      try {
-        const [profileRes, reposRes] = await Promise.all([
-          fetch(`https://api.github.com/users/${username}`),
-          fetch(`https://api.github.com/users/${username}/repos?per_page=100&sort=updated`)
-        ]);
-
-        if (!profileRes.ok || !reposRes.ok) throw new Error("GitHub API request failed.");
-
-        const profile = await profileRes.json();
-        const repos = await reposRes.json();
-
-        document.getElementById("avatar").src = profile.avatar_url;
-        document.getElementById("repoCount").textContent = profile.public_repos;
-        document.getElementById("followers").textContent = profile.followers;
-        document.getElementById("following").textContent = profile.following;
-
-        const totalStars = repos.reduce((sum, repo) => sum + (repo.stargazers_count || 0), 0);
-        document.getElementById("stars").textContent = totalStars;
-
-        const selected = repos
-          .filter(repo => !repo.fork)
-          .slice(0, 9);
-
-        repoBox.innerHTML = "";
-
-        selected.forEach(repo => {
-          const card = document.createElement("article");
-          card.className = "card";
-
-          const description = repo.description || "A project from my GitHub portfolio.";
-          const language = repo.language || "Code";
-
-          card.innerHTML = `
-            <h3>${escapeHTML(repo.name)}</h3>
-            <p>${escapeHTML(description)}</p>
-            <div class="tag-list">
-              <span class="tag">${escapeHTML(language)}</span>
-              <span class="tag">★ ${repo.stargazers_count}</span>
-              <span class="tag">⑂ ${repo.forks_count}</span>
+      <div>
+        <p class="section-kicker reveal">Education</p>
+        <div class="timeline reveal reveal-delay-1">
+          <div class="timeline-item">
+            <div class="tl-dot-wrap"><div class="tl-dot"></div><div class="tl-line"></div></div>
+            <div class="tl-body">
+              <div class="tl-date">2023 – Present</div>
+              <div class="tl-title">B.S. in Data Science &amp; Applications</div>
+              <div class="tl-sub">IIT Madras — Online Degree Programme</div>
             </div>
-            <div class="card-actions">
-              <a class="text-link" href="${repo.html_url}" target="_blank" rel="noopener">View Repository →</a>
+          </div>
+          <div class="timeline-item">
+            <div class="tl-dot-wrap"><div class="tl-dot"></div><div class="tl-line"></div></div>
+            <div class="tl-body">
+              <div class="tl-date">2022 – Present</div>
+              <div class="tl-title">B.E. in Electrical &amp; Computer Engineering</div>
+              <div class="tl-sub">Undergraduate Studies</div>
             </div>
-          `;
+          </div>
+          <div class="timeline-item">
+            <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
+            <div class="tl-body">
+              <div class="tl-date">Ongoing</div>
+              <div class="tl-title">Open Source Contributor &amp; Builder</div>
+              <div class="tl-sub">GitHub · Personal Projects · Hackathons</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-          repoBox.appendChild(card);
-        });
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-kicker">Projects</div>
+      <h2>Things I've<br><span class="h1-accent">built &amp; shipped</span></h2>
+      <p class="section-desc">A selection of personal and academic projects spanning ML, systems, and web development.</p>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card featured reveal" id="proj-1">
+        <div class="project-icon">🧠</div>
+        <div class="project-title">ML Model Playground</div>
+        <div class="project-desc">Interactive web app for training and visualizing machine learning models in real-time. Supports classification, regression, and clustering with live parameter tuning. Built with Python backend and React frontend.</div>
+        <div class="project-tags"><span class="tag">Python</span><span class="tag">TensorFlow</span><span class="tag">React</span><span class="tag">FastAPI</span><span class="tag">D3.js</span></div>
+        <div class="project-links">
+          <a href="https://github.com/cosmiccoder200x-sys" target="_blank" rel="noopener" class="proj-link primary" id="proj-1-github">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+            View Source
+          </a>
+          <a href="#" class="proj-link" id="proj-1-demo">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Live Demo
+          </a>
+        </div>
+      </div>
+      <div class="project-card reveal reveal-delay-1" id="proj-2">
+        <div class="project-icon">🤖</div>
+        <div class="project-title">Embedded CV System</div>
+        <div class="project-desc">Real-time computer vision pipeline on microcontroller with hardware acceleration and RTOS integration.</div>
+        <div class="project-tags"><span class="tag">C++</span><span class="tag">OpenCV</span><span class="tag">ARM</span><span class="tag">RTOS</span></div>
+        <div class="project-links"><a href="https://github.com/cosmiccoder200x-sys" target="_blank" rel="noopener" class="proj-link primary" id="proj-2-github">GitHub</a></div>
+      </div>
+      <div class="project-card reveal" id="proj-3">
+        <div class="project-icon">📊</div>
+        <div class="project-title">Data Science Toolkit</div>
+        <div class="project-desc">Automated EDA and feature engineering pipeline for tabular datasets with beautiful visualizations.</div>
+        <div class="project-tags"><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Plotly</span><span class="tag">Streamlit</span></div>
+        <div class="project-links"><a href="https://github.com/cosmiccoder200x-sys" target="_blank" rel="noopener" class="proj-link primary" id="proj-3-github">GitHub</a></div>
+      </div>
+      <div class="project-card reveal reveal-delay-1" id="proj-4">
+        <div class="project-icon">🔌</div>
+        <div class="project-title">IoT Smart Monitor</div>
+        <div class="project-desc">ESP32-based environmental monitoring with cloud sync, alerts, and real-time dashboard.</div>
+        <div class="project-tags"><span class="tag">C</span><span class="tag">ESP32</span><span class="tag">MQTT</span><span class="tag">React</span></div>
+        <div class="project-links"><a href="https://github.com/cosmiccoder200x-sys" target="_blank" rel="noopener" class="proj-link primary" id="proj-4-github">GitHub</a></div>
+      </div>
+      <div class="project-card reveal reveal-delay-2" id="proj-5">
+        <div class="project-icon">⚡</div>
+        <div class="project-title">Neural Net from Scratch</div>
+        <div class="project-desc">Pure NumPy implementation of deep neural networks with backprop, dropout, and multiple optimizers.</div>
+        <div class="project-tags"><span class="tag">Python</span><span class="tag">NumPy</span><span class="tag">Math</span></div>
+        <div class="project-links"><a href="https://github.com/cosmiccoder200x-sys" target="_blank" rel="noopener" class="proj-link primary" id="proj-5-github">GitHub</a></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        if (!selected.length) {
-          repoBox.innerHTML = '<div class="loading">No public repositories found.</div>';
+<!-- GITHUB -->
+<section id="github">
+  <div class="container">
+    <div class="gh-header">
+      <div class="section-head reveal" style="margin-bottom:0">
+        <div class="section-kicker">GitHub Activity</div>
+        <h2>Live <span class="h1-accent">stats</span></h2>
+        <p class="section-desc">Real data fetched live from the GitHub API.</p>
+      </div>
+      <a href="https://github.com/cosmiccoder200x-sys" target="_blank" rel="noopener" class="btn btn-ghost reveal" id="view-github-btn">
+        View Profile
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+    </div>
+    <div class="stats-row reveal">
+      <div class="stat-card"><div class="stat-icon">📁</div><div class="stat-number" id="gh-repos">—</div><div class="stat-label">Public Repos</div></div>
+      <div class="stat-card"><div class="stat-icon">⭐</div><div class="stat-number" id="gh-stars">—</div><div class="stat-label">Total Stars</div></div>
+      <div class="stat-card"><div class="stat-icon">👥</div><div class="stat-number" id="gh-followers">—</div><div class="stat-label">Followers</div></div>
+      <div class="stat-card"><div class="stat-icon">🔱</div><div class="stat-number" id="gh-following">—</div><div class="stat-label">Following</div></div>
+    </div>
+    <div class="repos-grid reveal reveal-delay-1" id="repos-grid">
+      <div class="repo-card"><div class="repo-top"><div class="repo-name loading-skeleton" style="width:120px;height:1em"></div></div><div class="repo-desc loading-skeleton" style="height:2em"></div></div>
+      <div class="repo-card"><div class="repo-top"><div class="repo-name loading-skeleton" style="width:140px;height:1em"></div></div><div class="repo-desc loading-skeleton" style="height:2em"></div></div>
+    </div>
+    <p class="gh-note" id="gh-note">Fetching live data from GitHub API…</p>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-kicker">Skills</div>
+      <h2>Tech I <span class="h1-accent">work with</span></h2>
+      <p class="section-desc">A blend of software engineering, ML, and embedded systems expertise.</p>
+    </div>
+    <div class="skills-container">
+      <div class="reveal">
+        <p class="skills-group-title">Core Proficiencies</p>
+        <div class="skill-bar-wrap">
+          <div class="skill-item"><div class="skill-top"><span class="skill-name">Python</span><span class="skill-pct">92%</span></div><div class="skill-track"><div class="skill-fill fill-blue" data-pct="92"></div></div></div>
+          <div class="skill-item"><div class="skill-top"><span class="skill-name">Machine Learning</span><span class="skill-pct">85%</span></div><div class="skill-track"><div class="skill-fill fill-blue" data-pct="85"></div></div></div>
+          <div class="skill-item"><div class="skill-top"><span class="skill-name">C / C++</span><span class="skill-pct">80%</span></div><div class="skill-track"><div class="skill-fill fill-orange" data-pct="80"></div></div></div>
+          <div class="skill-item"><div class="skill-top"><span class="skill-name">JavaScript / TypeScript</span><span class="skill-pct">78%</span></div><div class="skill-track"><div class="skill-fill fill-green" data-pct="78"></div></div></div>
+          <div class="skill-item"><div class="skill-top"><span class="skill-name">Data Science</span><span class="skill-pct">88%</span></div><div class="skill-track"><div class="skill-fill fill-blue" data-pct="88"></div></div></div>
+          <div class="skill-item"><div class="skill-top"><span class="skill-name">Embedded Systems</span><span class="skill-pct">75%</span></div><div class="skill-track"><div class="skill-fill fill-orange" data-pct="75"></div></div></div>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <p class="skills-group-title">Tools &amp; Technologies</p>
+        <div class="tools-grid">
+          <div class="tool-card"><div class="tool-icon">🐍</div><div class="tool-name">Python</div></div>
+          <div class="tool-card"><div class="tool-icon">⚛️</div><div class="tool-name">React</div></div>
+          <div class="tool-card"><div class="tool-icon">🔥</div><div class="tool-name">TensorFlow</div></div>
+          <div class="tool-card"><div class="tool-icon">🐳</div><div class="tool-name">Docker</div></div>
+          <div class="tool-card"><div class="tool-icon">🐙</div><div class="tool-name">Git</div></div>
+          <div class="tool-card"><div class="tool-icon">🗄️</div><div class="tool-name">SQL</div></div>
+          <div class="tool-card"><div class="tool-icon">☁️</div><div class="tool-name">Cloud</div></div>
+          <div class="tool-card"><div class="tool-icon">🖥️</div><div class="tool-name">Linux</div></div>
+          <div class="tool-card"><div class="tool-icon">📐</div><div class="tool-name">MATLAB</div></div>
+          <div class="tool-card"><div class="tool-icon">⚡</div><div class="tool-name">FastAPI</div></div>
+          <div class="tool-card"><div class="tool-icon">🧮</div><div class="tool-name">NumPy</div></div>
+          <div class="tool-card"><div class="tool-icon">📊</div><div class="tool-name">Pandas</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-card reveal">
+      <div class="section-kicker" style="justify-content:center">Say hello</div>
+      <h2>Let's build something<br><span class="h1-accent">incredible together</span></h2>
+      <p>Whether you have a project, an internship opportunity, or just want to chat about technology — my inbox is always open.</p>
+      <div class="contact-links">
+        <a href="mailto:sreerang.p200x@gmail.com" class="contact-link main" id="email-btn">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Send Email
+        </a>
+        <a href="https://github.com/cosmiccoder200x-sys" target="_blank" rel="noopener" class="contact-link" id="contact-github-btn">
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a href="https://linkedin.com/in/sreerang-p" target="_blank" rel="noopener" class="contact-link" id="linkedin-btn">
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+      <div class="contact-email" id="contact-email">📧 sreerang.p200x@gmail.com</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer role="contentinfo">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-left">Built with <span>♥</span> by <strong>Sreerang P</strong> · 2025</div>
+      <nav class="footer-right" aria-label="Footer navigation">
+        <a href="https://github.com/cosmiccoder200x-sys" target="_blank" rel="noopener" class="footer-link">GitHub</a>
+        <a href="#" class="footer-link">LinkedIn</a>
+        <a href="#" class="footer-link">Resume</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+
+  /* ── Particle Canvas ── */
+  const canvas = document.getElementById('particle-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H;
+  const particles = [];
+
+  function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+
+  class Particle {
+    constructor() { this.reset(true); }
+    reset(init) {
+      this.x = init ? Math.random() * W : Math.random() * W;
+      this.y = init ? Math.random() * H : Math.random() * H;
+      this.r = Math.random() * 1.4 + 0.4;
+      this.vx = (Math.random() - 0.5) * 0.3;
+      this.vy = (Math.random() - 0.5) * 0.3;
+      this.life = 0;
+      this.maxLife = Math.random() * 300 + 200;
+      this.hue = [220, 260, 280, 200][Math.floor(Math.random() * 4)];
+    }
+    update() {
+      this.x += this.vx; this.y += this.vy; this.life++;
+      if (this.life > this.maxLife || this.x < 0 || this.x > W || this.y < 0 || this.y > H) this.reset(false);
+    }
+    draw() {
+      const a = Math.sin((this.life / this.maxLife) * Math.PI) * 0.5;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+      ctx.fillStyle = `hsla(${this.hue},80%,70%,${a})`;
+      ctx.fill();
+    }
+  }
+
+  for (let i = 0; i < 90; i++) particles.push(new Particle());
+
+  function drawLines() {
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const d = Math.sqrt(dx*dx + dy*dy);
+        if (d < 100) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(108,140,255,${(1 - d/100) * 0.08})`;
+          ctx.lineWidth = 0.6;
+          ctx.stroke();
         }
-      } catch (error) {
-        repoBox.innerHTML = `
-          <div class="card">
-            <h3>GitHub data unavailable</h3>
-            <p>Live repository data could not be loaded. You can still visit the profile directly.</p>
-            <div class="card-actions">
-              <a class="text-link" href="https://github.com/${username}" target="_blank" rel="noopener">Open GitHub →</a>
-            </div>
-          </div>
-        `;
       }
     }
+  }
 
-    function escapeHTML(value) {
-      return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-    }
+  (function loop() {
+    ctx.clearRect(0, 0, W, H);
+    drawLines();
+    particles.forEach(p => { p.update(); p.draw(); });
+    requestAnimationFrame(loop);
+  })();
 
-    loadGitHub();
+  /* ── Cursor glow ── */
+  const glow = document.getElementById('cursor-glow');
+  document.addEventListener('mousemove', e => { glow.style.left = e.clientX + 'px'; glow.style.top = e.clientY + 'px'; });
+  document.addEventListener('mouseleave', () => glow.style.opacity = '0');
+  document.addEventListener('mouseenter', () => glow.style.opacity = '1');
 
-    // Motion / interaction layer
-    const cursorGlow = document.querySelector(".cursor-glow");
-    const progress = document.querySelector(".scroll-progress");
-    const nav = document.querySelector("nav");
+  /* ── Scroll progress ── */
+  const progressBar = document.getElementById('scroll-progress');
+  window.addEventListener('scroll', () => {
+    const s = document.documentElement.scrollTop;
+    const t = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    progressBar.style.width = (s / t * 100) + '%';
+  }, { passive: true });
 
-    window.addEventListener("pointermove", (event) => {
-      if (cursorGlow) {
-        cursorGlow.style.left = event.clientX + "px";
-        cursorGlow.style.top = event.clientY + "px";
+  /* ── Hide nav on scroll down ── */
+  const mainNav = document.getElementById('main-nav');
+  let lastSY = 0;
+  window.addEventListener('scroll', () => {
+    const sy = window.scrollY;
+    mainNav.classList.toggle('hide', sy > lastSY && sy > 140);
+    lastSY = sy;
+  }, { passive: true });
+
+  /* ── Back to top ── */
+  const backTop = document.getElementById('back-top');
+  window.addEventListener('scroll', () => backTop.classList.toggle('show', window.scrollY > 500), { passive: true });
+
+  /* ── Active nav ── */
+  const secs = document.querySelectorAll('section[id], header[id]');
+  const navAs = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    secs.forEach(s => { if (window.scrollY >= s.offsetTop - 120) cur = s.id; });
+    navAs.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
+  }, { passive: true });
+
+  /* ── Scroll reveal ── */
+  const ro = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        e.target.querySelectorAll('.skill-fill').forEach(b => { b.style.width = b.dataset.pct + '%'; });
       }
-    }, { passive: true });
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 
-    function updateScrollUI() {
-      const scrollTop = window.scrollY;
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      const percentage = max > 0 ? (scrollTop / max) * 100 : 0;
-      if (progress) progress.style.width = percentage + "%";
-      if (nav) nav.classList.toggle("scrolled", scrollTop > 20);
+  /* ── Typed text ── */
+  const words = ['things.', 'solutions.', 'ML models.', 'web apps.', 'the future.'];
+  const typedEl = document.getElementById('typed');
+  let wi = 0, ci = 0, del = false;
+  function type() {
+    const w = words[wi];
+    if (!del) { typedEl.textContent = w.slice(0, ++ci); if (ci === w.length) { del = true; setTimeout(type, 1600); return; } }
+    else       { typedEl.textContent = w.slice(0, --ci); if (ci === 0) { del = false; wi = (wi+1) % words.length; setTimeout(type, 400); return; } }
+    setTimeout(type, del ? 55 : 100);
+  }
+  setTimeout(type, 1200);
+
+  /* ── Mobile nav ── */
+  const ham = document.getElementById('hamburger-btn');
+  const mNav = document.getElementById('mobile-nav');
+  let open = false;
+  window.closeMobileNav = () => { open = false; mNav.classList.remove('open'); ham.setAttribute('aria-expanded','false'); document.body.style.overflow = ''; };
+  ham.addEventListener('click', () => { open = !open; mNav.classList.toggle('open', open); ham.setAttribute('aria-expanded', String(open)); document.body.style.overflow = open ? 'hidden' : ''; });
+
+  /* ── GitHub API ── */
+  const GH = 'cosmiccoder200x-sys';
+  function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+  function lc(lang) { return ({Python:'py',JavaScript:'js',TypeScript:'ts',HTML:'html',C:'c','C++':'c'})[lang] || 'py'; }
+  function count(el, n) {
+    if (!el) return;
+    const dur = 1200, t0 = Date.now();
+    (function step() {
+      const p = Math.min((Date.now()-t0)/dur, 1);
+      const e = 1 - Math.pow(1-p,3);
+      el.textContent = Math.round(n * e);
+      if (p < 1) requestAnimationFrame(step);
+    })();
+  }
+
+  async function fetchGH() {
+    try {
+      const [u, r] = await Promise.all([
+        fetch(`https://api.github.com/users/${GH}`).then(x => x.json()),
+        fetch(`https://api.github.com/users/${GH}/repos?sort=stars&per_page=6&type=owner`).then(x => x.json())
+      ]);
+      if (u.public_repos != null) {
+        count(document.getElementById('stat-repos'),    u.public_repos);
+        count(document.getElementById('stat-followers'), u.followers);
+        count(document.getElementById('gh-repos'),       u.public_repos);
+        count(document.getElementById('gh-followers'),   u.followers);
+        count(document.getElementById('gh-following'),   u.following);
+      }
+      if (Array.isArray(r)) {
+        count(document.getElementById('gh-stars'), r.reduce((s,x) => s + x.stargazers_count, 0));
+        document.getElementById('repos-grid').innerHTML = r.slice(0,4).map(x => `
+          <a href="${esc(x.html_url)}" target="_blank" rel="noopener" class="repo-card" style="text-decoration:none">
+            <div class="repo-top">
+              <div class="repo-name">📦 ${esc(x.name)}</div>
+              <div class="repo-stars">⭐ ${x.stargazers_count}</div>
+            </div>
+            <div class="repo-desc">${esc(x.description||'No description.')}</div>
+            <div class="repo-lang">${x.language?`<span class="lang-dot lang-${lc(x.language)}"></span>${esc(x.language)}`:''}</div>
+          </a>`).join('');
+        document.getElementById('gh-note').textContent = 'Last updated: ' + new Date().toLocaleDateString();
+      }
+    } catch(_) {
+      document.getElementById('gh-note').textContent = 'Unable to load GitHub data — visit github.com/cosmiccoder200x-sys';
     }
-    window.addEventListener("scroll", updateScrollUI, { passive: true });
-    updateScrollUI();
+  }
+  fetchGH();
 
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-
-    document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
-
-  </script>
+})();
+</script>
 </body>
 </html>

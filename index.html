@@ -170,11 +170,11 @@
     }
     @keyframes rotateBorder { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     .avatar-wrap { position: relative; display: inline-block; margin-bottom: 18px; }
-    .avatar { width: 110px; height: 110px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(108,140,255,.3); }
+    .avatar { position: relative; z-index: 2; width: 110px; height: 110px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(108,140,255,.3); }
     .avatar-ring {
       position: absolute; inset: -6px; border-radius: 50%; border: 2px solid transparent;
       background: linear-gradient(var(--bg), var(--bg)) padding-box, linear-gradient(135deg, var(--accent), var(--accent-2), var(--accent-3)) border-box;
-      animation: spinRing 4s linear infinite;
+      animation: spinRing 4s linear infinite; z-index: 1;
     }
     @keyframes spinRing { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     .profile-name { font-size: 1.25rem; font-weight: 800; margin-bottom: 4px; }
@@ -419,12 +419,12 @@
 
       <div class="profile-card" id="profile-card">
         <div class="avatar-wrap">
-          <img src="https://avatars.githubusercontent.com/u/230580457?v=4" alt="Sreerang P avatar" class="avatar" id="profile-avatar" loading="eager"
-            onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'110\' height=\'110\'%3E%3Crect width=\'110\' height=\'110\' rx=\'55\' fill=\'%23111722\'/%3E%3Ctext x=\'50%25\' y=\'55%25\' text-anchor=\'middle\' dominant-baseline=\'middle\' font-size=\'36\' fill=\'%236c8cff\'%3ESP%3C/text%3E%3C/svg%3E'" />
+          <img src="https://github.com/cosmiccoder200x-sys.png" alt="Sreerang P avatar" class="avatar" id="profile-avatar" loading="eager"
+            onerror="this.onerror=null; this.src='https://avatars.githubusercontent.com/u/230580457?v=4';" />
           <div class="avatar-ring" aria-hidden="true"></div>
         </div>
         <div class="profile-name">Sreerang P</div>
-        <div class="profile-role">ECE × Data Science</div>
+        <div class="profile-role">Computer Engineering × Data Science</div>
         <div class="profile-badges">
           <span class="badge">🎓 IIT Madras</span>
           <span class="badge">💻 Open Source</span>

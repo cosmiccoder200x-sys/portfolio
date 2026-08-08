@@ -829,6 +829,9 @@
         count(document.getElementById('gh-repos'),       u.public_repos);
         count(document.getElementById('gh-followers'),   u.followers);
         count(document.getElementById('gh-following'),   u.following);
+        if (u.avatar_url) {
+          document.getElementById('profile-avatar').src = u.avatar_url;
+        }
       }
       if (Array.isArray(r)) {
         count(document.getElementById('gh-stars'), r.reduce((s,x) => s + x.stargazers_count, 0));

@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Sreerang P — Electrical & Computer Engineering student and IIT Madras BS Data Science scholar. Full-stack developer, ML engineer, and open source contributor." />
-  <meta property="og:title" content="Sreerang P | Portfolio" />
-  <meta property="og:description" content="ECE Student · IIT Madras DS · Builder of things that matter." />
-  <title>Sreerang P | Portfolio</title>
+  <meta name="description" content="Portfolio of Sreerang P, an Electrical & Computer Engineering student and IIT Madras BS Data Science student building software, data and AI projects." />
+  <meta property="og:title" content="Sreerang P | Software, Data & AI Builder" />
+  <meta property="og:description" content="Portfolio of Sreerang P, an Electrical & Computer Engineering student and IIT Madras BS Data Science student building software, data and AI projects." />
+  <title>Sreerang P | Software, Data & AI Builder</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -276,22 +276,11 @@
     @keyframes shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
 
     /* ── Skills ── */
-    .skills-container { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
-    .skills-group-title { font-size: .8rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-3); margin-bottom: 20px; }
-    .skill-bar-wrap { display: grid; gap: 14px; }
-    .skill-top { display: flex; justify-content: space-between; margin-bottom: 8px; }
-    .skill-name { font-size: .9rem; font-weight: 600; }
-    .skill-pct { font-size: .82rem; color: var(--text-3); font-family: var(--mono); }
-    .skill-track { height: 5px; background: var(--surface-2); border-radius: 5px; overflow: hidden; }
-    .skill-fill { height: 100%; border-radius: 5px; width: 0%; transition: width 1.4s cubic-bezier(.2,.8,.2,1); }
-    .fill-blue   { background: linear-gradient(90deg, var(--accent), var(--accent-2)); }
-    .fill-green  { background: linear-gradient(90deg, #34d399, #10b981); }
-    .fill-orange { background: linear-gradient(90deg, #fb923c, #f59e0b); }
-    .tools-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
-    .tool-card { aspect-ratio: 1; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 16px 10px; transition: border-color .2s, background .2s, transform .2s; text-align: center; }
-    .tool-card:hover { border-color: var(--border-h); background: var(--surface-2); transform: translateY(-3px) scale(1.03); }
-    .tool-icon { font-size: 1.6rem; line-height: 1; }
-    .tool-name { font-size: .72rem; color: var(--text-3); font-weight: 600; }
+    .skills-container { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+    .skill-cat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; transition: border-color .25s, background .25s, transform .25s; }
+    .skill-cat-card:hover { border-color: var(--border-h); background: var(--surface-2); transform: translateY(-3px); box-shadow: 0 12px 36px rgba(0,0,0,.25); }
+    .skill-cat-title { font-size: .85rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+    .skill-pills { display: flex; flex-wrap: wrap; gap: 10px; }
 
     /* ── Contact ── */
     .contact-card { background: linear-gradient(135deg, rgba(108,140,255,.10), rgba(167,139,250,.08), rgba(52,211,153,.05)); border: 1px solid rgba(108,140,255,.2); border-radius: var(--radius-xl); padding: 72px 56px; text-align: center; position: relative; overflow: hidden; }
@@ -396,10 +385,9 @@
           <span class="h1-accent">Sreerang P</span><br>
           <span class="h1-muted">I build </span><span id="typed"></span><span class="cursor-blink" aria-hidden="true"></span>
         </h1>
-        <p class="hero-sub">
+        <p class="hero-sub" id="hero-sub">
           <strong>Electrical &amp; Computer Engineering</strong> student &amp;
-          <strong>IIT Madras BS Data Science</strong> scholar.
-          Turning complex problems into elegant, high-performance software.
+          <strong>IIT Madras BS Data Science</strong> student building software, data and AI products.
         </p>
         <div class="hero-btns">
           <a href="#projects" class="btn btn-primary" id="hero-projects-btn">
@@ -424,11 +412,9 @@
           <div class="avatar-ring" aria-hidden="true"></div>
         </div>
         <div class="profile-name">Sreerang P</div>
-        <div class="profile-role">Computer Engineering × Data Science</div>
-        <div class="profile-badges">
-          <span class="badge">🎓 IIT Madras</span>
-          <span class="badge">💻 Open Source</span>
-          <span class="badge">🚀 Builder</span>
+        <div class="profile-role" id="profile-role">Software, Data &amp; AI Builder</div>
+        <div class="profile-badges" id="profile-badges">
+          <!-- Dynamic profile badges -->
         </div>
         <div class="profile-stats">
           <div class="pstat"><div class="pstat-n" id="stat-repos">—</div><div class="pstat-l">Repos</div></div>
@@ -451,53 +437,20 @@
         <div class="section-head reveal">
           <div class="section-kicker">About me</div>
           <h2>Passionate about<br><span class="h1-accent">crafting solutions</span></h2>
-          <p class="section-desc">Student, builder, and lifelong learner at the intersection of hardware and software.</p>
+          <p class="section-desc" id="about-desc">Electrical &amp; Computer Engineering student and IIT Madras BS Data Science student building software, data and AI products.</p>
         </div>
-        <div class="about-text reveal reveal-delay-1">
-          <p>I'm <strong>Sreerang P</strong>, an Electrical &amp; Computer Engineering student also pursuing a BS in Data Science at <strong>IIT Madras</strong>. I love building things at the crossroads of hardware and software — from embedded systems to full-stack applications.</p>
-          <p>My passion lies in <strong>machine learning</strong>, <strong>computer vision</strong>, and <strong>systems programming</strong>. I enjoy open-source collaboration and constantly learning new technologies to tackle real-world problems.</p>
+        <div class="about-text reveal reveal-delay-1" id="about-text">
+          <!-- Dynamic about me paragraphs -->
         </div>
-        <div class="skills-cloud reveal reveal-delay-2">
-          <span class="skill-pill"><span class="dot dot-blue"></span>Python</span>
-          <span class="skill-pill"><span class="dot dot-blue"></span>C/C++</span>
-          <span class="skill-pill"><span class="dot dot-purple"></span>Machine Learning</span>
-          <span class="skill-pill"><span class="dot dot-green"></span>JavaScript</span>
-          <span class="skill-pill"><span class="dot dot-orange"></span>React</span>
-          <span class="skill-pill"><span class="dot dot-blue"></span>Linux</span>
-          <span class="skill-pill"><span class="dot dot-purple"></span>TensorFlow</span>
-          <span class="skill-pill"><span class="dot dot-green"></span>Node.js</span>
-          <span class="skill-pill"><span class="dot dot-pink"></span>VHDL</span>
-          <span class="skill-pill"><span class="dot dot-orange"></span>Arduino</span>
+        <div class="skills-cloud reveal reveal-delay-2" id="about-skills-cloud">
+          <!-- Dynamic key skills cloud -->
         </div>
       </div>
 
       <div>
         <p class="section-kicker reveal">Education</p>
-        <div class="timeline reveal reveal-delay-1">
-          <div class="timeline-item">
-            <div class="tl-dot-wrap"><div class="tl-dot"></div><div class="tl-line"></div></div>
-            <div class="tl-body">
-              <div class="tl-date">2023 – Present</div>
-              <div class="tl-title">B.S. in Data Science &amp; Applications</div>
-              <div class="tl-sub">IIT Madras — Online Degree Programme</div>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="tl-dot-wrap"><div class="tl-dot"></div><div class="tl-line"></div></div>
-            <div class="tl-body">
-              <div class="tl-date">2022 – Present</div>
-              <div class="tl-title">B.E. in Electrical &amp; Computer Engineering</div>
-              <div class="tl-sub">Undergraduate Studies</div>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
-            <div class="tl-body">
-              <div class="tl-date">Ongoing</div>
-              <div class="tl-title">Open Source Contributor &amp; Builder</div>
-              <div class="tl-sub">GitHub · Personal Projects · Hackathons</div>
-            </div>
-          </div>
+        <div class="timeline reveal reveal-delay-1" id="education-timeline">
+          <!-- Dynamic education timeline items -->
         </div>
       </div>
     </div>
@@ -512,51 +465,8 @@
       <h2>Things I've<br><span class="h1-accent">built &amp; shipped</span></h2>
       <p class="section-desc">A selection of personal and academic projects spanning ML, systems, and web development.</p>
     </div>
-    <div class="projects-grid">
-      <div class="project-card featured reveal" id="proj-1">
-        <div class="project-icon">🧠</div>
-        <div class="project-title">ML Model Playground</div>
-        <div class="project-desc">Interactive web app for training and visualizing machine learning models in real-time. Supports classification, regression, and clustering with live parameter tuning. Built with Python backend and React frontend.</div>
-        <div class="project-tags"><span class="tag">Python</span><span class="tag">TensorFlow</span><span class="tag">React</span><span class="tag">FastAPI</span><span class="tag">D3.js</span></div>
-        <div class="project-links">
-          <a href="https://github.com/cosmiccoder200x-sys" target="_blank" rel="noopener" class="proj-link primary" id="proj-1-github">
-            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-            View Source
-          </a>
-          <a href="#" class="proj-link" id="proj-1-demo">
-            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            Live Demo
-          </a>
-        </div>
-      </div>
-      <div class="project-card reveal reveal-delay-1" id="proj-2">
-        <div class="project-icon">🤖</div>
-        <div class="project-title">Embedded CV System</div>
-        <div class="project-desc">Real-time computer vision pipeline on microcontroller with hardware acceleration and RTOS integration.</div>
-        <div class="project-tags"><span class="tag">C++</span><span class="tag">OpenCV</span><span class="tag">ARM</span><span class="tag">RTOS</span></div>
-        <div class="project-links"><a href="https://github.com/cosmiccoder200x-sys" target="_blank" rel="noopener" class="proj-link primary" id="proj-2-github">GitHub</a></div>
-      </div>
-      <div class="project-card reveal" id="proj-3">
-        <div class="project-icon">📊</div>
-        <div class="project-title">Data Science Toolkit</div>
-        <div class="project-desc">Automated EDA and feature engineering pipeline for tabular datasets with beautiful visualizations.</div>
-        <div class="project-tags"><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Plotly</span><span class="tag">Streamlit</span></div>
-        <div class="project-links"><a href="https://github.com/cosmiccoder200x-sys" target="_blank" rel="noopener" class="proj-link primary" id="proj-3-github">GitHub</a></div>
-      </div>
-      <div class="project-card reveal reveal-delay-1" id="proj-4">
-        <div class="project-icon">🔌</div>
-        <div class="project-title">IoT Smart Monitor</div>
-        <div class="project-desc">ESP32-based environmental monitoring with cloud sync, alerts, and real-time dashboard.</div>
-        <div class="project-tags"><span class="tag">C</span><span class="tag">ESP32</span><span class="tag">MQTT</span><span class="tag">React</span></div>
-        <div class="project-links"><a href="https://github.com/cosmiccoder200x-sys" target="_blank" rel="noopener" class="proj-link primary" id="proj-4-github">GitHub</a></div>
-      </div>
-      <div class="project-card reveal reveal-delay-2" id="proj-5">
-        <div class="project-icon">⚡</div>
-        <div class="project-title">Neural Net from Scratch</div>
-        <div class="project-desc">Pure NumPy implementation of deep neural networks with backprop, dropout, and multiple optimizers.</div>
-        <div class="project-tags"><span class="tag">Python</span><span class="tag">NumPy</span><span class="tag">Math</span></div>
-        <div class="project-links"><a href="https://github.com/cosmiccoder200x-sys" target="_blank" rel="noopener" class="proj-link primary" id="proj-5-github">GitHub</a></div>
-      </div>
+    <div class="projects-grid" id="projects-grid">
+      <!-- Dynamic project cards -->
     </div>
   </div>
 </section>
@@ -597,35 +507,8 @@
       <h2>Tech I <span class="h1-accent">work with</span></h2>
       <p class="section-desc">A blend of software engineering, ML, and embedded systems expertise.</p>
     </div>
-    <div class="skills-container">
-      <div class="reveal">
-        <p class="skills-group-title">Core Proficiencies</p>
-        <div class="skill-bar-wrap">
-          <div class="skill-item"><div class="skill-top"><span class="skill-name">Python</span><span class="skill-pct">92%</span></div><div class="skill-track"><div class="skill-fill fill-blue" data-pct="92"></div></div></div>
-          <div class="skill-item"><div class="skill-top"><span class="skill-name">Machine Learning</span><span class="skill-pct">85%</span></div><div class="skill-track"><div class="skill-fill fill-blue" data-pct="85"></div></div></div>
-          <div class="skill-item"><div class="skill-top"><span class="skill-name">C / C++</span><span class="skill-pct">80%</span></div><div class="skill-track"><div class="skill-fill fill-orange" data-pct="80"></div></div></div>
-          <div class="skill-item"><div class="skill-top"><span class="skill-name">JavaScript / TypeScript</span><span class="skill-pct">78%</span></div><div class="skill-track"><div class="skill-fill fill-green" data-pct="78"></div></div></div>
-          <div class="skill-item"><div class="skill-top"><span class="skill-name">Data Science</span><span class="skill-pct">88%</span></div><div class="skill-track"><div class="skill-fill fill-blue" data-pct="88"></div></div></div>
-          <div class="skill-item"><div class="skill-top"><span class="skill-name">Embedded Systems</span><span class="skill-pct">75%</span></div><div class="skill-track"><div class="skill-fill fill-orange" data-pct="75"></div></div></div>
-        </div>
-      </div>
-      <div class="reveal reveal-delay-2">
-        <p class="skills-group-title">Tools &amp; Technologies</p>
-        <div class="tools-grid">
-          <div class="tool-card"><div class="tool-icon">🐍</div><div class="tool-name">Python</div></div>
-          <div class="tool-card"><div class="tool-icon">⚛️</div><div class="tool-name">React</div></div>
-          <div class="tool-card"><div class="tool-icon">🔥</div><div class="tool-name">TensorFlow</div></div>
-          <div class="tool-card"><div class="tool-icon">🐳</div><div class="tool-name">Docker</div></div>
-          <div class="tool-card"><div class="tool-icon">🐙</div><div class="tool-name">Git</div></div>
-          <div class="tool-card"><div class="tool-icon">🗄️</div><div class="tool-name">SQL</div></div>
-          <div class="tool-card"><div class="tool-icon">☁️</div><div class="tool-name">Cloud</div></div>
-          <div class="tool-card"><div class="tool-icon">🖥️</div><div class="tool-name">Linux</div></div>
-          <div class="tool-card"><div class="tool-icon">📐</div><div class="tool-name">MATLAB</div></div>
-          <div class="tool-card"><div class="tool-icon">⚡</div><div class="tool-name">FastAPI</div></div>
-          <div class="tool-card"><div class="tool-icon">🧮</div><div class="tool-name">NumPy</div></div>
-          <div class="tool-card"><div class="tool-icon">📊</div><div class="tool-name">Pandas</div></div>
-        </div>
-      </div>
+    <div class="skills-container" id="skills-container">
+      <!-- Dynamic skills cards -->
     </div>
   </div>
 </section>
@@ -661,10 +544,8 @@
   <div class="container">
     <div class="footer-inner">
       <div class="footer-left">Built with <span>♥</span> by <strong>Sreerang P</strong> · 2025</div>
-      <nav class="footer-right" aria-label="Footer navigation">
-        <a href="https://github.com/cosmiccoder200x-sys" target="_blank" rel="noopener" class="footer-link">GitHub</a>
-        <a href="#" class="footer-link">LinkedIn</a>
-        <a href="#" class="footer-link">Resume</a>
+      <nav class="footer-right" id="footer-links" aria-label="Footer navigation">
+        <!-- Dynamic footer links -->
       </nav>
     </div>
   </div>
@@ -673,6 +554,280 @@
 <script>
 (function(){
   'use strict';
+
+  /* ── Centralized Portfolio Data ── */
+  const PORTFOLIO_DATA = {
+    profile: {
+      name: "Sreerang P",
+      title: "Software, Data & AI Builder",
+      subTitle: "<strong>Electrical &amp; Computer Engineering</strong> student &amp; <strong>IIT Madras BS Data Science</strong> student building software, data and AI products.",
+      avatar: "https://github.com/cosmiccoder200x-sys.png",
+      fallbackAvatar: "https://avatars.githubusercontent.com/u/230580457?v=4",
+      typedWords: ["software.", "data products.", "AI agents.", "useful tools."],
+      aboutTitle: "crafting solutions",
+      aboutDesc: "Electrical &amp; Computer Engineering student and IIT Madras BS Data Science student building software, data and AI products.",
+      aboutText: [
+        "I'm <strong>Sreerang P</strong>, an Electrical &amp; Computer Engineering student at TKM College of Engineering (expected graduation 2029) and a BS Data Science &amp; Applications student at <strong>IIT Madras</strong>. I focus on building software, data products, and AI solutions.",
+        "I enjoy programming, data science, machine learning, and designing useful applications. I love open-source collaboration, continuous learning, and experimentation with new technical frameworks."
+      ]
+    },
+    education: [
+      {
+        period: "Present — Expected 2029",
+        degree: "B.Tech in Electrical &amp; Computer Engineering",
+        institution: "TKM College of Engineering",
+        notes: "KTU 2024 Scheme"
+      },
+      {
+        period: "Ongoing",
+        degree: "B.S. in Data Science &amp; Applications",
+        institution: "IIT Madras",
+        notes: "Online Degree Programme"
+      },
+      {
+        period: "Ongoing",
+        degree: "Open Source Contributor &amp; Builder",
+        institution: "GitHub · Personal Projects",
+        notes: "Software development, data and AI projects"
+      }
+    ],
+    skills: {
+      languages: ["Python", "C++", "C", "TypeScript", "JavaScript"],
+      software: ["React", "Next.js", "Vite", "Flask", "Git"],
+      dataAi: ["Data Science", "NumPy", "Pandas", "Machine Learning", "Computer Vision"],
+      backendCloud: ["Supabase", "SQL", "PostgreSQL", "REST APIs"]
+    },
+    socials: {
+      github: "https://github.com/cosmiccoder200x-sys",
+      linkedin: "https://linkedin.com/in/sreerang-p",
+      email: "mailto:sreerangp.official@gmail.com",
+      resume: null // Hidden when null
+    },
+    projects: [
+      {
+        name: "StudyOS AI",
+        description: "An AI-powered study platform with an AI tutor, flashcards, quiz generation, note summarization, spaced review, study planning, analytics, goals, and subject organization.",
+        technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+        github: "https://github.com/cosmiccoder200x-sys/studyos",
+        demo: null,
+        featured: true,
+        icon: "🎓"
+      },
+      {
+        name: "Xboost",
+        description: "A modern bookmark and content-management platform for saving, organizing, and discovering links, videos, and online resources.",
+        technologies: ["React", "TypeScript", "Vite", "Tailwind CSS", "Supabase", "PWA"],
+        github: "https://github.com/cosmiccoder200x-sys/xboostproductivity",
+        demo: "https://xboostproductivity.vercel.app/",
+        featured: true,
+        icon: "🔖"
+      },
+      {
+        name: "Campus Guardian AI",
+        description: "An academic assistant for engineering students at TKM College of Engineering, aligned with the KTU 2024 scheme, featuring attendance tracking, grade prediction, smart bunk planning, and an AI academic assistant.",
+        technologies: ["Flask", "SQLAlchemy", "Flask-Login", "SQLite", "PostgreSQL", "Chart.js", "JavaScript", "CSS"],
+        github: "https://github.com/cosmiccoder200x-sys/campus-guardian-ai",
+        demo: "https://web-production-efbf5.up.railway.app/",
+        featured: true,
+        icon: "🛡️"
+      },
+      {
+        name: "FocusFlow",
+        description: "A Chrome productivity extension for tracking website usage, blocking distracting sites, Pomodoro sessions, productivity statistics, coding-platform tracking, dark mode, tasks, notes, achievements, and reports.",
+        technologies: ["JavaScript", "HTML", "CSS", "Chrome Extension APIs"],
+        github: "https://github.com/cosmiccoder200x-sys/Focusflow",
+        demo: null,
+        featured: false,
+        icon: "⚡"
+      },
+      {
+        name: "AirTouch AI",
+        description: "A desktop computer-control application that uses webcam-based hand gesture recognition to control the cursor, keyboard, media, and system functions.",
+        technologies: ["Python", "OpenCV", "MediaPipe", "PyAutoGUI", "NumPy", "Tkinter", "CustomTkinter"],
+        github: "https://github.com/cosmiccoder200x-sys/AirTouchAI",
+        demo: null,
+        featured: false,
+        icon: "🤖"
+      },
+      {
+        name: "TKM Notes",
+        description: "An interactive, exam-focused notes platform for TKM College of Engineering covering S3–S8 under the KTU 2024 scheme.",
+        technologies: ["Next.js", "TypeScript", "Tailwind CSS"],
+        github: "https://github.com/cosmiccoder200x-sys/TKM-notes",
+        demo: null,
+        featured: false,
+        icon: "📝"
+      },
+      {
+        name: "HabitOS",
+        description: "A local-first, AI-powered personal dashboard and habit tracker with offline sync, Google integrations, and media player controls.",
+        technologies: ["React", "TypeScript", "Vite", "Tailwind CSS", "Express", "Firestore", "IndexedDB"],
+        github: "https://github.com/cosmiccoder200x-sys/habit-os",
+        demo: null,
+        featured: false,
+        icon: "⚙️"
+      },
+      {
+        name: "Algoverse",
+        description: "An interactive 3D data structures and algorithms visualizer with practice modules and dashboard statistics.",
+        technologies: ["React", "TypeScript", "Vite", "Tailwind CSS", "tRPC"],
+        github: "https://github.com/cosmiccoder200x-sys/Algoverse",
+        demo: null,
+        featured: false,
+        icon: "🌀"
+      }
+    ]
+  };
+
+  /* ── Escape Helper ── */
+  function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+  function lc(lang) { return ({Python:'py',JavaScript:'js',TypeScript:'ts',HTML:'html',C:'c','C++':'c'})[lang] || 'py'; }
+
+  /* ── Render Functions ── */
+  function renderAll() {
+    // 1. Hero Title & Subtitle & Badges
+    const heroSub = document.getElementById('hero-sub');
+    if (heroSub) heroSub.innerHTML = PORTFOLIO_DATA.profile.subTitle;
+
+    const profRole = document.getElementById('profile-role');
+    if (profRole) profRole.textContent = PORTFOLIO_DATA.profile.title;
+
+    const badgesContainer = document.getElementById('profile-badges');
+    if (badgesContainer) {
+      badgesContainer.innerHTML = `
+        <span class="badge">🎓 IIT Madras DS</span>
+        <span class="badge">💻 Open Source</span>
+        <span class="badge">🚀 Builder</span>
+      `;
+    }
+
+    // 2. About Me Text
+    const aboutTextContainer = document.getElementById('about-text');
+    if (aboutTextContainer) {
+      aboutTextContainer.innerHTML = PORTFOLIO_DATA.profile.aboutText.map(para => `<p>${para}</p>`).join('');
+    }
+
+    // 3. About Skills Cloud (key skills in about section)
+    const aboutSkillsContainer = document.getElementById('about-skills-cloud');
+    if (aboutSkillsContainer) {
+      const allSkills = [
+        ...PORTFOLIO_DATA.skills.languages.slice(0, 3),
+        ...PORTFOLIO_DATA.skills.software.slice(0, 2),
+        ...PORTFOLIO_DATA.skills.dataAi.slice(0, 3),
+        ...PORTFOLIO_DATA.skills.backendCloud.slice(0, 2)
+      ];
+      const dots = ['dot-blue', 'dot-purple', 'dot-green', 'dot-orange', 'dot-pink'];
+      aboutSkillsContainer.innerHTML = allSkills.map((s, idx) => {
+        const dotColor = dots[idx % dots.length];
+        return `<span class="skill-pill"><span class="dot ${dotColor}"></span>${esc(s)}</span>`;
+      }).join('');
+    }
+
+    // 4. Education Timeline
+    const timelineContainer = document.getElementById('education-timeline');
+    if (timelineContainer) {
+      timelineContainer.innerHTML = PORTFOLIO_DATA.education.map((edu, idx) => {
+        const hasLine = idx < PORTFOLIO_DATA.education.length - 1;
+        return `
+          <div class="timeline-item">
+            <div class="tl-dot-wrap">
+              <div class="tl-dot"></div>
+              ${hasLine ? '<div class="tl-line"></div>' : ''}
+            </div>
+            <div class="tl-body">
+              <div class="tl-date">${esc(edu.period)}</div>
+              <div class="tl-title">${esc(edu.degree)}</div>
+              <div class="tl-sub">${esc(edu.institution)} ${edu.notes ? `— ${esc(edu.notes)}` : ''}</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // 5. Projects Grid
+    const projectsContainer = document.getElementById('projects-grid');
+    if (projectsContainer) {
+      projectsContainer.innerHTML = PORTFOLIO_DATA.projects.map((proj, idx) => {
+        const featuredClass = proj.featured ? 'featured' : '';
+        const delayClass = idx % 3 === 0 ? '' : `reveal-delay-${idx % 3}`;
+        const tagsHtml = proj.technologies.map(t => `<span class="tag">${esc(t)}</span>`).join('');
+        let linksHtml = '';
+        if (proj.github) {
+          linksHtml += `
+            <a href="${esc(proj.github)}" target="_blank" rel="noopener" class="proj-link primary">
+              <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+              View Source
+            </a>
+          `;
+        }
+        if (proj.demo) {
+          linksHtml += `
+            <a href="${esc(proj.demo)}" target="_blank" rel="noopener" class="proj-link">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Live Demo
+            </a>
+          `;
+        }
+        return `
+          <div class="project-card ${featuredClass} reveal ${delayClass}">
+            <div class="project-icon">${esc(proj.icon || '📦')}</div>
+            <div class="project-title">${esc(proj.name)}</div>
+            <div class="project-desc">${esc(proj.description)}</div>
+            <div class="project-tags">${tagsHtml}</div>
+            <div class="project-links">${linksHtml}</div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // 6. Skills Categories
+    const skillsContainer = document.getElementById('skills-container');
+    if (skillsContainer) {
+      const categories = [
+        { title: "Languages", skills: PORTFOLIO_DATA.skills.languages, icon: "💻", dot: "dot-blue", delay: "" },
+        { title: "Software & Tools", skills: PORTFOLIO_DATA.skills.software, icon: "🛠️", dot: "dot-purple", delay: "reveal-delay-1" },
+        { title: "Data & AI", skills: PORTFOLIO_DATA.skills.dataAi, icon: "📊", dot: "dot-green", delay: "reveal-delay-1" },
+        { title: "Backend & Cloud", skills: PORTFOLIO_DATA.skills.backendCloud, icon: "🗄️", dot: "dot-orange", delay: "reveal-delay-2" }
+      ];
+      skillsContainer.innerHTML = categories.map(cat => {
+        const pillsHtml = cat.skills.map(s => `
+          <span class="skill-pill">
+            <span class="dot ${cat.dot}"></span>
+            ${esc(s)}
+          </span>
+        `).join('');
+        return `
+          <div class="skill-cat-card reveal ${cat.delay}">
+            <div class="skill-cat-title">
+              <span>${cat.icon}</span> ${esc(cat.title)}
+            </div>
+            <div class="skill-pills">
+              ${pillsHtml}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // 7. Footer Links
+    const footerLinksContainer = document.getElementById('footer-links');
+    if (footerLinksContainer) {
+      let footerHtml = '';
+      if (PORTFOLIO_DATA.socials.github) {
+        footerHtml += `<a href="${esc(PORTFOLIO_DATA.socials.github)}" target="_blank" rel="noopener" class="footer-link">GitHub</a>`;
+      }
+      if (PORTFOLIO_DATA.socials.linkedin) {
+        footerHtml += `<a href="${esc(PORTFOLIO_DATA.socials.linkedin)}" target="_blank" rel="noopener" class="footer-link">LinkedIn</a>`;
+      }
+      if (PORTFOLIO_DATA.socials.resume) {
+        footerHtml += `<a href="${esc(PORTFOLIO_DATA.socials.resume)}" target="_blank" rel="noopener" class="footer-link">Resume</a>`;
+      }
+      footerLinksContainer.innerHTML = footerHtml;
+    }
+  }
+
+  // Execute rendering first
+  renderAll();
 
   /* ── Particle Canvas ── */
   const canvas = document.getElementById('particle-canvas');
@@ -777,14 +932,13 @@
     entries.forEach(e => {
       if (e.isIntersecting) {
         e.target.classList.add('visible');
-        e.target.querySelectorAll('.skill-fill').forEach(b => { b.style.width = b.dataset.pct + '%'; });
       }
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
   document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 
   /* ── Typed text ── */
-  const words = ['things.', 'solutions.', 'ML models.', 'web apps.', 'the future.'];
+  const words = PORTFOLIO_DATA.profile.typedWords;
   const typedEl = document.getElementById('typed');
   let wi = 0, ci = 0, del = false;
   function type() {
@@ -804,8 +958,6 @@
 
   /* ── GitHub API ── */
   const GH = 'cosmiccoder200x-sys';
-  function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-  function lc(lang) { return ({Python:'py',JavaScript:'js',TypeScript:'ts',HTML:'html',C:'c','C++':'c'})[lang] || 'py'; }
   function count(el, n) {
     if (!el) return;
     const dur = 1200, t0 = Date.now();
@@ -818,11 +970,19 @@
   }
 
   async function fetchGH() {
+    const prioritizedRepos = ['studyos', 'xboostproductivity', 'campus-guardian-ai', 'Focusflow', 'AirTouchAI', 'TKM-notes', 'habit-os', 'Algoverse'];
     try {
       const [u, r] = await Promise.all([
-        fetch(`https://api.github.com/users/${GH}`).then(x => x.json()),
-        fetch(`https://api.github.com/users/${GH}/repos?sort=stars&per_page=6&type=owner`).then(x => x.json())
+        fetch(`https://api.github.com/users/${GH}`).then(x => {
+          if (!x.ok) throw new Error();
+          return x.json();
+        }),
+        fetch(`https://api.github.com/users/${GH}/repos?per_page=100`).then(x => {
+          if (!x.ok) throw new Error();
+          return x.json();
+        })
       ]);
+      
       if (u.public_repos != null) {
         count(document.getElementById('stat-repos'),    u.public_repos);
         count(document.getElementById('stat-followers'), u.followers);
@@ -833,9 +993,23 @@
           document.getElementById('profile-avatar').src = u.avatar_url;
         }
       }
+      
       if (Array.isArray(r)) {
-        count(document.getElementById('gh-stars'), r.reduce((s,x) => s + x.stargazers_count, 0));
-        document.getElementById('repos-grid').innerHTML = r.slice(0,4).map(x => `
+        // Compute actual total stars
+        const totalStars = r.reduce((s, x) => s + x.stargazers_count, 0);
+        count(document.getElementById('gh-stars'), totalStars);
+        
+        // Sort repositories so prioritized ones are displayed first
+        const sortedRepos = [...r].sort((a, b) => {
+          const aIndex = prioritizedRepos.indexOf(a.name);
+          const bIndex = prioritizedRepos.indexOf(b.name);
+          if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex;
+          if (aIndex !== -1) return -1;
+          if (bIndex !== -1) return 1;
+          return b.stargazers_count - a.stargazers_count; // fallback by stars
+        });
+        
+        document.getElementById('repos-grid').innerHTML = sortedRepos.slice(0, 4).map(x => `
           <a href="${esc(x.html_url)}" target="_blank" rel="noopener" class="repo-card" style="text-decoration:none">
             <div class="repo-top">
               <div class="repo-name">📦 ${esc(x.name)}</div>
@@ -847,7 +1021,25 @@
         document.getElementById('gh-note').textContent = 'Last updated: ' + new Date().toLocaleDateString();
       }
     } catch(_) {
-      document.getElementById('gh-note').textContent = 'Unable to load GitHub data — visit github.com/cosmiccoder200x-sys';
+      // Graceful fallback when API fails or is rate limited
+      document.getElementById('gh-note').textContent = 'Showing offline fallback. Visit github.com/cosmiccoder200x-sys';
+      document.getElementById('gh-repos').textContent = PORTFOLIO_DATA.projects.length;
+      document.getElementById('gh-stars').textContent = '★';
+      document.getElementById('gh-followers').textContent = '—';
+      document.getElementById('gh-following').textContent = '—';
+      document.getElementById('stat-repos').textContent = PORTFOLIO_DATA.projects.length;
+      document.getElementById('stat-followers').textContent = '—';
+      
+      // Render static project list as repo cards
+      document.getElementById('repos-grid').innerHTML = PORTFOLIO_DATA.projects.slice(0, 4).map(x => `
+        <a href="${esc(x.github)}" target="_blank" rel="noopener" class="repo-card" style="text-decoration:none">
+          <div class="repo-top">
+            <div class="repo-name">📦 ${esc(x.name)}</div>
+            <div class="repo-stars">⭐ verified</div>
+          </div>
+          <div class="repo-desc">${esc(x.description)}</div>
+          <div class="repo-lang"><span class="lang-dot lang-${lc(x.technologies[0])}"></span>${esc(x.technologies[0])}</div>
+        </a>`).join('');
     }
   }
   fetchGH();

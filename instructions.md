@@ -1,0 +1,117 @@
+# Instructions — cosmiccoder200x-sys/portfolio
+
+Living project guide. Read before editing; keep it updated when architecture or
+conventions change.
+
+## What this is
+
+A **single-file static portfolio site** (`index.html`, ~1200 lines) with no build
+step: all CSS lives in one `<style>` block, all JS in one IIFE `<script>` block.
+It is deployed to **GitHub Pages** via `.github/workflows/static.yml` (push to
+`main` → Actions → Pages). `CNAME` holds a custom domain; `README.md` also
+documents an optional Vercel deploy (framework preset: Other, no build command).
+
+## Architecture
+
+- **`index.html`** — the whole site:
+  - `<style>` — design tokens (`:root` CSS variables), section styles, responsive
+    breakpoints at 1024 / 860 / 520 px.
+  - Body markup — semantic sections: `header#home` (hero), `#about`, `#projects`,
+    `#github`, `#skills`, `#contact`, `<footer>`.
+  - `<script>` IIFE — contains `PORTFOLIO_DATA` (single source of truth for
+    profile, education, skills, socials, **projects**), `renderAll()` which
+    renders every dynamic section from that object, small UI behaviours
+    (typed text, particles, cursor glow, scroll progress, reveal-on-scroll via
+    IntersectionObserver, mobile nav, contact form → Google Forms), and `fetchGH()`
+    which enriches the GitHub section with **live API data plus graceful
+    offline fallback**.
+- **`.github/workflows/static.yml`** — Pages deployment; uploads the repo root.
+
+### Data flow rules
+
+- All site content (names, project descriptions, links) lives in
+  `PORTFOLIO_DATA`. **Never hard-code project cards in HTML** — render from data.
+- The featured-projects grid is **fully static** (rendered from `PORTFOLIO_DATA`
+  at load) and must render even with no network. The live GitHub API is used only
+  to *enrich* (stats, recent-repo cards) and must always keep the offline
+  fallback path working.
+- Live GitHub enrichment is unauthenticated `api.github.com` (60 req/h per IP).
+  Never add tokens to client code.
+
+## Coding conventions
+
+- Vanilla JS, ES2017+, single IIFE, `'use strict'`. No frameworks, no bundler,
+  no new dependencies without an explicit request.
+- All dynamic HTML goes through `esc()` (HTML-escape) to prevent XSS; keep doing
+  this for any interpolated data, including URLs.
+- External links: `target="_blank" rel="noopener"`.
+- Element IDs are kebab-case; dynamic containers are `*-grid`, `*-container`.
+- Comments mark sections with `── Section ──` box drawing.
+
+## Design rules
+
+- Preserve the existing visual identity: dark theme (`--bg: #04050a`), accent
+  blue `--accent: #6c8cff` / purple `--accent-2: #a78bfa` / green `--accent-3`,
+  Inter + JetBrains Mono fonts, 18–36 px radii, `cubic-bezier(.2,.8,.2,1)`
+  easing, `.reveal` scroll animations with `reveal-delay-1..3` staggering.
+- Project grid: 3 columns ≥1025 px, 2 columns 861–1024 px, 1 column ≤860 px.
+  `.project-card.featured` spans 2 columns on desktop/tablet; featured cards are
+  interleaved 1:1 with regular cards so rows pack exactly.
+- When a category filter (other than "All") is active the grid switches to
+  single-column spans (`.projects-grid.filtered`) so filtered views have no gaps.
+- Interaction polish stays restrained: hover lift `-6px`, 200–300 ms transitions,
+  visible `:focus-visible` outlines on every interactive element.
+- No fabricated metrics, testimonials, badges, or completion claims. Status and
+  demos are shown only when verified.
+
+## Content / project-data rules
+
+- Every project entry needs: `name`, `description` (based on the repo's real
+  implementation), `technologies` (verified from the repo), `github` (repo URL),
+  `demo` (**only if verified live**, otherwise `null`), `featured` (boolean),
+  `icon`, `category` (one of `ai`, `web`, `devtools`, `productivity`).
+- Source of truth for project facts is the GitHub repo (README + code), never
+  memory. Repos that are forks, experiments, course notes, or near-duplicates of
+  an already-listed project are documented in the audit but not listed.
+- The `prioritizedRepos` array inside `fetchGH()` must list repo names in the
+  same priority order as the curated grid; keep both in sync when adding projects.
+
+## Security requirements
+
+- No API keys, tokens, or secrets in the repo or in client-side code.
+- Contact form posts directly to a Google Forms `formResponse` endpoint via a
+  hidden iframe; no backend, no stored credentials.
+- Keep `esc()` around all interpolated data.
+
+## Testing procedure (no test framework exists)
+
+1. Syntax-check the inline script: extract the `<script>` contents and run
+   `node --check` on it.
+2. DOM test with jsdom in a scratch directory (not committed): load `index.html`
+   with scripts enabled, stub `IntersectionObserver`, canvas `getContext`, and
+   `fetch`; assert card count, filter behaviour, link hygiene
+   (`rel="noopener"`, `target="_blank"`), no duplicate projects, and that the
+   GitHub fallback path renders when `fetch` fails.
+3. Verify every external URL with `curl -s -o /dev/null -w "%{http_code}" -L`.
+   A demo link may only ship when it returns 200.
+4. Sanity-check responsive behaviour by CSS inspection (breakpoints listed above);
+   no build output to validate.
+
+## Deployment constraints
+
+- Pushing to `main` auto-deploys to GitHub Pages. **Never push without explicit
+  user authorization.**
+- `CNAME` must keep the custom domain exactly as configured in the GitHub repo's
+  Pages settings.
+- The site is intentionally dependency-free: do not introduce a backend, build
+  step, or framework.
+
+## How to add a project
+
+1. Verify the repo: README, primary languages, and (if any) the live demo URL
+   (`curl -L` must return 200).
+2. Add one object to `PORTFOLIO_DATA.projects` (fields listed above), placed so
+   featured and regular cards alternate, and set its `category`.
+3. Insert the repo name into `prioritizedRepos` in `fetchGH()` at the matching
+   position.
+4. Run the testing steps above, then commit/push only with authorization.

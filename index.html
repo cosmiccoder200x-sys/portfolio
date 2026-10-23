@@ -236,7 +236,7 @@
     .tl-sub { color: var(--text-3); font-size: .88rem; }
 
     /* ── Projects ── */
-    .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; grid-auto-flow: dense; }
     .project-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; display: flex; flex-direction: column; transition: transform .3s cubic-bezier(.2,.8,.2,1), border-color .3s, background .3s, box-shadow .3s; position: relative; overflow: hidden; }
     .project-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(108,140,255,.06), transparent 60%); opacity: 0; transition: opacity .3s; }
     .project-card:hover { transform: translateY(-6px); border-color: var(--border-h); background: var(--surface-2); box-shadow: 0 20px 60px rgba(0,0,0,.3), 0 0 0 1px rgba(108,140,255,.1) inset; }
@@ -251,6 +251,22 @@
     .proj-link { display: inline-flex; align-items: center; gap: 6px; font-size: .84rem; font-weight: 700; color: var(--text-2); padding: 7px 14px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); transition: color .2s, border-color .2s, background .2s; }
     .proj-link:hover { color: var(--text); border-color: var(--border-h); background: var(--surface-2); }
     .proj-link.primary { color: var(--accent); border-color: rgba(108,140,255,.3); }
+    .proj-link:focus-visible, .filter-btn:focus-visible, .contact-link:focus-visible, .btn:focus-visible, .nav-links a:focus-visible, .repo-card:focus-visible, .footer-link:focus-visible {
+      outline: 2px solid var(--accent); outline-offset: 3px;
+    }
+    .project-title, .project-desc { overflow-wrap: anywhere; }
+
+    /* Project filters */
+    .project-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 30px; }
+    .project-card[hidden], .project-filters[hidden] { display: none; }
+    .filter-btn {
+      padding: 8px 16px; border-radius: 999px; font-size: .84rem; font-weight: 600;
+      color: var(--text-2); background: var(--surface); border: 1px solid var(--border);
+      transition: color .2s, border-color .2s, background .2s;
+    }
+    .filter-btn:hover { color: var(--text); border-color: var(--border-h); background: var(--surface-2); }
+    .filter-btn[aria-pressed="true"] { color: var(--accent); background: rgba(108,140,255,.1); border-color: rgba(108,140,255,.35); }
+    .projects-empty { color: var(--text-3); font-size: .95rem; padding: 24px 0; }
 
     /* ── GitHub Stats ── */
     #github { background: linear-gradient(180deg, transparent, rgba(167,139,250,.03) 50%, transparent); }
@@ -541,11 +557,15 @@
     <div class="section-head reveal">
       <div class="section-kicker">Projects</div>
       <h2>Things I've<br><span class="h1-accent">built &amp; shipped</span></h2>
-      <p class="section-desc">A selection of personal and academic projects spanning ML, systems, and web development.</p>
+      <p class="section-desc">A selection of personal and academic projects spanning AI systems, full-stack products, and developer tools.</p>
+    </div>
+    <div class="project-filters reveal" id="project-filters" role="group" aria-label="Filter projects by category">
+      <!-- Dynamic category filter buttons -->
     </div>
     <div class="projects-grid" id="projects-grid">
       <!-- Dynamic project cards -->
     </div>
+    <p class="projects-empty" id="projects-empty" hidden>No projects in this category yet.</p>
   </div>
 </section>
 
@@ -710,31 +730,34 @@
     },
     projects: [
       {
-        name: "StudyOS AI",
-        description: "An AI-powered study platform with an AI tutor, flashcards, quiz generation, note summarization, spaced review, study planning, analytics, goals, and subject organization.",
-        technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
-        github: "https://github.com/cosmiccoder200x-sys/studyos",
+        name: "wallpaperX",
+        description: "A production SaaS for wallpaper optimization and discovery — upload any image or paste a URL to get the highest-quality version within a target file size, with smart compression, a categorized library, user accounts, and an admin dashboard.",
+        technologies: ["React", "TypeScript", "Vite", "Tailwind CSS", "Flask", "PostgreSQL"],
+        github: "https://github.com/cosmiccoder200x-sys/wallpaperX",
+        demo: "https://frontend-six-dusky-25.vercel.app",
+        featured: true,
+        icon: "🖼️",
+        category: "web"
+      },
+      {
+        name: "Gitfolio",
+        description: "A SaaS-style platform that turns a GitHub profile into a developer portfolio — one-click GitHub sync, six distinct layout themes (terminal, bento grid, editorial, and more), and a live visual builder with viewport previews.",
+        technologies: ["React", "TypeScript", "Vite", "Tailwind CSS"],
+        github: "https://github.com/cosmiccoder200x-sys/gitfolio",
         demo: null,
-        featured: true,
-        icon: "🎓"
+        featured: false,
+        icon: "🪄",
+        category: "devtools"
       },
       {
-        name: "Xboost",
-        description: "A modern bookmark and content-management platform for saving, organizing, and discovering links, videos, and online resources.",
-        technologies: ["React", "TypeScript", "Vite", "Tailwind CSS", "Supabase", "PWA"],
-        github: "https://github.com/cosmiccoder200x-sys/xboostproductivity",
-        demo: "https://xboostproductivity.vercel.app/",
+        name: "Local Brain MCP",
+        description: "A Model Context Protocol server that gives AI coding agents persistent, local-first memory — indexes a repo's Git history and engineering decisions into an embedded SQLite vector database with millisecond local recall. Published on npm.",
+        technologies: ["TypeScript", "Node.js", "MCP", "SQLite", "Vector Search"],
+        github: "https://github.com/cosmiccoder200x-sys/local-brain-mcp",
+        demo: "https://local-brain-mcp.vercel.app",
         featured: true,
-        icon: "🔖"
-      },
-      {
-        name: "Campus Guardian AI",
-        description: "An academic assistant for engineering students at TKM College of Engineering, aligned with the KTU 2024 scheme, featuring attendance tracking, grade prediction, smart bunk planning, and an AI academic assistant.",
-        technologies: ["Flask", "SQLAlchemy", "Flask-Login", "SQLite", "PostgreSQL", "Chart.js", "JavaScript", "CSS"],
-        github: "https://github.com/cosmiccoder200x-sys/campus-guardian-ai",
-        demo: "https://web-production-efbf5.up.railway.app/",
-        featured: true,
-        icon: "🛡️"
+        icon: "🧠",
+        category: "devtools"
       },
       {
         name: "FocusFlow",
@@ -743,7 +766,38 @@
         github: "https://github.com/cosmiccoder200x-sys/Focusflow",
         demo: null,
         featured: false,
-        icon: "⚡"
+        icon: "⚡",
+        category: "productivity"
+      },
+      {
+        name: "FinSight",
+        description: "A full-stack personal finance and investing assistant — track holdings and expenses, set savings goals, score financial health, simulate investments, and chat with an AI copilot, with an admin dashboard and Docker-based infrastructure.",
+        technologies: ["React", "TypeScript", "FastAPI", "SQLAlchemy", "PostgreSQL", "Docker"],
+        github: "https://github.com/cosmiccoder200x-sys/FinSight",
+        demo: "https://finsight.cosmiccoder200x.workers.dev/",
+        featured: true,
+        icon: "📈",
+        category: "web"
+      },
+      {
+        name: "E--learning",
+        description: "A full-stack e-learning platform with class management, live sessions, course materials, assignments, submissions, and grading — a React frontend backed by a Flask REST API and Supabase.",
+        technologies: ["React", "TypeScript", "Vite", "Flask", "Supabase"],
+        github: "https://github.com/cosmiccoder200x-sys/E--learning",
+        demo: null,
+        featured: false,
+        icon: "📚",
+        category: "web"
+      },
+      {
+        name: "Gullylabs",
+        description: "A production e-commerce platform for physical and digital products — storefront with search, cart, coupons, and Razorpay checkout, plus real-time order tracking, returns, support chat, and a full admin console.",
+        technologies: ["React", "TanStack Start", "Tailwind CSS", "Supabase", "Razorpay"],
+        github: "https://github.com/cosmiccoder200x-sys/Gullylabs",
+        demo: "https://gullylab.vercel.app",
+        featured: true,
+        icon: "🛍️",
+        category: "web"
       },
       {
         name: "AirTouch AI",
@@ -752,34 +806,68 @@
         github: "https://github.com/cosmiccoder200x-sys/AirTouchAI",
         demo: null,
         featured: false,
-        icon: "🤖"
+        icon: "🤖",
+        category: "ai"
       },
       {
-        name: "TKM Notes",
-        description: "An interactive, exam-focused notes platform for TKM College of Engineering covering S3–S8 under the KTU 2024 scheme.",
-        technologies: ["Next.js", "TypeScript", "Tailwind CSS"],
-        github: "https://github.com/cosmiccoder200x-sys/TKM-notes",
-        demo: null,
-        featured: false,
-        icon: "📝"
+        name: "StudyOS AI",
+        description: "An AI-powered study platform with an AI tutor, flashcards, quiz generation, note summarization, spaced review, study planning, analytics, goals, and subject organization.",
+        technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+        github: "https://github.com/cosmiccoder200x-sys/studyos",
+        demo: "https://studyos-sigma.vercel.app",
+        featured: true,
+        icon: "🎓",
+        category: "ai"
       },
       {
         name: "HabitOS",
         description: "A local-first, AI-powered personal dashboard and habit tracker with offline sync, Google integrations, and media player controls.",
         technologies: ["React", "TypeScript", "Vite", "Tailwind CSS", "Express", "Firestore", "IndexedDB"],
         github: "https://github.com/cosmiccoder200x-sys/habit-os",
-        demo: null,
+        demo: "https://chronosos-205440418404.asia-southeast1.run.app",
         featured: false,
-        icon: "⚙️"
+        icon: "⚙️",
+        category: "productivity"
+      },
+      {
+        name: "Modulr",
+        description: "An adaptive exam-learning platform for TKM College of Engineering (KTU 2024 Scheme, S3–S8) that turns syllabus, previous-year questions, mastery, and mistakes into personalized, high-yield study sessions — shipped as a fully static site.",
+        technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Vitest"],
+        github: "https://github.com/cosmiccoder200x-sys/Modulr",
+        demo: "https://tkm-notes.vercel.app/",
+        featured: true,
+        icon: "🧩",
+        category: "ai"
       },
       {
         name: "Algoverse",
         description: "An interactive 3D data structures and algorithms visualizer with practice modules and dashboard statistics.",
         technologies: ["React", "TypeScript", "Vite", "Tailwind CSS", "tRPC"],
         github: "https://github.com/cosmiccoder200x-sys/Algoverse",
+        demo: "https://v2j2uqyxyp3jq.kimi.page",
+        featured: false,
+        icon: "🌀",
+        category: "devtools"
+      },
+      {
+        name: "Xboost",
+        description: "A modern bookmark and content-management platform for saving, organizing, and discovering links, videos, and online resources.",
+        technologies: ["React", "TypeScript", "Vite", "Tailwind CSS", "Supabase", "PWA"],
+        github: "https://github.com/cosmiccoder200x-sys/xboostproductivity",
+        demo: "https://xboostproductivity.vercel.app/",
+        featured: true,
+        icon: "🔖",
+        category: "productivity"
+      },
+      {
+        name: "Campus Guardian AI",
+        description: "An academic assistant for engineering students at TKM College of Engineering, aligned with the KTU 2024 scheme, featuring attendance tracking, grade prediction, smart bunk planning, and an AI academic assistant.",
+        technologies: ["Flask", "SQLAlchemy", "Flask-Login", "SQLite", "PostgreSQL", "Chart.js", "JavaScript", "CSS"],
+        github: "https://github.com/cosmiccoder200x-sys/campus-guardian-ai",
         demo: null,
         featured: false,
-        icon: "🌀"
+        icon: "🛡️",
+        category: "ai"
       }
     ]
   };
@@ -849,8 +937,9 @@
       }).join('');
     }
 
-    // 5. Projects Grid
+    // 5. Projects Grid + Category Filters
     const projectsContainer = document.getElementById('projects-grid');
+    const CATEGORY_LABELS = { ai: "AI & Data", web: "Web & Full-Stack", devtools: "Developer Tools", productivity: "Productivity" };
     if (projectsContainer) {
       projectsContainer.innerHTML = PORTFOLIO_DATA.projects.map((proj, idx) => {
         const featuredClass = proj.featured ? 'featured' : '';
@@ -859,23 +948,23 @@
         let linksHtml = '';
         if (proj.github) {
           linksHtml += `
-            <a href="${esc(proj.github)}" target="_blank" rel="noopener" class="proj-link primary">
-              <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+            <a href="${esc(proj.github)}" target="_blank" rel="noopener" class="proj-link primary" aria-label="View ${esc(proj.name)} source code on GitHub (opens in new tab)">
+              <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
               View Source
             </a>
           `;
         }
         if (proj.demo) {
           linksHtml += `
-            <a href="${esc(proj.demo)}" target="_blank" rel="noopener" class="proj-link">
-              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            <a href="${esc(proj.demo)}" target="_blank" rel="noopener" class="proj-link" aria-label="Open ${esc(proj.name)} live demo (opens in new tab)">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
               Live Demo
             </a>
           `;
         }
         return `
-          <div class="project-card ${featuredClass} reveal ${delayClass}">
-            <div class="project-icon">${esc(proj.icon || '📦')}</div>
+          <div class="project-card ${featuredClass} reveal ${delayClass}" data-category="${esc(proj.category || '')}">
+            <div class="project-icon" aria-hidden="true">${esc(proj.icon || '📦')}</div>
             <div class="project-title">${esc(proj.name)}</div>
             <div class="project-desc">${esc(proj.description)}</div>
             <div class="project-tags">${tagsHtml}</div>
@@ -883,6 +972,37 @@
           </div>
         `;
       }).join('');
+
+      // Category filter buttons (rendered only when categories exist)
+      const filtersContainer = document.getElementById('project-filters');
+      const emptyState = document.getElementById('projects-empty');
+      const presentCategories = [...new Set(PORTFOLIO_DATA.projects.map(p => p.category).filter(Boolean))];
+      if (filtersContainer && presentCategories.length > 1) {
+        const buttons = [{ id: 'all', label: 'All Projects' }].concat(
+          presentCategories.map(c => ({ id: c, label: CATEGORY_LABELS[c] || c }))
+        );
+        filtersContainer.innerHTML = buttons.map((b, i) => `
+          <button type="button" class="filter-btn" data-filter="${esc(b.id)}" aria-pressed="${i === 0 ? 'true' : 'false'}">${esc(b.label)}</button>
+        `).join('');
+
+        filtersContainer.addEventListener('click', (e) => {
+          const btn = e.target.closest('.filter-btn');
+          if (!btn) return;
+          const filter = btn.dataset.filter;
+          filtersContainer.querySelectorAll('.filter-btn').forEach(b =>
+            b.setAttribute('aria-pressed', String(b === btn))
+          );
+          let visible = 0;
+          projectsContainer.querySelectorAll('.project-card').forEach(card => {
+            const show = filter === 'all' || card.dataset.category === filter;
+            card.hidden = !show;
+            if (show) visible++;
+          });
+          if (emptyState) emptyState.hidden = visible > 0;
+        });
+      } else if (filtersContainer) {
+        filtersContainer.hidden = true;
+      }
     }
 
     // 6. Skills Categories
@@ -1122,7 +1242,7 @@
   }
 
   async function fetchGH() {
-    const prioritizedRepos = ['studyos', 'xboostproductivity', 'campus-guardian-ai', 'Focusflow', 'AirTouchAI', 'TKM-notes', 'habit-os', 'Algoverse'];
+    const prioritizedRepos = ['wallpaperX', 'gitfolio', 'local-brain-mcp', 'Focusflow', 'FinSight', 'E--learning', 'Gullylabs', 'AirTouchAI', 'studyos', 'habit-os', 'Modulr', 'Algoverse', 'xboostproductivity', 'campus-guardian-ai'];
     try {
       const [u, r] = await Promise.all([
         fetch(`https://api.github.com/users/${GH}`).then(x => {

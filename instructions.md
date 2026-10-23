@@ -54,11 +54,11 @@ documents an optional Vercel deploy (framework preset: Other, no build command).
   blue `--accent: #6c8cff` / purple `--accent-2: #a78bfa` / green `--accent-3`,
   Inter + JetBrains Mono fonts, 18–36 px radii, `cubic-bezier(.2,.8,.2,1)`
   easing, `.reveal` scroll animations with `reveal-delay-1..3` staggering.
-- Project grid: 3 columns ≥1025 px, 2 columns 861–1024 px, 1 column ≤860 px.
-  `.project-card.featured` spans 2 columns on desktop/tablet; featured cards are
-  interleaved 1:1 with regular cards so rows pack exactly.
-- When a category filter (other than "All") is active the grid switches to
-  single-column spans (`.projects-grid.filtered`) so filtered views have no gaps.
+- Project grid: 3 columns ≥1025 px, 2 columns 861–1024 px, 1 column ≤860 px
+  (featured spans 1 column there). `.project-card.featured` spans 2 columns on
+  desktop/tablet; keep the featured/regular mix such that total spans are a
+  multiple of the column count so rows pack exactly.
+- `grid-auto-flow: dense` fills gaps when a category filter hides cards.
 - Interaction polish stays restrained: hover lift `-6px`, 200–300 ms transitions,
   visible `:focus-visible` outlines on every interactive element.
 - No fabricated metrics, testimonials, badges, or completion claims. Status and
@@ -66,6 +66,10 @@ documents an optional Vercel deploy (framework preset: Other, no build command).
 
 ## Content / project-data rules
 
+- **The curated grid lists exactly these 5 projects, in this order: Modulr,
+  Local Brain MCP, FocusFlow Extension, E--learning, Gullylabs.** Other repos
+  are deliberately not detailed on the site; do not add project entries beyond
+  this list without an explicit request.
 - Every project entry needs: `name`, `description` (based on the repo's real
   implementation), `technologies` (verified from the repo), `github` (repo URL),
   `demo` (**only if verified live**, otherwise `null`), `featured` (boolean),
@@ -112,6 +116,6 @@ documents an optional Vercel deploy (framework preset: Other, no build command).
    (`curl -L` must return 200).
 2. Add one object to `PORTFOLIO_DATA.projects` (fields listed above), placed so
    featured and regular cards alternate, and set its `category`.
-3. Insert the repo name into `prioritizedRepos` in `fetchGH()` at the matching
-   position.
+3. Re-check that the featured/regular spans still pack the grid, and insert the
+   repo name into `prioritizedRepos` in `fetchGH()` at the matching position.
 4. Run the testing steps above, then commit/push only with authorization.

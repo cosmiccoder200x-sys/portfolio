@@ -75,6 +75,22 @@
       mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.4) 30%, rgba(0,0,0,0.4) 70%, transparent 100%);
     }
 
+    /* 3D Kinetic Cyber Grid with Scroll Parallax */
+    .cyber-grid-floor {
+      position: fixed; inset: -150px -100px; z-index: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(124,58,237,0.09) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(6,182,212,0.07) 1px, transparent 1px);
+      background-size: 50px 50px;
+      transform: perspective(650px) rotateX(32deg);
+      transform-origin: center 25%;
+      mask-image: radial-gradient(ellipse 85% 65% at 50% 45%, black 20%, transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse 85% 65% at 50% 45%, black 20%, transparent 75%);
+      opacity: 0.7;
+      will-change: background-position, transform;
+      transition: opacity 0.5s ease;
+    }
+
     /* Nebula glows */
     .nebula {
       position: fixed; border-radius: 50%; pointer-events: none; z-index: 0;
@@ -198,6 +214,40 @@
       box-shadow: 0 0 6px var(--cyan);
       animation: pulse 2s infinite;
     }
+
+    /* Live Telemetry Equalizer */
+    .nav-telemetry {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--mono);
+      font-size: .7rem;
+      color: var(--cyan);
+      background: rgba(6,182,212,0.07);
+      border: 1px solid rgba(6,182,212,0.2);
+      padding: 5px 9px;
+      border-radius: 8px;
+      user-select: none;
+    }
+    .eq-bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 2px;
+      height: 12px;
+    }
+    .eq-b {
+      width: 2px;
+      background: var(--cyan);
+      border-radius: 1px;
+    }
+    .eq-b.b1 { height: 6px; animation: eqAnim1 1.2s ease-in-out infinite alternate; }
+    .eq-b.b2 { height: 11px; animation: eqAnim2 0.8s ease-in-out infinite alternate; }
+    .eq-b.b3 { height: 4px; animation: eqAnim3 1.5s ease-in-out infinite alternate; }
+    .eq-b.b4 { height: 9px; animation: eqAnim4 1.0s ease-in-out infinite alternate; }
+    @keyframes eqAnim1 { 0% { height: 3px; } 100% { height: 11px; } }
+    @keyframes eqAnim2 { 0% { height: 12px; } 100% { height: 4px; } }
+    @keyframes eqAnim3 { 0% { height: 4px; } 100% { height: 10px; } }
+    @keyframes eqAnim4 { 0% { height: 9px; } 100% { height: 2px; } }
 
     .nav-cmd {
       display: inline-flex; align-items: center; gap: 6px;
@@ -547,10 +597,110 @@
     .stat-sub { font-family: var(--mono); font-size: .72rem; color: var(--text-3); }
 
     /* ══════════════════════════════════════════
+       KINETIC CYBER MARQUEE (Dual-Track)
+    ══════════════════════════════════════════ */
+    .marquee-wrapper {
+      position: relative; z-index: 10;
+      margin: 48px 0;
+      overflow: hidden;
+      mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+      transform: rotate(-0.8deg);
+      background: rgba(10, 10, 18, 0.6);
+      border-top: 1px solid rgba(124, 58, 237, 0.2);
+      border-bottom: 1px solid rgba(6, 182, 212, 0.2);
+      padding: 14px 0;
+      backdrop-filter: blur(12px);
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      user-select: none;
+      gap: 16px;
+    }
+    .marquee-track.track-left {
+      animation: marqueeLeft 34s linear infinite;
+      margin-bottom: 10px;
+    }
+    .marquee-track.track-right {
+      animation: marqueeRight 38s linear infinite;
+    }
+    @keyframes marqueeLeft {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    @keyframes marqueeRight {
+      0% { transform: translateX(-50%); }
+      100% { transform: translateX(0); }
+    }
+    .marquee-content {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+    .m-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+      color: var(--violet-2);
+      background: rgba(124, 58, 237, 0.08);
+      border: 1px solid rgba(124, 58, 237, 0.22);
+      padding: 6px 14px;
+      border-radius: 999px;
+      white-space: nowrap;
+      transition: border-color .2s, background .2s, transform .2s;
+    }
+    .m-item:hover {
+      background: rgba(124, 58, 237, 0.18);
+      border-color: var(--violet);
+      transform: scale(1.05);
+    }
+    .m-item.m-alt {
+      color: var(--cyan);
+      background: rgba(6, 182, 212, 0.07);
+      border-color: rgba(6, 182, 212, 0.22);
+    }
+    .m-item.m-alt:hover {
+      background: rgba(6, 182, 212, 0.16);
+      border-color: var(--cyan);
+    }
+    .m-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--violet);
+      box-shadow: 0 0 6px var(--violet);
+    }
+    .m-dot.m-dot-cyan {
+      background: var(--cyan);
+      box-shadow: 0 0 6px var(--cyan);
+    }
+
+    /* ══════════════════════════════════════════
        SECTION SHARED
     ══════════════════════════════════════════ */
     section { position: relative; z-index: 10; padding: 110px 0; }
-    .section-head { margin-bottom: 56px; }
+    .section-head {
+      margin-bottom: 56px;
+      position: relative;
+    }
+    .section-head::after {
+      content: '';
+      display: block;
+      width: 0%;
+      height: 2px;
+      margin-top: 18px;
+      background: linear-gradient(90deg, var(--violet), var(--cyan), transparent);
+      box-shadow: 0 0 8px rgba(124,58,237,0.4);
+      transition: width 1.2s cubic-bezier(.2,.8,.2,1);
+    }
+    .section-head.visible::after {
+      width: 140px;
+    }
     .section-num {
       font-family: var(--mono); font-size: .75rem; color: var(--violet-2);
       letter-spacing: .1em; text-transform: uppercase;
@@ -632,18 +782,21 @@
       background: var(--surface-3); border: 1px solid var(--border);
       border-radius: var(--radius); padding: 26px;
       display: flex; flex-direction: column;
-      transition: transform .3s cubic-bezier(.2,.8,.2,1), border-color .3s, background .3s, box-shadow .3s;
+      transition: transform .18s cubic-bezier(.2,.8,.2,1), border-color .25s, background .25s, box-shadow .25s;
       position: relative; overflow: hidden;
+      transform-style: preserve-3d;
+      will-change: transform;
     }
     .project-card::before {
       content: ''; position: absolute; inset: 0;
-      background: radial-gradient(circle at top right, rgba(124,58,237,0.12), transparent 60%);
+      background: radial-gradient(circle 320px at var(--sheen-x, 50%) var(--sheen-y, 50%), rgba(124,58,237,0.20), transparent 65%);
       opacity: 0; transition: opacity .3s; pointer-events: none;
+      z-index: 1;
     }
     .project-card:hover {
-      transform: translateY(-5px); border-color: var(--border-h);
+      border-color: var(--border-h);
       background: var(--surface);
-      box-shadow: 0 20px 50px rgba(0,0,0,.4), 0 0 40px rgba(124,58,237,0.1);
+      box-shadow: 0 20px 50px rgba(0,0,0,.45), 0 0 35px rgba(124,58,237,0.18);
     }
     .project-card:hover::before { opacity: 1; }
     .project-card.featured {
@@ -1072,9 +1225,10 @@
 
 <div id="scroll-progress" role="progressbar" aria-label="Page scroll progress"></div>
 <div class="grid-overlay" aria-hidden="true"></div>
-<div class="nebula nebula-1" aria-hidden="true"></div>
-<div class="nebula nebula-2" aria-hidden="true"></div>
-<div class="nebula nebula-3" aria-hidden="true"></div>
+<div class="cyber-grid-floor" id="cyber-grid-floor" aria-hidden="true"></div>
+<div class="nebula nebula-1" id="nebula-1" aria-hidden="true"></div>
+<div class="nebula nebula-2" id="nebula-2" aria-hidden="true"></div>
+<div class="nebula nebula-3" id="nebula-3" aria-hidden="true"></div>
 <canvas id="particle-canvas" aria-hidden="true"></canvas>
 <div id="cursor-glow" aria-hidden="true"></div>
 
@@ -1135,6 +1289,17 @@
       </ul>
 
       <div class="nav-right">
+        <!-- Live Telemetry Equalizer -->
+        <div class="nav-telemetry" id="nav-telemetry" title="Telemetry: Active // 120 FPS">
+          <div class="eq-bars" aria-hidden="true">
+            <span class="eq-b b1"></span>
+            <span class="eq-b b2"></span>
+            <span class="eq-b b3"></span>
+            <span class="eq-b b4"></span>
+          </div>
+          <span class="telemetry-label">120 FPS</span>
+        </div>
+
         <!-- Live IST Clock in Navigation -->
         <div class="nav-clock" id="nav-clock" aria-label="Live System Time">
           <span class="nav-clock-dot"></span>
@@ -1248,6 +1413,8 @@
               <button type="button" class="term-chip" data-cmd="projects">projects</button>
               <button type="button" class="term-chip" data-cmd="skills">skills</button>
               <button type="button" class="term-chip" data-cmd="heatmap">heatmap</button>
+              <button type="button" class="term-chip" data-cmd="matrix">matrix</button>
+              <button type="button" class="term-chip" data-cmd="telemetry">telemetry</button>
               <button type="button" class="term-chip" data-cmd="bio">bio</button>
               <button type="button" class="term-chip" data-cmd="clear">clear</button>
             </div>
@@ -1287,6 +1454,56 @@
         <div class="stat-label">Curiosity &amp; Drive</div>
         <div class="stat-sub">Always Experimenting</div>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- KINETIC TECH MARQUEE (Dual-Track Cyber Streamer) -->
+<div class="marquee-wrapper reveal" aria-hidden="true">
+  <div class="marquee-track track-left" id="marquee-track-1">
+    <div class="marquee-content">
+      <span class="m-item"><span class="m-dot"></span>NEURAL SYSTEMS</span>
+      <span class="m-item"><span class="m-dot"></span>MODEL CONTEXT PROTOCOL</span>
+      <span class="m-item"><span class="m-dot"></span>AUTONOMOUS AGENTS</span>
+      <span class="m-item"><span class="m-dot"></span>NEXT.JS 15</span>
+      <span class="m-item"><span class="m-dot"></span>PYTHON 3.12</span>
+      <span class="m-item"><span class="m-dot"></span>FASTAPI MICROSERVICES</span>
+      <span class="m-item"><span class="m-dot"></span>DATA PIPELINES</span>
+      <span class="m-item"><span class="m-dot"></span>PYTORCH</span>
+      <span class="m-item"><span class="m-dot"></span>DISTRIBUTED SYSTEMS</span>
+    </div>
+    <div class="marquee-content" aria-hidden="true">
+      <span class="m-item"><span class="m-dot"></span>NEURAL SYSTEMS</span>
+      <span class="m-item"><span class="m-dot"></span>MODEL CONTEXT PROTOCOL</span>
+      <span class="m-item"><span class="m-dot"></span>AUTONOMOUS AGENTS</span>
+      <span class="m-item"><span class="m-dot"></span>NEXT.JS 15</span>
+      <span class="m-item"><span class="m-dot"></span>PYTHON 3.12</span>
+      <span class="m-item"><span class="m-dot"></span>FASTAPI MICROSERVICES</span>
+      <span class="m-item"><span class="m-dot"></span>DATA PIPELINES</span>
+      <span class="m-item"><span class="m-dot"></span>PYTORCH</span>
+      <span class="m-item"><span class="m-dot"></span>DISTRIBUTED SYSTEMS</span>
+    </div>
+  </div>
+  <div class="marquee-track track-right" id="marquee-track-2">
+    <div class="marquee-content">
+      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>FULL-STACK ENGINEERING</span>
+      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>VECTOR DATABASES</span>
+      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>POSTGRESQL &amp; REDIS</span>
+      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>DOCKER CONTAINERS</span>
+      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>IIT MADRAS BS DS</span>
+      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>TKMCE ECE</span>
+      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>DEVTOOLS &amp; CLI</span>
+      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>BROWSER EXTENSIONS</span>
+    </div>
+    <div class="marquee-content" aria-hidden="true">
+      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>FULL-STACK ENGINEERING</span>
+      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>VECTOR DATABASES</span>
+      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>POSTGRESQL &amp; REDIS</span>
+      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>DOCKER CONTAINERS</span>
+      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>IIT MADRAS BS DS</span>
+      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>TKMCE ECE</span>
+      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>DEVTOOLS &amp; CLI</span>
+      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>BROWSER EXTENSIONS</span>
     </div>
   </div>
 </div>
@@ -1662,7 +1879,7 @@
 
     switch (cmd) {
       case 'help':
-        addTermLine('>', 'Commands: projects, skills, heatmap, bio, npm, contact, clear, sudo hire');
+        addTermLine('>', 'Commands: projects, skills, heatmap, bio, npm, matrix, telemetry, contact, clear, sudo hire');
         break;
       case 'projects':
         addTermLine('>', 'Curated: Modulr, Local Brain MCP, FocusFlow, E--learning, Gullylabs');
@@ -1673,7 +1890,7 @@
         document.getElementById('skills')?.scrollIntoView({ behavior: 'smooth' });
         break;
       case 'heatmap':
-        addTermLine('>', 'Jumping to GitHub 52-week activity heatmap...');
+        addTermLine('>', 'Jumping to GitHub 52-week activity heatmap (zero white, 100% dark obsidian)...');
         document.getElementById('heatmap-section')?.scrollIntoView({ behavior: 'smooth' });
         break;
       case 'bio':
@@ -1681,6 +1898,18 @@
         break;
       case 'npm':
         addTermLine('>', 'Published package: $ npm install -g local-brain-mcp');
+        break;
+      case 'matrix':
+        addTermLine('>', 'MATRIX KINETICS: 3D perspective cyber grid & dual-track streamer activated.');
+        const cf = document.getElementById('cyber-grid-floor');
+        if (cf) {
+          cf.style.opacity = '1';
+          setTimeout(() => { cf.style.opacity = '0.7'; }, 2500);
+        }
+        break;
+      case 'telemetry':
+      case 'stats':
+        addTermLine('>', 'TELEMETRY: 246 commits/year · 22 GitHub repos · 120 FPS audio wave active.');
         break;
       case 'contact':
         addTermLine('>', 'Email: sreerangp.official@gmail.com | GitHub: cosmiccoder200x-sys');
@@ -1930,27 +2159,49 @@
   })();
 
   /* ══════════════════════════════════════════
-     SCROLL PROGRESS BAR
+     SCROLL PROGRESS & BACKGROUND PARALLAX
   ══════════════════════════════════════════ */
   const prog = document.getElementById('scroll-progress');
-  window.addEventListener('scroll', () => {
-    const total = document.documentElement.scrollHeight - window.innerHeight;
-    if (prog && total > 0) {
-      prog.style.width = (window.scrollY / total * 100) + '%';
-    }
-  }, { passive: true });
-
-  /* ══════════════════════════════════════════
-     NAV HIDE ON SCROLL
-  ══════════════════════════════════════════ */
+  const cyberFloor = document.getElementById('cyber-grid-floor');
+  const neb1 = document.getElementById('nebula-1');
+  const neb2 = document.getElementById('nebula-2');
+  const neb3 = document.getElementById('nebula-3');
   const mainNav = document.getElementById('main-nav');
+  const bTop = document.getElementById('back-top');
   let lastY = 0;
+  let scrollTicking = false;
+
   window.addEventListener('scroll', () => {
     const y = window.scrollY;
+
+    // Nav visibility & Back to top
     if (mainNav) mainNav.classList.toggle('hide', y > lastY && y > 100);
     lastY = y;
-    const bTop = document.getElementById('back-top');
     if (bTop) bTop.classList.toggle('show', y > 400);
+
+    // Parallax transforms in requestAnimationFrame
+    if (!scrollTicking) {
+      window.requestAnimationFrame(() => {
+        const total = document.documentElement.scrollHeight - window.innerHeight;
+        if (prog && total > 0) {
+          prog.style.width = (y / total * 100) + '%';
+        }
+
+        // Kinetic perspective cyber floor scroll
+        if (cyberFloor) {
+          cyberFloor.style.backgroundPositionY = `${(y * 0.35) % 50}px`;
+          cyberFloor.style.transform = `perspective(650px) rotateX(${Math.max(16, 32 - y * 0.005)}deg) translateY(${Math.min(50, y * 0.03)}px)`;
+        }
+
+        // Ambient Nebulae depth parallax
+        if (neb1) neb1.style.transform = `translate3d(0, ${y * 0.09}px, 0)`;
+        if (neb2) neb2.style.transform = `translate3d(0, ${-y * 0.06}px, 0)`;
+        if (neb3) neb3.style.transform = `translate3d(-50%, calc(-50% + ${y * 0.04}px), 0)`;
+
+        scrollTicking = false;
+      });
+      scrollTicking = true;
+    }
   }, { passive: true });
 
   /* ══════════════════════════════════════════
@@ -2247,11 +2498,32 @@
     const yearEl = document.getElementById('footer-year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+    // 3D Perspective Tilt on Project Cards
+    function init3DTilt() {
+      document.querySelectorAll('.project-card').forEach(card => {
+        card.addEventListener('pointermove', e => {
+          const rect = card.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width - 0.5;
+          const y = (e.clientY - rect.top) / rect.height - 0.5;
+          card.style.transform = `perspective(850px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg) translateY(-5px)`;
+          card.style.setProperty('--sheen-x', `${(x + 0.5) * 100}%`);
+          card.style.setProperty('--sheen-y', `${(y + 0.5) * 100}%`);
+        });
+        card.addEventListener('pointerleave', () => {
+          card.style.transform = '';
+          card.style.removeProperty('--sheen-x');
+          card.style.removeProperty('--sheen-y');
+        });
+      });
+    }
+
     // Observe reveal elements
     document.querySelectorAll('.reveal:not([data-observed])').forEach(el => {
       el.dataset.observed = '1';
       revealObs.observe(el);
     });
+
+    init3DTilt();
   }
 
   renderAll();

@@ -152,3 +152,53 @@ When changing the design, update the appended override block rather than
 reintroducing the old violet/cyan palette into the original CSS. Keep the original
 styles as a fallback foundation. Run the existing script syntax, DOM, link,
 responsive, and GitHub offline-fallback checks before merging.
+
+
+## Professional portfolio update — 2026-10-31
+
+The professional pass keeps the Midnight Blue visual foundation and the existing dependency-free,
+single-file architecture.
+
+### Content and sections
+
+- The positioning is software development, AI systems, and data science; do not present the
+  Electrical & Computer Engineering degree as the user's intended career direction.
+- Keep the exact TKMCE branch designation **Electrical & Computer Engineering**.
+- Keep the IIT Madras BS Data Science & Applications programme as ongoing study.
+- The curated project grid remains exactly five projects, in its existing order.
+- Each project has a case-study modal with an overview, problem, implementation approach,
+  technology stack, architecture summary, and source/demo links where available.
+- The Milestones section records the user's HackerRank AI Orchestrator challenge score
+  as **2,798 / 4,096** (a score, not a rank or award) and the Local Brain MCP npm publication.
+- A resume PDF is not present in the repository. Use a mailto **Request Resume** link until
+  the user supplies a current PDF; never point a download button at a missing file.
+
+### Live data and forms
+
+- GitHub profile, repository, and contribution data must come from live responses.
+- Never synthesize contribution calendars, guessed totals, cached star counts, or substitute
+  curated project cards for live repository data.
+- On network/API failure, show a clear unavailable state and retain the curated project grid.
+- Contribution totals must use the current calendar year and returned data only.
+- The contact form posts to the existing Google Forms endpoint through a hidden iframe.
+  Do not use a fixed-delay timer to claim success. Only update the status after the response
+  iframe loads, and phrase the message as a returned response rather than guaranteed delivery.
+
+### Visual and accessibility
+
+- Keep the midnight navy / electric-blue palette consistent, including SVG heatmap cells.
+- Keep motion restrained and honor `prefers-reduced-motion`.
+- Maintain visible focus states, keyboard-operable project filters/modals, and responsive
+  navigation including the Milestones anchor.
+- Do not add unverified technology names to the marquee or skill list.
+
+### Verification after edits
+
+1. Extract the inline JavaScript and run `node --check`.
+2. Confirm exactly five curated project data entries and five case-study specifications.
+3. Confirm no generated GitHub contribution fallback or fake "verified" repository stars remain.
+4. Confirm the contact form has no fixed-delay success handler.
+5. Check all nav anchors resolve to section IDs, especially `#milestones`.
+6. Check the project links, demo URLs, mailto links, and npm package URL.
+7. Inspect responsive styles and reduced-motion behavior. Browser-based visual QA is still
+   required before merging or deploying.

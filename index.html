@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Portfolio of Sreerang P — Electrical & Computer Engineering student & IIT Madras BS Data Science student building software, data and AI systems." />
   <meta property="og:title" content="Sreerang P | Software, Data & AI Builder" />
-  <meta property="og:description" content="ECE student & IIT Madras DS student building AI systems, data products, and developer tools." />
+  <meta property="og:description" content="Electrical & Computer Engineering student at TKMCE and IIT Madras BS Data Science student building software, data products, and AI systems." />
   <meta property="og:type" content="website" />
   <meta name="theme-color" content="#050508" />
   <title>Sreerang P | Software, Data &amp; AI Builder</title>
@@ -1220,6 +1220,199 @@
       .footer-inner { flex-direction: column; text-align: center; }
     }
   </style>
+
+  <!-- MIDNIGHT SYSTEMS REDESIGN: electric-blue visual layer -->
+  <style id="midnight-blue-redesign">
+    :root {
+      --bg:#050914; --bg-2:#08111f;
+      --surface:rgba(37,99,235,.075); --surface-2:rgba(37,99,235,.13);
+      --surface-3:rgba(148,163,184,.045);
+      --border:rgba(148,163,184,.13); --border-h:rgba(59,130,246,.58);
+      --border-c:rgba(56,189,248,.4);
+      --text:#f4f8ff; --text-2:#a8b8ce; --text-3:#71839e;
+      --violet:#2563eb; --violet-2:#60a5fa; --violet-3:#bfdbfe;
+      --cyan:#38bdf8; --cyan-2:#bae6fd; --emerald:#34d399;
+      --radius:18px; --radius-lg:24px; --radius-xl:32px;
+      --max:1220px;
+    }
+    html { scroll-padding-top:88px; }
+    body {
+      background:
+        radial-gradient(ellipse at 78% 8%,rgba(37,99,235,.13),transparent 34%),
+        radial-gradient(ellipse at 8% 42%,rgba(14,165,233,.07),transparent 28%),
+        var(--bg);
+      letter-spacing:-.012em;
+    }
+    ::selection { background:rgba(59,130,246,.38); color:#fff; }
+    a,button,input,textarea { -webkit-tap-highlight-color:transparent; }
+    :focus-visible { outline:2px solid #60a5fa!important; outline-offset:4px; }
+    #particle-canvas { opacity:.28; }
+    .grid-overlay {
+      background-image:linear-gradient(rgba(96,165,250,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(96,165,250,.055) 1px,transparent 1px);
+      background-size:72px 72px; opacity:.6;
+    }
+    .cyber-grid-floor {
+      background-image:linear-gradient(rgba(96,165,250,.11) 1px,transparent 1px),linear-gradient(90deg,rgba(56,189,248,.08) 1px,transparent 1px);
+      background-size:58px 58px; opacity:.34;
+    }
+    .nebula-1 { background:radial-gradient(circle,rgba(37,99,235,.17),transparent 70%); }
+    .nebula-2 { background:radial-gradient(circle,rgba(14,165,233,.11),transparent 70%); }
+    .nebula-3 { background:radial-gradient(circle,rgba(56,189,248,.07),transparent 70%); }
+    #cursor-glow {
+      width:520px;height:520px;
+      background:radial-gradient(circle,rgba(59,130,246,.12),rgba(14,165,233,.035) 35%,transparent 68%);
+      mix-blend-mode:screen;
+    }
+    #scroll-progress {
+      height:3px;background:linear-gradient(90deg,#2563eb,#38bdf8,#bfdbfe);
+      box-shadow:0 0 16px rgba(59,130,246,.65),0 0 34px rgba(56,189,248,.22);
+    }
+    nav#main-nav {
+      background:rgba(5,9,20,.78);
+      border-bottom-color:rgba(148,163,184,.12);
+      backdrop-filter:blur(28px) saturate(160%);
+    }
+    .logo-text .sp,.nav-links a.active,.nav-cmd:hover { color:#93c5fd; }
+    .logo-status { box-shadow:0 0 10px var(--emerald); }
+    .nav-links a:hover { background:rgba(59,130,246,.09); }
+    .nav-links a.active { background:rgba(59,130,246,.11); }
+    .nav-telemetry { color:#7dd3fc;background:rgba(56,189,248,.07);border-color:rgba(56,189,248,.2); }
+    .nav-clock-dot,.eq-b { background:#38bdf8;box-shadow:0 0 8px rgba(56,189,248,.55); }
+    .nav-cmd:hover { border-color:rgba(96,165,250,.5);background:rgba(37,99,235,.1); }
+    .nav-cmd kbd { color:#93c5fd;background:rgba(37,99,235,.16);border-color:rgba(96,165,250,.3); }
+    .hero { min-height:100svh;padding-top:112px;padding-bottom:90px; }
+    .hero-inner { grid-template-columns:minmax(0,1.08fr) minmax(320px,.82fr);gap:clamp(36px,6vw,92px); }
+    .hero-meta span { color:#7dd3fc; }
+    .status-badge {
+      border-color:rgba(56,189,248,.25);background:rgba(56,189,248,.075);
+      color:#7dd3fc;border-radius:999px;padding:8px 14px;
+    }
+    .status-dot { background:#38bdf8;box-shadow:0 0 10px #38bdf8; }
+    h1 { font-size:clamp(3.5rem,7.5vw,6.7rem);letter-spacing:-.065em;line-height:.91; }
+    .h1-gradient {
+      background:linear-gradient(115deg,#dbeafe 0%,#60a5fa 38%,#38bdf8 76%,#bae6fd 100%);
+      -webkit-background-clip:text;background-clip:text;
+    }
+    .hero-tagline { max-width:650px;color:#a8b8ce;font-size:clamp(1rem,1.35vw,1.15rem);line-height:1.85; }
+    .hero-tagline strong { color:#e5efff;font-weight:650; }
+    .hero-visual { position:relative; }
+    .hero-visual::before {
+      content:"";position:absolute;inset:8% -8% 4%;z-index:-1;border-radius:50%;
+      background:radial-gradient(ellipse,rgba(37,99,235,.19),transparent 68%);
+      filter:blur(24px);animation:midnightBreath 7s ease-in-out infinite alternate;
+    }
+    @keyframes midnightBreath { to { transform:scale(1.12) translateY(-10px);opacity:.65; } }
+    .terminal-frame {
+      max-width:410px;border-radius:26px;
+      background:linear-gradient(155deg,rgba(15,27,49,.97),rgba(6,12,25,.97));
+      border:1px solid rgba(96,165,250,.3);
+      box-shadow:0 36px 100px rgba(0,0,0,.5),0 0 0 1px rgba(96,165,250,.06) inset,0 0 80px rgba(37,99,235,.12);
+      transform:perspective(1100px) rotateY(-4deg) rotateX(2deg);
+      transition:transform .7s cubic-bezier(.2,.8,.2,1),box-shadow .7s;
+    }
+    .terminal-frame:hover { transform:perspective(1100px) rotateY(0) rotateX(0) translateY(-8px);box-shadow:0 48px 110px rgba(0,0,0,.55),0 0 90px rgba(37,99,235,.2); }
+    .terminal-bar { background:rgba(37,99,235,.1);border-color:rgba(96,165,250,.14); }
+    .terminal-title { color:#8fa9ca; }
+    .terminal-photo { height:270px;object-position:center 32%;filter:saturate(.92) contrast(1.04); }
+    .interactive-terminal { background:rgba(4,10,22,.98); }
+    .term-prompt { color:#60a5fa; }
+    .btn-primary { background:linear-gradient(120deg,#2563eb,#1d4ed8);box-shadow:0 12px 34px rgba(37,99,235,.22); }
+    .btn-primary:hover { box-shadow:0 18px 42px rgba(37,99,235,.34); }
+    .btn-cyan { background:rgba(56,189,248,.1);border-color:rgba(56,189,248,.3);color:#bae6fd; }
+    .btn-cyan:hover { background:rgba(56,189,248,.17); }
+    .btn-outline { border-color:rgba(148,163,184,.2); }
+    .btn-outline:hover { border-color:rgba(96,165,250,.5);color:#bfdbfe;background:rgba(37,99,235,.08); }
+    section { position:relative;z-index:2;padding:clamp(76px,9vw,124px) 0; }
+    .section-head { margin-bottom:48px; }
+    .section-head::after { background:linear-gradient(90deg,#3b82f6,#38bdf8,transparent);box-shadow:0 0 12px rgba(59,130,246,.3); }
+    .section-num { color:#7db5ff; }
+    .section-num::before { background:#60a5fa; }
+    .section-desc { color:#9fb0c8; }
+    .project-filters button,.project-filter {
+      border-color:rgba(148,163,184,.16);
+    }
+    .project-card {
+      padding:clamp(24px,3vw,34px);border-radius:22px;
+      background:linear-gradient(145deg,rgba(15,27,49,.74),rgba(7,13,27,.84));
+      border-color:rgba(148,163,184,.13);
+      box-shadow:0 14px 40px rgba(0,0,0,.13);
+      transition:transform .45s cubic-bezier(.2,.8,.2,1),border-color .35s,background .35s,box-shadow .45s;
+    }
+    .project-card::before {
+      background:radial-gradient(circle 380px at var(--sheen-x,50%) var(--sheen-y,50%),rgba(59,130,246,.2),transparent 68%);
+    }
+    .project-card:hover {
+      transform:translateY(-9px) scale(1.008);border-color:rgba(96,165,250,.48);
+      background:linear-gradient(145deg,rgba(17,39,76,.86),rgba(7,16,34,.94));
+      box-shadow:0 28px 70px rgba(0,0,0,.36),0 0 36px rgba(37,99,235,.12);
+    }
+    .project-card.featured {
+      background:linear-gradient(125deg,rgba(37,99,235,.15),rgba(8,18,38,.94) 58%);
+      border-color:rgba(59,130,246,.3);
+    }
+    .project-icon { background:rgba(37,99,235,.12);border-color:rgba(96,165,250,.2); }
+    .project-title { color:#eff6ff; }
+    .project-num,.project-meta { color:#8ca2c1; }
+    .stat-card,.gh-heatmap-card,.repo-card,.skill-card {
+      background:linear-gradient(145deg,rgba(15,27,49,.72),rgba(7,13,27,.82));
+      border-color:rgba(148,163,184,.13);border-radius:20px;
+    }
+    .stat-card:hover { border-color:rgba(96,165,250,.4);background:rgba(37,99,235,.08); }
+    .stat-number { color:#eff6ff; }
+    .stat-label { color:#8fa4c0; }
+    .gh-heatmap-card:hover { border-color:rgba(96,165,250,.38); }
+    .gh-heatmap-title { color:#93c5fd; }
+    .gh-heatmap-user { color:#7dd3fc;background:rgba(56,189,248,.08);border-color:rgba(56,189,248,.2); }
+    .heat-box.lvl-0 { background:#101d32;border-color:rgba(96,165,250,.13); }
+    .heat-box.lvl-1 { background:rgba(37,99,235,.38);border-color:rgba(59,130,246,.3); }
+    .heat-box.lvl-2 { background:#2563eb; }
+    .heat-box.lvl-3 { background:#3b82f6; }
+    .heat-box.lvl-4 { background:#7dd3fc; }
+    .contact-card {
+      background:radial-gradient(ellipse at 50% 0%,rgba(37,99,235,.2),transparent 60%),linear-gradient(145deg,rgba(13,27,52,.95),rgba(6,13,27,.98));
+      border-color:rgba(96,165,250,.3);box-shadow:0 42px 110px rgba(0,0,0,.42),0 0 70px rgba(37,99,235,.08);
+    }
+    .contact-card::before { background:radial-gradient(circle,rgba(37,99,235,.16),transparent 70%); }
+    .contact-link { background:rgba(148,163,184,.055);border-color:rgba(148,163,184,.16); }
+    .contact-link:hover { border-color:rgba(96,165,250,.48);color:#bfdbfe;background:rgba(37,99,235,.1); }
+    .contact-link.main { background:linear-gradient(120deg,#2563eb,#1d4ed8); }
+    .contact-link.main:hover { box-shadow:0 14px 36px rgba(37,99,235,.34); }
+    .contact-form-wrap { background:rgba(4,10,22,.72);border-color:rgba(96,165,250,.2); }
+    input,textarea { color:#eff6ff; }
+    footer { border-color:rgba(148,163,184,.12); }
+    .back-top { background:rgba(37,99,235,.15);border-color:rgba(96,165,250,.25); }
+    .back-top:hover { background:#2563eb; }
+    .cmd-box { background:rgba(7,15,31,.97);border-color:rgba(96,165,250,.35); }
+    .cmd-input-wrap { border-color:rgba(148,163,184,.14); }
+    .cmd-overlay { background:rgba(2,6,16,.82); }
+    .mobile-nav { background:rgba(4,9,20,.98); }
+    .mobile-nav a:hover { color:#93c5fd; }
+    .spec-dialog,.spec-modal { background:#081326;border-color:rgba(96,165,250,.3); }
+    @media (max-width:1024px) {
+      .hero-inner { grid-template-columns:minmax(0,1fr) minmax(280px,.8fr);gap:38px; }
+      .terminal-frame { transform:none; }
+    }
+    @media (max-width:860px) {
+      .hero { padding-top:110px; }
+      .hero-inner { grid-template-columns:1fr;gap:42px; }
+      .hero-visual { width:min(100%,430px);margin:0 auto; }
+      .terminal-frame { max-width:100%; }
+      section { padding:82px 0; }
+    }
+    @media (max-width:520px) {
+      .container { width:min(var(--max),calc(100% - 32px)); }
+      h1 { font-size:clamp(3rem,15vw,4.6rem); }
+      .hero-meta { flex-wrap:wrap;gap:8px 11px;font-size:.62rem; }
+      .terminal-photo { height:230px; }
+      .contact-card { padding:48px 22px; }
+      #cursor-glow { display:none; }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      *,*::before,*::after { scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important; }
+      #cursor-glow,#particle-canvas { display:none!important; }
+      .terminal-frame,.project-card { transform:none!important; }
+    }
+  </style>
 </head>
 <body>
 
@@ -1326,7 +1519,7 @@
         <div class="hero-meta">
           <span>SYS // 0x200X</span>
           <span class="meta-sep">/</span>
-          <span>TKMCE · ECE '29</span>
+          <span>TKMCE · ELECTRICAL & COMPUTER ENGINEERING</span>
           <span class="meta-sep">/</span>
           <span>IIT MADRAS · DATA SCIENCE</span>
         </div>
@@ -1398,7 +1591,7 @@
             <div class="term-history" id="term-history">
               <div class="term-line">
                 <span class="term-prompt">&gt;</span>
-                <span class="term-text">Sreerang P: B.Tech ECE @ TKMCE · BS DS @ IIT Madras</span>
+                <span class="term-text">Sreerang P: B.Tech Electrical & Computer Engineering @ TKMCE · BS DS @ IIT Madras</span>
               </div>
               <div class="term-line">
                 <span class="term-prompt">&gt;</span>

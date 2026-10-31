@@ -119,3 +119,36 @@ documents an optional Vercel deploy (framework preset: Other, no build command).
 3. Re-check that the featured/regular spans still pack the grid, and insert the
    repo name into `prioritizedRepos` in `fetchGH()` at the matching position.
 4. Run the testing steps above, then commit/push only with authorization.
+
+## Redesign update — Midnight Systems (2026-10-31)
+
+The `redesign/midnight-blue-immersive` branch introduces a visual-only design layer
+inside `index.html` (`#midnight-blue-redesign` style block). This intentionally
+keeps the dependency-free single-file architecture and preserves the existing
+markup, `PORTFOLIO_DATA`, render functions, GitHub API enrichment, contact form,
+command palette, mobile navigation, terminal REPL, project filters, and reveal
+behaviour.
+
+### Current visual direction
+
+- Midnight navy background with electric-blue / sky-blue accents.
+- Inter + Space Grotesk + JetBrains Mono remain the typography system.
+- Restrained blue ambient lighting, grid, and cursor glow.
+- Immersive but purposeful hover depth on the terminal and project cards.
+- Blue contribution heatmap levels and blue focus-visible states.
+- Responsive layout retained at the existing breakpoints.
+- `prefers-reduced-motion` disables decorative motion and transforms.
+
+### Content accuracy
+
+- Use the full branch designation **Electrical & Computer Engineering** for TKMCE.
+- Do not label the user's branch as ECE or Electronics & Communication.
+- Keep the IIT Madras BS Data Science context.
+- Do not invent project metrics, testimonials, skills, or deployment URLs.
+
+### Maintenance
+
+When changing the design, update the appended override block rather than
+reintroducing the old violet/cyan palette into the original CSS. Keep the original
+styles as a fallback foundation. Run the existing script syntax, DOM, link,
+responsive, and GitHub offline-fallback checks before merging.

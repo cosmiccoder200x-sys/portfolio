@@ -1163,7 +1163,158 @@
       .stats-inner { grid-template-columns: 1fr; }
       .footer-inner { flex-direction: column; text-align: center; }
     }
-  </style>
+  
+/* ═══════════════════════════════════════════════════════
+   FUTURE TERMINAL — GREEN SYSTEM OVERRIDES
+   ═══════════════════════════════════════════════════════ */
+:root {
+  --bg:#050806; --bg-2:#0a100c; --surface:rgba(82,255,120,.045);
+  --surface-2:rgba(82,255,120,.09); --surface-3:rgba(255,255,255,.035);
+  --border:rgba(151,210,163,.13); --border-h:rgba(82,255,120,.42);
+  --border-c:rgba(82,255,120,.28); --text:#f1f7f2; --text-2:#9db0a2;
+  --text-3:#637568; --violet:#52ff78; --violet-2:#78ff91; --violet-3:#c5ffd0;
+  --cyan:#a3ffb4; --cyan-2:#d1ffda; --emerald:#52ff78;
+}
+html { scroll-behavior:smooth; }
+body { background:#050806; color:#f1f7f2; }
+body::before {
+  content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
+  background-image:linear-gradient(rgba(82,255,120,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(82,255,120,.035) 1px,transparent 1px);
+  background-size:52px 52px; mask-image:linear-gradient(to bottom,black,transparent 88%);
+}
+#scroll-progress { background:linear-gradient(90deg,#52ff78,#c5ffd0); box-shadow:0 0 14px rgba(82,255,120,.65); height:3px; }
+#particle-canvas { opacity:.18; }
+nav#main-nav { background:rgba(5,8,6,.88); border-color:rgba(82,255,120,.16); }
+.logo-mark svg { animation:none; }
+.logo-mark svg polygon { stroke:#52ff78; }
+.logo-mark svg circle { fill:#52ff78; }
+.logo-text .sp,.nav-links a:hover,.nav-links a.active { color:#78ff91; }
+.logo-status,.status-dot { background:#52ff78; box-shadow:0 0 12px #52ff78; }
+.nav-links a::after { background:#52ff78; }
+#main-nav .cmd-trigger { border-color:rgba(82,255,120,.25); }
+.hero { min-height:calc(100svh - 64px); padding:112px 0 88px; display:flex; align-items:center; }
+.hero-inner { display:grid; grid-template-columns:minmax(0,1fr); gap:34px; width:min(100%,940px); margin:0 auto; }
+.hero-text { display:none !important; }
+.future-intro { max-width:820px; margin:0 auto; text-align:center; position:relative; z-index:2; }
+.future-eyebrow,.future-kicker,.future-meta-line,.future-scroll-cue,.detail-topline,.node-index,.detail-label {
+  font-family:var(--mono); letter-spacing:.13em; font-size:.68rem; color:#78a984;
+}
+.future-eyebrow { display:flex; justify-content:center; align-items:center; gap:12px; }
+.future-live-dot { width:7px; height:7px; border-radius:50%; background:#52ff78; box-shadow:0 0 12px #52ff78; }
+.future-divider { color:#426b4b; }
+.future-kicker { margin-top:28px; color:#a3ffb4; }
+.future-intro h1 { font:700 clamp(4rem,12vw,8.8rem)/.94 var(--display); letter-spacing:-.085em; color:#f1f7f2; margin:10px 0 12px; }
+.future-period { color:#52ff78; }
+.future-role { color:#a9b9ac; font:500 clamp(.95rem,2vw,1.22rem) var(--mono); }
+.future-role span { color:#52ff78; padding:0 7px; }
+.future-summary { max-width:620px; margin:20px auto 0; color:#9db0a2; font-size:1.02rem; }
+.future-actions { display:flex; justify-content:center; flex-wrap:wrap; gap:12px; margin-top:26px; }
+.future-btn { border:1px solid rgba(82,255,120,.26); border-radius:7px; padding:11px 17px; color:#dce9df; font-size:.86rem; transition:.22s ease; background:rgba(14,27,17,.55); }
+.future-btn:hover { border-color:#52ff78; color:#a3ffb4; transform:translateY(-2px); box-shadow:0 8px 30px rgba(82,255,120,.1); }
+.future-btn.primary { background:#52ff78; border-color:#52ff78; color:#041007; font-weight:700; }
+.future-btn.primary:hover { background:#a3ffb4; color:#041007; }
+.future-meta-line { display:flex; justify-content:center; align-items:center; gap:14px; flex-wrap:wrap; margin-top:26px; font-size:.58rem; }
+.future-meta-line i { width:4px; height:4px; background:#52ff78; border-radius:50%; }
+.hero-visual { opacity:1 !important; animation:none !important; width:100%; max-width:880px; margin:0 auto; position:relative; z-index:2; }
+#hex-canvas,.terminal-photo { display:none !important; }
+.terminal-frame { max-width:880px; width:100%; background:rgba(7,14,9,.96); border:1px solid rgba(82,255,120,.3); border-radius:12px; box-shadow:0 24px 90px rgba(0,0,0,.55),0 0 70px rgba(82,255,120,.055),inset 0 1px rgba(255,255,255,.025); }
+.terminal-bar { background:rgba(82,255,120,.055); border-bottom-color:rgba(82,255,120,.15); padding:14px 18px; }
+.t-dot-g { background:#52ff78; box-shadow:0 0 9px rgba(82,255,120,.5); }
+.terminal-title { color:#85a48b; }
+.interactive-terminal { background:rgba(4,9,5,.96); padding:18px 22px 20px; border-top-color:rgba(82,255,120,.15); font-size:.8rem; }
+.term-history { max-height:132px; min-height:64px; color:#b9c9bc; }
+.term-prompt { color:#52ff78 !important; }
+.term-text { color:#c3d2c6; }
+.term-input { color:#a3ffb4 !important; caret-color:#52ff78; }
+.term-input-row { border-color:rgba(82,255,120,.2) !important; }
+.term-input:focus { outline:none; }
+.term-chip { color:#a9c6ae !important; border-color:rgba(82,255,120,.18) !important; background:rgba(82,255,120,.035) !important; }
+.term-chip:hover,.term-chip:focus-visible { color:#041007 !important; background:#52ff78 !important; border-color:#52ff78 !important; }
+.future-scroll-cue { position:absolute; left:50%; bottom:-76px; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:9px; transition:opacity .35s ease; z-index:3; }
+.future-scroll-cue.is-hidden { opacity:0; pointer-events:none; }
+.mouse-outline { width:22px; height:34px; border:1px solid #52ff78; border-radius:13px; display:flex; justify-content:center; padding-top:6px; box-shadow:0 0 18px rgba(82,255,120,.12); }
+.mouse-outline i { width:3px; height:7px; border-radius:4px; background:#a3ffb4; animation:mouseWheel 1.35s ease-in-out infinite; }
+@keyframes mouseWheel { 0%{transform:translateY(0);opacity:1} 80%,100%{transform:translateY(9px);opacity:0} }
+.scroll-cue-label { font-size:.56rem; letter-spacing:.16em; }
+.scroll-cue-line { height:28px; width:1px; background:linear-gradient(#52ff78,transparent); }
+.scroll-hint { display:none !important; }
+.btn-primary,.btn-cyan { background:#52ff78 !important; color:#041007 !important; border-color:#52ff78 !important; }
+.h1-gradient { background:linear-gradient(100deg,#52ff78,#c5ffd0); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.section-num { color:#78ff91 !important; }
+.section-head h2 { color:#f1f7f2; }
+.section-head h2 .h1-gradient { color:transparent; }
+.section-head::before { background:#52ff78 !important; }
+.project-card,.milestone-card,.gh-heatmap-card,.contact-card,.skill-card,.stat-item {
+  background:linear-gradient(145deg,rgba(17,29,20,.88),rgba(8,15,10,.94)) !important;
+  border-color:rgba(82,255,120,.15) !important;
+}
+.project-card:hover,.milestone-card:hover { border-color:rgba(82,255,120,.45) !important; box-shadow:0 22px 55px rgba(0,0,0,.35),0 0 32px rgba(82,255,120,.07); }
+.project-filters button.active,.project-filters button:hover { background:#52ff78 !important; color:#041007 !important; border-color:#52ff78 !important; }
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible { outline:2px solid #a3ffb4 !important; outline-offset:3px; }
+#architecture { padding:112px 0; position:relative; }
+.future-architecture { border-top:1px solid rgba(82,255,120,.1); border-bottom:1px solid rgba(82,255,120,.1); background:linear-gradient(180deg,rgba(82,255,120,.018),transparent 50%); }
+.architecture-shell { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(260px,.65fr); gap:18px; padding:18px; border:1px solid rgba(82,255,120,.2); border-radius:12px; background:rgba(8,15,10,.7); }
+.architecture-map { display:grid; grid-template-columns:62px 1fr; gap:18px; padding:20px; border-radius:8px; background:rgba(3,8,4,.65); }
+.architecture-rail { display:flex; flex-direction:column; align-items:center; justify-content:space-between; color:#5e8066; font: .56rem var(--mono); letter-spacing:.1em; writing-mode:vertical-rl; transform:rotate(180deg); }
+.architecture-rail b { flex:1; width:1px; margin:12px 0; background:linear-gradient(transparent,#52ff78,transparent); }
+.architecture-nodes { display:flex; flex-direction:column; }
+.architecture-node { text-align:left; padding:16px 18px; border:1px solid rgba(82,255,120,.14); border-radius:8px; color:#f1f7f2; background:rgba(17,29,20,.7); display:grid; gap:5px; transition:.22s ease; cursor:pointer; }
+.architecture-node:hover,.architecture-node.active { border-color:#52ff78; background:rgba(82,255,120,.075); transform:translateX(4px); box-shadow:0 0 24px rgba(82,255,120,.055); }
+.node-index { font-size:.58rem; color:#78a984; }
+.architecture-node strong { font:600 1.05rem var(--display); }
+.architecture-node small { color:#91a596; font-size:.78rem; }
+.node-tech { color:#a3ffb4; font: .65rem var(--mono); margin-top:3px; }
+.architecture-connector { height:22px; display:flex; align-items:center; padding-left:26px; }
+.architecture-connector i { height:100%; width:1px; background:linear-gradient(transparent,#52ff78,transparent); position:relative; }
+.architecture-connector i::after { content:""; position:absolute; bottom:2px; left:-3px; width:6px; height:6px; border-right:1px solid #52ff78; border-bottom:1px solid #52ff78; transform:rotate(45deg); }
+.architecture-detail { border:1px solid rgba(82,255,120,.17); border-radius:8px; padding:22px; background:rgba(14,24,16,.62); display:flex; flex-direction:column; justify-content:center; }
+.detail-topline { display:flex; justify-content:space-between; font-size:.58rem; }
+.detail-status { color:#52ff78; }
+.detail-number { font:700 3.5rem/.95 var(--mono); color:rgba(82,255,120,.2); margin:26px 0 12px; }
+.architecture-detail h3 { font:600 1.35rem var(--display); color:#f1f7f2; }
+.architecture-detail p { color:#9db0a2; font-size:.88rem; margin-top:12px; }
+.detail-label { margin-top:26px; font-size:.58rem; }
+.detail-projects { color:#a3ffb4; font: .72rem/1.8 var(--mono); margin-top:8px; }
+#stats { background:rgba(82,255,120,.018); border-block:1px solid rgba(82,255,120,.08); }
+.stat-num { color:#a3ffb4 !important; }
+.marquee-wrapper { opacity:.65; }
+.m-item { color:#8fae95 !important; }
+.m-dot { background:#52ff78 !important; }
+.contact-link.main { background:#52ff78 !important; color:#041007 !important; }
+footer { border-color:rgba(82,255,120,.12) !important; }
+@media (max-width:860px) {
+  .hero { padding:104px 0 90px; }
+  .hero-inner { gap:28px; }
+  .future-intro h1 { font-size:clamp(4.2rem,17vw,7rem); }
+  .architecture-shell { grid-template-columns:1fr; }
+  .architecture-detail { min-height:250px; }
+}
+@media (max-width:560px) {
+  .container { width:min(var(--max),calc(100% - 32px)); }
+  .hero { min-height:auto; padding:102px 0 90px; }
+  .future-eyebrow { font-size:.55rem; gap:7px; }
+  .future-intro h1 { font-size:4.5rem; }
+  .future-summary { font-size:.9rem; }
+  .future-meta-line { font-size:.49rem; gap:8px; }
+  .future-actions { display:grid; grid-template-columns:1fr 1fr; }
+  .future-btn { font-size:.75rem; padding:11px 9px; }
+  .terminal-frame { border-radius:9px; }
+  .interactive-terminal { padding:14px 12px; }
+  .term-history { font-size:.68rem; }
+  .term-chips { gap:6px; }
+  .term-chip { padding:6px 8px !important; font-size:.62rem !important; }
+  .future-scroll-cue { bottom:-68px; }
+  #architecture { padding:80px 0; }
+  .architecture-shell { padding:9px; }
+  .architecture-map { grid-template-columns:28px 1fr; gap:9px; padding:10px; }
+  .architecture-node { padding:13px 11px; }
+  .architecture-detail { padding:17px; }
+}
+@media (prefers-reduced-motion:reduce) {
+  *,*::before,*::after { scroll-behavior:auto !important; animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
+}
+
+</style>
 
   <!-- MIDNIGHT SYSTEMS REDESIGN: electric-blue visual layer -->
   <style id="midnight-blue-redesign">
@@ -1422,6 +1573,7 @@
 <!-- MOBILE NAV -->
 <nav class="mobile-nav" id="mobile-nav" role="dialog" aria-label="Mobile navigation">
   <a href="#about" onclick="closeMobileNav()">About</a>
+  <a href="#architecture" onclick="closeMobileNav()">Architecture</a>
   <a href="#projects" onclick="closeMobileNav()">Projects</a>
   <a href="#github" onclick="closeMobileNav()">Contributions</a>
   <a href="#skills" onclick="closeMobileNav()">Skills</a>
@@ -1479,6 +1631,19 @@
 <header class="hero" id="home">
   <div class="container">
     <div class="hero-inner">
+
+      <div class="future-intro reveal">
+        <div class="future-eyebrow"><span class="future-live-dot"></span> SYSTEM ONLINE <span class="future-divider">/</span> INDEPENDENT SOFTWARE BUILDER</div>
+        <p class="future-kicker">HELLO, WORLD. I'M</p>
+        <h1>RANG<span class="future-period">.</span></h1>
+        <div class="future-role">Software Engineer <span>·</span> AI Builder <span>·</span> Data Science</div>
+        <p class="future-summary">I turn ideas into useful software — developer tools, AI-powered workflows, and products built with curiosity and intent.</p>
+        <div class="future-actions">
+          <a class="future-btn primary" href="#projects">Explore projects <span>↗</span></a>
+          <a class="future-btn" href="#contact">Start a conversation</a>
+        </div>
+        <div class="future-meta-line"><span>TKMCE · ELECTRICAL &amp; COMPUTER ENGINEERING</span><i></i><span>IIT MADRAS · BS DATA SCIENCE</span></div>
+      </div>
       <div class="hero-text">
         <div class="hero-meta">
           <span>SYS // 0x200X</span>
@@ -1553,7 +1718,7 @@
             <div class="term-history" id="term-history">
               <div class="term-line">
                 <span class="term-prompt">&gt;</span>
-                <span class="term-text">Sreerang P: B.Tech Electrical & Computer Engineering @ TKMCE · BS DS @ IIT Madras</span>
+                <span class="term-text">Rang // Software Engineer · AI Builder · BS Data Science @ IIT Madras</span>
               </div>
               <div class="term-line">
                 <span class="term-prompt">&gt;</span>
@@ -1562,14 +1727,13 @@
             </div>
             <div class="term-input-row">
               <span class="term-prompt">&gt;</span>
-              <input type="text" class="term-input" id="term-input" placeholder="try: projects, skills, heatmap, bio..." autocomplete="off" spellcheck="false" />
+              <input type="text" class="term-input" id="term-input" placeholder="try: help, projects, architecture, skills, contact..." autocomplete="off" spellcheck="false" />
             </div>
             <div class="term-chips">
               <button type="button" class="term-chip" data-cmd="projects">projects</button>
               <button type="button" class="term-chip" data-cmd="skills">skills</button>
               <button type="button" class="term-chip" data-cmd="heatmap">heatmap</button>
               <button type="button" class="term-chip" data-cmd="matrix">matrix</button>
-              <button type="button" class="term-chip" data-cmd="telemetry">telemetry</button>
               <button type="button" class="term-chip" data-cmd="bio">bio</button>
               <button type="button" class="term-chip" data-cmd="clear">clear</button>
             </div>
@@ -1579,6 +1743,12 @@
     </div>
   </div>
 
+
+  <div class="future-scroll-cue" id="future-scroll-cue" aria-label="Scroll to explore">
+    <span class="mouse-outline"><i></i></span>
+    <span class="scroll-cue-label">SCROLL TO EXPLORE</span>
+    <span class="scroll-cue-line"></span>
+  </div>
   <div class="scroll-hint" aria-hidden="true">
     <span>Scroll</span>
     <div class="scroll-line"></div>
@@ -1666,6 +1836,48 @@
         </div>
         <div class="timeline reveal reveal-delay-1" id="education-timeline"></div>
       </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SYSTEM ARCHITECTURE -->
+<section id="architecture" class="future-architecture">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-num">02 / System Map</div>
+      <h2>How I think in <span class="h1-gradient">systems</span></h2>
+      <p class="section-desc">A practical view of the layers I work across. Select a node to explore the tools and projects connected to it.</p>
+    </div>
+    <div class="architecture-shell reveal">
+      <div class="architecture-map" aria-label="Interactive system architecture">
+        <div class="architecture-rail"><span>INPUT</span><b></b><span>OUTPUT</span></div>
+        <div class="architecture-nodes">
+          <button class="architecture-node active" type="button" data-arch="interface">
+            <span class="node-index">01 / EXPERIENCE</span><strong>Interface</strong><small>Web · UI · Interaction</small><span class="node-tech">React · TypeScript · HTML/CSS</span>
+          </button>
+          <div class="architecture-connector"><i></i></div>
+          <button class="architecture-node" type="button" data-arch="application">
+            <span class="node-index">02 / APPLICATION</span><strong>Application Logic</strong><small>APIs · Automation · Products</small><span class="node-tech">Python · Flask · REST APIs</span>
+          </button>
+          <div class="architecture-connector"><i></i></div>
+          <button class="architecture-node" type="button" data-arch="data">
+            <span class="node-index">03 / DATA</span><strong>Data Layer</strong><small>Persistence · Retrieval · State</small><span class="node-tech">PostgreSQL · SQLite · Supabase</span>
+          </button>
+          <div class="architecture-connector"><i></i></div>
+          <button class="architecture-node" type="button" data-arch="intelligence">
+            <span class="node-index">04 / INTELLIGENCE</span><strong>AI &amp; Intelligence</strong><small>Agents · Context · Workflows</small><span class="node-tech">LLM APIs · MCP · Orchestration</span>
+          </button>
+        </div>
+      </div>
+      <aside class="architecture-detail" aria-live="polite">
+        <div class="detail-topline"><span>NODE_INSPECTOR</span><span class="detail-status">● ACTIVE</span></div>
+        <div class="detail-number" id="architecture-number">01</div>
+        <h3 id="architecture-title">Interface layer</h3>
+        <p id="architecture-copy">The experience layer turns complex functionality into clear, accessible interfaces. I focus on responsive layouts, useful interactions, and thoughtful visual systems.</p>
+        <div class="detail-label">CONNECTED WORK</div>
+        <div class="detail-projects" id="architecture-projects">Portfolio · Xboost · TKM Notes</div>
+      </aside>
     </div>
   </div>
 </section>
@@ -2000,7 +2212,15 @@
 
     switch (cmd) {
       case 'help':
-        addTermLine('>', 'Commands: projects, skills, heatmap, bio, npm, matrix, telemetry, contact, clear, sudo hire');
+        addTermLine('>', 'Commands: whoami, projects, architecture, skills, heatmap, npm, contact, clear, sudo hire');
+        break;
+      case 'whoami':
+      case 'bio':
+        addTermLine('>', 'Rang — Software Engineer, AI builder, and IIT Madras BS Data Science student.');
+        break;
+      case 'architecture':
+        addTermLine('>', 'Explore the system map: frontend, application, data, and intelligence layers.');
+        document.getElementById('architecture')?.scrollIntoView({ behavior: 'smooth' });
         break;
       case 'projects':
         addTermLine('>', 'Curated: Modulr, Local Brain MCP, FocusFlow, E--learning, Gullylabs');
@@ -2015,7 +2235,7 @@
         document.getElementById('heatmap-section')?.scrollIntoView({ behavior: 'smooth' });
         break;
       case 'bio':
-        addTermLine('>', 'Sreerang P: B.Tech ECE @ TKMCE (2029) + BS Data Science @ IIT Madras');
+        addTermLine('>', 'Rang: Electrical & Computer Engineering @ TKMCE + BS Data Science @ IIT Madras');
         break;
       case 'npm':
         addTermLine('>', 'Published package: $ npm install -g local-brain-mcp');
@@ -2027,10 +2247,6 @@
           cf.style.opacity = '1';
           setTimeout(() => { cf.style.opacity = '0.7'; }, 2500);
         }
-        break;
-      case 'telemetry':
-      case 'stats':
-        addTermLine('>', 'TELEMETRY: 246 commits/year · 22 GitHub repos ·  audio wave active.');
         break;
       case 'contact':
         addTermLine('>', 'Email: sreerangp.official@gmail.com | GitHub: cosmiccoder200x-sys');
@@ -2628,6 +2844,34 @@
 
     init3DTilt();
   }
+
+
+  /* ═══════════════════════════════════════════════════════
+     FUTURE TERMINAL INTERACTIONS
+     ═══════════════════════════════════════════════════════ */
+  const architectureCopy = {
+    interface: { number:"01", title:"Interface layer", copy:"The experience layer turns complex functionality into clear, accessible interfaces. I focus on responsive layouts, useful interactions, and thoughtful visual systems.", projects:"Portfolio · Xboost · TKM Notes" },
+    application: { number:"02", title:"Application logic", copy:"The application layer connects user actions to reliable product behaviour through APIs, server-side logic, and automation. The goal is simple: make the useful path the easy path.", projects:"Ghost Data Still Exists · HabitOS · FocusFlow" },
+    data: { number:"03", title:"Data layer", copy:"Products need dependable state and persistence. I work with relational data, local-first storage, and retrieval patterns where the underlying project actually uses them.", projects:"Local Brain MCP · Supabase projects · SQLite" },
+    intelligence: { number:"04", title:"AI & intelligence", copy:"I experiment with model APIs, tool calling, agent workflows, and context engineering to build systems that do useful work instead of adding AI for decoration.", projects:"Ghost Data Still Exists · Local Brain MCP · AI workflows" }
+  };
+  document.querySelectorAll("[data-arch]").forEach(node => {
+    node.addEventListener("click", () => {
+      const item = architectureCopy[node.dataset.arch];
+      if (!item) return;
+      document.querySelectorAll("[data-arch]").forEach(n => n.classList.toggle("active", n === node));
+      document.getElementById("architecture-number").textContent = item.number;
+      document.getElementById("architecture-title").textContent = item.title;
+      document.getElementById("architecture-copy").textContent = item.copy;
+      document.getElementById("architecture-projects").textContent = item.projects;
+    });
+  });
+  const scrollCue = document.getElementById("future-scroll-cue");
+  const updateScrollCue = () => {
+    if (scrollCue) scrollCue.classList.toggle("is-hidden", window.scrollY > 90);
+  };
+  window.addEventListener("scroll", updateScrollCue, { passive:true });
+  updateScrollCue();
 
   renderAll();
 

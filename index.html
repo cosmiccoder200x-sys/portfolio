@@ -1749,7 +1749,7 @@
       <div class="section-head reveal" style="margin-bottom:0">
         <div class="section-num">04 / GitHub Activity</div>
         <h2>Live <span class="h1-gradient">stats</span></h2>
-        <p class="section-desc">Real data fetched live from the GitHub API and contribution graph.</p>
+        <p class="section-desc">Live public profile, repository, and contribution data. Unavailable data is never replaced with estimates.</p>
       </div>
       <a href="https://github.com/cosmiccoder200x-sys" target="_blank" rel="noopener" class="btn btn-outline reveal" id="view-github-btn">
         View Profile
@@ -1772,7 +1772,7 @@
           <span>CONTRIBUTION_MATRIX // 52_WEEKS_ACTIVITY</span>
         </div>
         <div class="gh-heatmap-meta">
-          <span class="gh-heatmap-total" id="gh-total-contribs">246 contributions</span>
+          <span class="gh-heatmap-total" id="gh-total-contribs">Loading contribution data…</span>
           <span class="gh-heatmap-user">@cosmiccoder200x-sys</span>
           <div class="gh-heatmap-legend" aria-hidden="true">
             <span>Less</span>
@@ -1787,7 +1787,7 @@
       </div>
       <div class="gh-heatmap-scroll">
         <div class="gh-heatmap-viewport" id="gh-heatmap-container">
-          <!-- Rendered in pure dark Cyber-Violet SVG by loadHeatmap() - zero white -->
+          <!-- Live contribution data is rendered here when the public endpoint responds. -->
         </div>
       </div>
     </div>
@@ -2857,40 +2857,24 @@
       </svg>`;
     }
 
-    // Default dark fallback (246 contributions distribution, 0 white)
-    function generateFallbackData() {
-      const days = [];
-      const now = new Date('2026-10-28T00:00:00');
-      for (let i = 370; i >= 0; i--) {
-        const d = new Date(now);
-        d.setDate(d.getDate() - i);
-        const y = d.getFullYear();
-        const m = String(d.getMonth() + 1).padStart(2, '0');
-        const day = String(d.getDate()).padStart(2, '0');
-        const dateStr = `${y}-${m}-${day}`;
-        const isContrib = (i % 6 === 0 || i % 7 === 0 || (i > 100 && i < 180 && i % 2 === 0));
-        const count = isContrib ? (i % 3 === 0 ? 12 : (i % 2 === 0 ? 4 : 2)) : 0;
-        const level = count > 10 ? 4 : (count > 5 ? 3 : (count > 2 ? 2 : (count > 0 ? 1 : 0)));
-        days.push({ date: dateStr, count, level });
-      }
-      return days;
-    }
-
-    // Immediate dark render
-    const initialDays = generateFallbackData();
-    container.innerHTML = `<div class="gh-heatmap-svg">${buildSvg(initialDays)}</div>`;
+    // Render only contribution data returned by the live source; never synthesize activity.
+    container.innerHTML = '<p class="gh-data-state">Loading contribution history…</p>';
 
     try {
       const res = await fetch('https://github-contributions-api.jogruber.de/v4/cosmiccoder200x-sys');
       if (!res.ok) throw new Error();
       const data = await res.json();
       if (data && data.contributions && data.contributions.length > 0) {
-        const total = (data.total && (data.total['2026'] || data.total['2025'])) ? (data.total['2026'] || data.total['2025']) : 246;
+        const year = String(new Date().getFullYear());
+        const total = data.total && data.total[year] != null
+          ? data.total[year]
+          : data.contributions.filter(item => String(item.date).startsWith(year)).reduce((sum, item) => sum + (Number(item.count) || 0), 0);
         container.innerHTML = `<div class="gh-heatmap-svg">${buildSvg(data.contributions)}</div>`;
-        if (totalEl) totalEl.textContent = `${total} contributions in 2026`;
+        if (totalEl) totalEl.textContent = `${total} contributions in ${year}`;
       }
     } catch (_) {
-      // Retain dark fallback
+      container.innerHTML = '<p class="gh-data-state">Contribution history is temporarily unavailable. View the live activity on GitHub.</p>';
+      if (totalEl) totalEl.textContent = 'Live data unavailable';
     }
   }
   loadHeatmap();
@@ -2910,9 +2894,11 @@
       }
     }).catch(() => {
       const setVal = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
-      setVal('gh-repos', D.projects.length);
+      setVal('gh-repos', '—');
       setVal('gh-followers', '—');
       setVal('gh-following', '—');
+      const noteEl = document.getElementById('gh-note');
+      if (noteEl) noteEl.textContent = 'Live GitHub profile data is unavailable. Visit the profile directly for current details.';
     });
 
   fetch('https://api.github.com/users/cosmiccoder200x-sys/repos?per_page=100')
@@ -2951,20 +2937,9 @@
       }
     }).catch(() => {
       const noteEl = document.getElementById('gh-note');
-      if (noteEl) noteEl.textContent = 'Showing offline cached projects.';
+      if (noteEl) noteEl.textContent = 'Live repository data is unavailable. The curated project list above remains available.';
       const rGrid = document.getElementById('repos-grid');
-      if (rGrid) {
-        rGrid.innerHTML = D.projects.slice(0, 4).map(p => `
-          <a href="${esc(p.github)}" target="_blank" rel="noopener" class="repo-card">
-            <div class="repo-top">
-              <span class="repo-name">📦 ${esc(p.name)}</span>
-              <span class="repo-stars">★ verified</span>
-            </div>
-            <div class="repo-desc">${esc(p.description)}</div>
-            <div class="repo-lang"><span class="lang-dot lang-${lc(p.technologies[0])}"></span>${esc(p.technologies[0])}</div>
-          </a>
-        `).join('');
-      }
+      if (rGrid) rGrid.innerHTML = '<p class="gh-data-state">Repository details could not be loaded. Open the GitHub profile to view current repositories.</p>';
     });
 
   /* ══════════════════════════════════════════

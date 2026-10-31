@@ -1879,7 +1879,7 @@
             <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
             <span>Send Message</span>
           </button>
-          <div id="form-status" class="form-status" role="alert"></div>
+          <div id="form-status" class="form-status" role="status" aria-live="polite"></div>
         </form>
         <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(window.submitted){window.onFormSubmitted();}"></iframe>
       </div>
@@ -2954,29 +2954,30 @@
     if (!window.submitted) return;
     if (submitBtn) {
       submitBtn.disabled = false;
-      submitBtn.innerHTML = `
-        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-        <span>Send Message</span>
-      `;
+      submitBtn.removeAttribute("aria-busy");
+      submitBtn.textContent = "Send Message";
     }
     if (formStatus) {
-      formStatus.className = 'form-status success';
-      formStatus.innerHTML = '🎉 Thank you! Your message has been sent successfully.';
+      formStatus.className = "form-status success";
+      formStatus.textContent = "Google Forms returned a response to the submission. For direct follow-up, email me.";
     }
     if (contactForm) contactForm.reset();
     window.submitted = false;
   };
 
   if (contactForm) {
-    contactForm.addEventListener('submit', function(){
+    contactForm.addEventListener("submit", function(){
+      if (!contactForm.reportValidity()) return;
       window.submitted = true;
+      if (formStatus) {
+        formStatus.className = "form-status";
+        formStatus.textContent = "Sending your message to Google Forms…";
+      }
       if (submitBtn) {
         submitBtn.disabled = true;
-        submitBtn.innerHTML = '<span>Sending transmission...</span>';
+        submitBtn.setAttribute("aria-busy", "true");
+        submitBtn.textContent = "Sending message…";
       }
-      setTimeout(() => {
-        if (window.submitted) window.onFormSubmitted();
-      }, 1600);
     });
   }
 

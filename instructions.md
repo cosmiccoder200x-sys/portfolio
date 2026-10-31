@@ -202,3 +202,15 @@ single-file architecture.
 6. Check the project links, demo URLs, mailto links, and npm package URL.
 7. Inspect responsive styles and reduced-motion behavior. Browser-based visual QA is still
    required before merging or deploying.
+
+
+## LinkedIn + GitHub presentation update — 2026-10-31
+
+- LinkedIn profile: https://www.linkedin.com/in/sreerang-p
+- Current verified highlights: TKM Notes launch post; Google 5-Day AI Agents: Intensive Vibe Coding Course (issued June 2026); Gemini Certified University Student (issued April 2026, expires April 2029).
+- Do not display follower/connection counts or other scraped LinkedIn metrics; public search snapshots may be stale.
+- The GitHub section contains the contribution heatmap only. Do not restore profile counters, repository cards, stars, followers, following, or API sync timestamps.
+- Do not fetch GitHub profile or repository APIs from the portfolio. The public contribution endpoint is used only for the heatmap.
+- Keep the contribution scale consistent: slate → deep blue → cobalt → electric blue → ice blue. Avoid purple/violet remnants in heatmap cells, hover glows, labels, and legend.
+- The decorative 120 FPS label and live clock were removed to keep navigation free of simulated telemetry.
+- Keep milestone/credential facts tied to the actual public LinkedIn profile/post and retain issuer and issue/expiry dates.

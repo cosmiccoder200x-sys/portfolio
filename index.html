@@ -1026,7 +1026,7 @@
       cursor: pointer;
     }
     .heat-cell:hover {
-      filter: brightness(1.3) drop-shadow(0 0 5px #7c3aed);
+      filter: brightness(1.3) drop-shadow(0 0 5px #60a5fa);
       transform: scale(1.15);
       transform-origin: center;
     }
@@ -1435,6 +1435,17 @@
     #form-submit-btn:disabled { opacity:.72;cursor:wait;transform:none; }
     @media (max-width:860px) { .milestones-grid { grid-template-columns:1fr; } }
     @media (max-width:520px) { .hero-cta .btn { flex:1 1 calc(50% - 8px);justify-content:center; }.milestone-card { padding:24px 20px; } }
+
+    /* Final palette consistency: midnight navy + electric / ice blue only. */
+    :root { --violet:#2563eb;--violet-2:#60a5fa;--violet-3:#bfdbfe;--cyan:#38bdf8;--cyan-2:#bae6fd;--surface:rgba(37,99,235,.075);--surface-2:rgba(37,99,235,.13);--border-h:rgba(96,165,250,.48);--border-c:rgba(56,189,248,.38); }
+    .section-num,.tl-date,.gh-heatmap-title,.gh-heatmap-total,.cmd-icon,.cmd-item-icon,.footer-link:hover,.skill-pill:hover,.filter-btn[aria-pressed="true"],.proj-link.primary,.npm-copy:hover { color:#93c5fd; }
+    .section-num::before,.tl-dot { background:#60a5fa; }.tl-dot { box-shadow:0 0 0 3px rgba(59,130,246,.24); }.tl-line { background:linear-gradient(to bottom,rgba(96,165,250,.42),transparent); }
+    .tag,.filter-btn[aria-pressed="true"] { background:rgba(37,99,235,.12);border-color:rgba(96,165,250,.28); }
+    .m-item,.m-item.m-alt { color:#bfdbfe;background:rgba(37,99,235,.1);border-color:rgba(96,165,250,.22); }.m-item:hover,.m-item.m-alt:hover { background:rgba(37,99,235,.2);border-color:#60a5fa; }
+    .m-dot,.m-dot.m-dot-cyan { background:#60a5fa;box-shadow:0 0 7px rgba(96,165,250,.7); }
+    .heat-box.lvl-0 { background:#142238;border:1px solid #263c59; }.heat-box.lvl-1 { background:#17406f;border:1px solid #24558a; }.heat-box.lvl-2 { background:#1d4ed8;border:1px solid #3b82f6; }.heat-box.lvl-3 { background:#3b82f6;border:1px solid #60a5fa; }.heat-box.lvl-4 { background:#93c5fd;border:1px solid #bfdbfe; }
+    .gh-heatmap-total { background:rgba(37,99,235,.12);border-color:rgba(96,165,250,.28); }.heat-cell:hover { filter:brightness(1.18) drop-shadow(0 0 5px #60a5fa); }
+    .milestones-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }.milestone-card { min-width:0; }@media (max-width:860px) { .milestones-grid { grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
@@ -1468,7 +1479,7 @@
 <nav class="mobile-nav" id="mobile-nav" role="dialog" aria-label="Mobile navigation">
   <a href="#about" onclick="closeMobileNav()">About</a>
   <a href="#projects" onclick="closeMobileNav()">Projects</a>
-  <a href="#github" onclick="closeMobileNav()">GitHub &amp; Heatmap</a>
+  <a href="#github" onclick="closeMobileNav()">Contributions</a>
   <a href="#skills" onclick="closeMobileNav()">Skills</a>
   <a href="#milestones" onclick="closeMobileNav()">Milestones</a>
   <a href="#contact" onclick="closeMobileNav()">Contact</a>
@@ -1500,7 +1511,7 @@
       <ul class="nav-links" role="list">
         <li><a href="#about"    id="nav-about">About</a></li>
         <li><a href="#projects" id="nav-projects">Projects</a></li>
-        <li><a href="#github"   id="nav-github">GitHub</a></li>
+        <li><a href="#github"   id="nav-github">Contributions</a></li>
         <li><a href="#skills"   id="nav-skills">Skills</a></li>
         <li><a href="#milestones" id="nav-milestones">Milestones</a></li>
         <li><a href="#contact"  id="nav-contact">Contact</a></li>
@@ -1508,22 +1519,6 @@
 
       <div class="nav-right">
         <!-- Live Telemetry Equalizer -->
-        <div class="nav-telemetry" id="nav-telemetry" title="Telemetry: Active // 120 FPS">
-          <div class="eq-bars" aria-hidden="true">
-            <span class="eq-b b1"></span>
-            <span class="eq-b b2"></span>
-            <span class="eq-b b3"></span>
-            <span class="eq-b b4"></span>
-          </div>
-          <span class="telemetry-label">120 FPS</span>
-        </div>
-
-        <!-- Live IST Clock in Navigation -->
-        <div class="nav-clock" id="nav-clock" aria-label="Live System Time">
-          <span class="nav-clock-dot"></span>
-          <span id="live-clock">00:00:00 IST</span>
-        </div>
-
         <button type="button" class="nav-cmd" id="nav-cmd-btn" aria-label="Open command palette (Ctrl+K or Cmd+K)">
           <span>Search</span>
           <kbd>⌘K</kbd>
@@ -1746,62 +1741,7 @@
 </section>
 
 <!-- GITHUB ACTIVITY & 52-WEEK HEATMAP -->
-<section id="github">
-  <div class="container">
-    <div class="gh-header">
-      <div class="section-head reveal" style="margin-bottom:0">
-        <div class="section-num">04 / GitHub Activity</div>
-        <h2>Live <span class="h1-gradient">stats</span></h2>
-        <p class="section-desc">Live public profile, repository, and contribution data. Unavailable data is never replaced with estimates.</p>
-      </div>
-      <a href="https://github.com/cosmiccoder200x-sys" target="_blank" rel="noopener" class="btn btn-outline reveal" id="view-github-btn">
-        View Profile
-        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </a>
-    </div>
-
-    <div class="stats-row reveal">
-      <div class="stat-card"><div class="stat-icon">📁</div><div class="stat-number" id="gh-repos">—</div><div class="stat-label">Public Repos</div></div>
-      <div class="stat-card"><div class="stat-icon">⭐</div><div class="stat-number" id="gh-stars">—</div><div class="stat-label">Total Stars</div></div>
-      <div class="stat-card"><div class="stat-icon">👥</div><div class="stat-number" id="gh-followers">—</div><div class="stat-label">Followers</div></div>
-      <div class="stat-card"><div class="stat-icon">🔱</div><div class="stat-number" id="gh-following">—</div><div class="stat-label">Following</div></div>
-    </div>
-
-    <!-- 52-Week Contribution Heatmap Matrix -->
-    <div class="gh-heatmap-card reveal" id="heatmap-section">
-      <div class="gh-heatmap-header">
-        <div class="gh-heatmap-title">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-          <span>CONTRIBUTION_MATRIX // 52_WEEKS_ACTIVITY</span>
-        </div>
-        <div class="gh-heatmap-meta">
-          <span class="gh-heatmap-total" id="gh-total-contribs">Loading contribution data…</span>
-          <span class="gh-heatmap-user">@cosmiccoder200x-sys</span>
-          <div class="gh-heatmap-legend" aria-hidden="true">
-            <span>Less</span>
-            <span class="heat-box lvl-0" title="0 commits"></span>
-            <span class="heat-box lvl-1" title="1-3 commits"></span>
-            <span class="heat-box lvl-2" title="4-6 commits"></span>
-            <span class="heat-box lvl-3" title="7-9 commits"></span>
-            <span class="heat-box lvl-4" title="10+ commits"></span>
-            <span>More</span>
-          </div>
-        </div>
-      </div>
-      <div class="gh-heatmap-scroll">
-        <div class="gh-heatmap-viewport" id="gh-heatmap-container">
-          <!-- Live contribution data is rendered here when the public endpoint responds. -->
-        </div>
-      </div>
-    </div>
-
-    <div class="repos-grid reveal reveal-delay-1" id="repos-grid">
-      <div class="repo-card"><div class="repo-top"><div class="repo-name loading-skeleton" style="width:120px;height:1em"></div></div><div class="repo-desc loading-skeleton" style="height:2em;margin-top:8px"></div></div>
-      <div class="repo-card"><div class="repo-top"><div class="repo-name loading-skeleton" style="width:140px;height:1em"></div></div><div class="repo-desc loading-skeleton" style="height:2em;margin-top:8px"></div></div>
-    </div>
-    <p class="gh-note" id="gh-note">Fetching live data from GitHub API…</p>
-  </div>
-</section>
+<section id="github"><div class="container"><div class="gh-header"><div class="section-head reveal" style="margin-bottom:0"><div class="section-num">04 / GitHub Contributions</div><h2>Building in <span class="h1-gradient">public</span></h2><p class="section-desc">A year of visible coding activity. This is the only live GitHub element on this portfolio.</p></div><a href="https://github.com/cosmiccoder200x-sys" target="_blank" rel="noopener" class="btn btn-outline reveal" id="view-github-btn">View GitHub ↗</a></div><div class="gh-heatmap-card reveal" id="heatmap-section"><div class="gh-heatmap-header"><div class="gh-heatmap-title">CONTRIBUTION_HISTORY // LAST_52_WEEKS</div><div class="gh-heatmap-meta"><span class="gh-heatmap-total" id="gh-total-contribs">Loading contribution history…</span><span class="gh-heatmap-user">@cosmiccoder200x-sys</span><div class="gh-heatmap-legend" aria-hidden="true"><span>Less</span><span class="heat-box lvl-0"></span><span class="heat-box lvl-1"></span><span class="heat-box lvl-2"></span><span class="heat-box lvl-3"></span><span class="heat-box lvl-4"></span><span>More</span></div></div></div><div class="gh-heatmap-scroll"><div class="gh-heatmap-viewport" id="gh-heatmap-container"><p class="gh-data-state">Loading contribution history…</p></div></div><p class="gh-note">Contribution history is loaded from a public contribution-data endpoint. Counts may differ slightly from GitHub's own display.</p></div></div></section>
 
 <!-- SKILLS -->
 <section id="skills">
@@ -1815,32 +1755,14 @@
   </div>
 </section>
 
-<!-- MILESTONES -->
-<section id="milestones">
-  <div class="container">
-    <div class="section-head reveal">
-      <div class="section-num">06 / Selected Milestones</div>
-      <h2>Learning by <span class="h1-gradient">building</span></h2>
-      <p class="section-desc">Concrete milestones from building, publishing, and experimenting — with scores clearly identified and no invented rankings.</p>
-    </div>
-    <div class="milestones-grid">
-      <article class="milestone-card reveal">
-        <div class="milestone-kicker">HACKERRANK · OCTOBER 2026</div>
-        <div class="milestone-score">2,798 <span>/ 4,096</span></div>
-        <h3>AI Orchestrator Challenge</h3>
-        <p>Built a first AI orchestrator using free tools and API keys. The exercise involved AI orchestration, API integration, automation, and iterative problem-solving.</p>
-        <a href="https://www.hackerrank.com/" target="_blank" rel="noopener" class="proj-link">HackerRank ↗</a>
-      </article>
-      <article class="milestone-card reveal reveal-delay-1">
-        <div class="milestone-kicker">OPEN SOURCE · NPM</div>
-        <div class="milestone-score milestone-word">Published</div>
-        <h3>Local Brain MCP</h3>
-        <p>Published a local-first Model Context Protocol server that gives coding agents persistent repository context using Git history and a local SQLite-backed vector store.</p>
-        <a href="https://www.npmjs.com/package/local-brain-mcp" target="_blank" rel="noopener" class="proj-link">npm package ↗</a>
-      </article>
-    </div>
-  </div>
-</section>
+<!-- MILESTONES & LINKEDIN HIGHLIGHTS -->
+<section id="milestones"><div class="container"><div class="section-head reveal"><div class="section-num">06 / Selected Milestones</div><h2>Learning by <span class="h1-gradient">building</span></h2><p class="section-desc">Selected work, learning milestones, and credentials shared on LinkedIn.</p></div><div class="milestones-grid">
+<article class="milestone-card reveal"><div class="milestone-kicker">HACKERRANK · OCTOBER 2026</div><div class="milestone-score">2,798 <span>/ 4,096</span></div><h3>AI Orchestrator Challenge</h3><p>Built a first AI orchestrator using free tools and API keys. The exercise involved AI orchestration, API integration, automation, and iterative problem-solving. This is the challenge score, not a leaderboard rank.</p><a href="https://www.hackerrank.com/" target="_blank" rel="noopener" class="proj-link">HackerRank ↗</a></article>
+<article class="milestone-card reveal reveal-delay-1"><div class="milestone-kicker">OPEN SOURCE · NPM</div><div class="milestone-score milestone-word">Published</div><h3>Local Brain MCP</h3><p>Published a local-first Model Context Protocol server that gives coding agents persistent repository context using Git history and a local SQLite-backed vector store.</p><a href="https://www.npmjs.com/package/local-brain-mcp" target="_blank" rel="noopener" class="proj-link">npm package ↗</a></article>
+<article class="milestone-card reveal"><div class="milestone-kicker">PRODUCT BUILD · LINKEDIN</div><div class="milestone-score milestone-word">Launched</div><h3>TKM Notes</h3><p>Shared the launch of an open-source, exam-focused learning platform built around the KTU 2024 Scheme, with TKMCE branch coverage, PYQs, revision workflows, and a Learn CS area.</p><a href="https://www.linkedin.com/posts/sreerang-p_prep-less-prioritize-better-activity-7510762916741070848-i4PF" target="_blank" rel="noopener" class="proj-link">Read launch post ↗</a><a href="https://tkm-notes.vercel.app/" target="_blank" rel="noopener" class="proj-link">Open TKM Notes ↗</a></article>
+<article class="milestone-card reveal reveal-delay-1"><div class="milestone-kicker">GOOGLE · JUNE 2026</div><div class="milestone-score milestone-word">Completed</div><h3>5-Day AI Agents Course</h3><p>5-Day AI Agents: Intensive Vibe Coding Course With Google. Issued June 2026.</p><a href="https://www.linkedin.com/in/sreerang-p" target="_blank" rel="noopener" class="proj-link">View LinkedIn credentials ↗</a></article>
+<article class="milestone-card reveal"><div class="milestone-kicker">GOOGLE FOR EDUCATION · 2026–2029</div><div class="milestone-score milestone-word">Certified</div><h3>Gemini Certified University Student</h3><p>Credential issued April 2026 and valid through April 2029.</p><a href="https://www.linkedin.com/in/sreerang-p" target="_blank" rel="noopener" class="proj-link">View LinkedIn credentials ↗</a></article>
+</div></div></section>
 
 <!-- CONTACT -->
 <section id="contact">
@@ -2164,7 +2086,7 @@
         break;
       case 'telemetry':
       case 'stats':
-        addTermLine('>', 'TELEMETRY: 246 commits/year · 22 GitHub repos · 120 FPS audio wave active.');
+        addTermLine('>', 'TELEMETRY: 246 commits/year · 22 GitHub repos ·  audio wave active.');
         break;
       case 'contact':
         addTermLine('>', 'Email: sreerangp.official@gmail.com | GitHub: cosmiccoder200x-sys');
@@ -2375,24 +2297,6 @@
 
   /* ══════════════════════════════════════════
      LIVE CLOCK
-  ══════════════════════════════════════════ */
-  function updateClock(){
-    const now = new Date();
-    const ist = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }));
-    const h = String(ist.getHours()).padStart(2, '0');
-    const m = String(ist.getMinutes()).padStart(2, '0');
-    const s = String(ist.getSeconds()).padStart(2, '0');
-    const str = `${h}:${m}:${s} IST`;
-    const el1 = document.getElementById('live-clock');
-    const el2 = document.getElementById('footer-clock');
-    if (el1) el1.textContent = str;
-    if (el2) el2.textContent = str;
-  }
-  updateClock();
-  setInterval(updateClock, 1000);
-
-  /* ══════════════════════════════════════════
-     TYPED TEXT EFFECT
   ══════════════════════════════════════════ */
   (function(){
     const el = document.getElementById('typed-text');
@@ -2807,13 +2711,13 @@
       const leftMargin = 32;
       const topMargin = 22;
 
-      // Dark Cyber-Violet colors: Level 0 is deep obsidian dark slate, NEVER white
+      // Five distinct midnight-blue activity levels, from slate to ice blue.
       const colors = {
-        0: { fill: '#101d32', stroke: 'rgba(96, 165, 250, 0.16)' },
-        1: { fill: 'rgba(37, 99, 235, 0.38)', stroke: 'rgba(59, 130, 246, 0.32)' },
-        2: { fill: '#2563eb', stroke: '#3b82f6' },
+        0: { fill: '#142238', stroke: '#263c59' },
+        1: { fill: '#17406f', stroke: '#24558a' },
+        2: { fill: '#1d4ed8', stroke: '#3b82f6' },
         3: { fill: '#3b82f6', stroke: '#60a5fa' },
-        4: { fill: '#7dd3fc', stroke: '#bae6fd' }
+        4: { fill: '#93c5fd', stroke: '#bfdbfe' }
       };
 
       const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -2850,11 +2754,11 @@
       const svgWidth = leftMargin + totalCols * colPitch + 16;
       const svgHeight = topMargin + 7 * rowPitch + 14;
 
-      const monthTexts = monthLabels.map(ml => `<text x="${ml.x}" y="14" fill="#64748b" font-family="'JetBrains Mono', monospace" font-size="9">${ml.text}</text>`).join('');
+      const monthTexts = monthLabels.map(ml => `<text x="${ml.x}" y="14" fill="#8fa4c0" font-family="'JetBrains Mono', monospace" font-size="9">${ml.text}</text>`).join('');
       const dayTexts = `
-        <text x="6" y="${topMargin + 1 * rowPitch + 9}" fill="#64748b" font-family="'JetBrains Mono', monospace" font-size="9">Mon</text>
-        <text x="6" y="${topMargin + 3 * rowPitch + 9}" fill="#64748b" font-family="'JetBrains Mono', monospace" font-size="9">Wed</text>
-        <text x="6" y="${topMargin + 5 * rowPitch + 9}" fill="#64748b" font-family="'JetBrains Mono', monospace" font-size="9">Fri</text>
+        <text x="6" y="${topMargin + 1 * rowPitch + 9}" fill="#8fa4c0" font-family="'JetBrains Mono', monospace" font-size="9">Mon</text>
+        <text x="6" y="${topMargin + 3 * rowPitch + 9}" fill="#8fa4c0" font-family="'JetBrains Mono', monospace" font-size="9">Wed</text>
+        <text x="6" y="${topMargin + 5 * rowPitch + 9}" fill="#8fa4c0" font-family="'JetBrains Mono', monospace" font-size="9">Fri</text>
       `;
 
       return `<svg viewBox="0 0 ${svgWidth} ${svgHeight}" class="gh-calendar-svg" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
@@ -2889,68 +2793,7 @@
   }
   loadHeatmap();
 
-  /* ══════════════════════════════════════════
-     GITHUB API
-  ══════════════════════════════════════════ */
-  fetch('https://api.github.com/users/cosmiccoder200x-sys')
-    .then(r => { if (!r.ok) throw new Error(); return r.json(); })
-    .then(u => {
-      if (u.public_repos != null) {
-        const setVal = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
-        setVal('gh-repos', u.public_repos);
-        setVal('gh-followers', u.followers);
-        setVal('gh-following', u.following);
-        setVal('stat-repos-counter', u.public_repos);
-      }
-    }).catch(() => {
-      const setVal = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
-      setVal('gh-repos', '—');
-      setVal('gh-followers', '—');
-      setVal('gh-following', '—');
-      const noteEl = document.getElementById('gh-note');
-      if (noteEl) noteEl.textContent = 'Live GitHub profile data is unavailable. Visit the profile directly for current details.';
-    });
-
-  fetch('https://api.github.com/users/cosmiccoder200x-sys/repos?per_page=100')
-    .then(r => { if (!r.ok) throw new Error(); return r.json(); })
-    .then(repos => {
-      if (Array.isArray(repos)) {
-        const totalStars = repos.reduce((acc, r) => acc + (r.stargazers_count || 0), 0);
-        const starsEl = document.getElementById('gh-stars');
-        if (starsEl) starsEl.textContent = totalStars;
-
-        const prioritized = ['Modulr', 'local-brain-mcp', 'Focusflow', 'E--learning', 'Gullylabs'];
-        const sorted = [...repos].sort((a, b) => {
-          const ia = prioritized.indexOf(a.name);
-          const ib = prioritized.indexOf(b.name);
-          if (ia !== -1 && ib !== -1) return ia - ib;
-          if (ia !== -1) return -1;
-          if (ib !== -1) return 1;
-          return (b.stargazers_count || 0) - (a.stargazers_count || 0);
-        });
-
-        const rGrid = document.getElementById('repos-grid');
-        if (rGrid) {
-          rGrid.innerHTML = sorted.slice(0, 4).map(r => `
-            <a href="${esc(r.html_url)}" target="_blank" rel="noopener" class="repo-card">
-              <div class="repo-top">
-                <span class="repo-name">📦 ${esc(r.name)}</span>
-                <span class="repo-stars">★ ${r.stargazers_count || 0}</span>
-              </div>
-              <div class="repo-desc">${esc(r.description || 'Open source repository.')}</div>
-              <div class="repo-lang">${r.language ? `<span class="lang-dot lang-${lc(r.language)}"></span>${esc(r.language)}` : ''}</div>
-            </a>
-          `).join('');
-        }
-        const noteEl = document.getElementById('gh-note');
-        if (noteEl) noteEl.textContent = 'Synced with GitHub API · ' + new Date().toLocaleDateString();
-      }
-    }).catch(() => {
-      const noteEl = document.getElementById('gh-note');
-      if (noteEl) noteEl.textContent = 'Live repository data is unavailable. The curated project list above remains available.';
-      const rGrid = document.getElementById('repos-grid');
-      if (rGrid) rGrid.innerHTML = '<p class="gh-data-state">Repository details could not be loaded. Open the GitHub profile to view current repositories.</p>';
-    });
+  // No live GitHub profile or repository counters are fetched.
 
   /* ══════════════════════════════════════════
      CONTACT FORM

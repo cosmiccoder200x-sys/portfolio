@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Portfolio of Sreerang P — Electrical & Computer Engineering student & IIT Madras BS Data Science student building software, data and AI systems." />
+  <meta name="description" content="Portfolio of Sreerang P — software developer and IIT Madras BS Data Science student building practical software, developer tools, and AI-powered workflows." />
   <meta property="og:title" content="Sreerang P | Software, Data & AI Builder" />
-  <meta property="og:description" content="Electrical & Computer Engineering student at TKMCE and IIT Madras BS Data Science student building software, data products, and AI systems." />
+  <meta property="og:description" content="Software, AI, and data-focused portfolio of Sreerang P, studying at TKM College of Engineering and IIT Madras." />
   <meta property="og:type" content="website" />
   <meta name="theme-color" content="#050508" />
-  <title>Sreerang P | Software, Data &amp; AI Builder</title>
+  <title>Sreerang P | Software Developer · AI &amp; Data Systems</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -1412,7 +1412,30 @@
       #cursor-glow,#particle-canvas { display:none!important; }
       .terminal-frame,.project-card { transform:none!important; }
     }
-  </style>
+  
+    /* Professional content additions */
+    .hero-tagline { max-width:680px; }
+    .hero-cta { gap:12px; }
+    .hero-cta .btn { min-height:46px; }
+    .stat-year { font-size:clamp(1.65rem,3vw,2.2rem);letter-spacing:-.04em; }
+    .spec-detail { margin:18px 0;padding:16px 18px;border:1px solid rgba(148,163,184,.13);border-radius:14px;background:rgba(15,27,49,.52); }
+    .spec-detail strong,.spec-stack strong { display:block;margin-bottom:7px;color:#93c5fd;font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase; }
+    .spec-detail p { margin:0;color:#b8c7dc;line-height:1.75; }
+    .spec-stack { display:flex;flex-direction:column;gap:5px;margin:18px 0;color:#b8c7dc;font-size:.88rem; }
+    .milestones-grid { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px; }
+    .milestone-card { padding:clamp(24px,3vw,34px);border:1px solid rgba(148,163,184,.14);border-radius:22px;background:linear-gradient(145deg,rgba(15,27,49,.78),rgba(7,13,27,.9));box-shadow:0 16px 44px rgba(0,0,0,.18); }
+    .milestone-kicker { color:#7db5ff;font:600 .7rem var(--mono);letter-spacing:.1em; }
+    .milestone-score { margin:18px 0 8px;color:#eff6ff;font:700 clamp(2.2rem,5vw,3.5rem) var(--display);letter-spacing:-.06em; }
+    .milestone-score span { color:#8fa4c0;font-size:.48em;letter-spacing:0; }
+    .milestone-word { font-size:2.35rem; }
+    .milestone-card h3 { margin:8px 0 10px;font:650 1.2rem var(--display);color:#eff6ff; }
+    .milestone-card p { margin:0 0 20px;color:#a8b8ce;line-height:1.75; }
+    .gh-data-state { margin:0;padding:24px;color:#9fb0c8;font-size:.9rem;line-height:1.7; }
+    .repo-loading { min-height:130px; }
+    #form-submit-btn:disabled { opacity:.72;cursor:wait;transform:none; }
+    @media (max-width:860px) { .milestones-grid { grid-template-columns:1fr; } }
+    @media (max-width:520px) { .hero-cta .btn { flex:1 1 calc(50% - 8px);justify-content:center; }.milestone-card { padding:24px 20px; } }
+</style>
 </head>
 <body>
 
@@ -1471,7 +1494,7 @@
         <div class="logo-text">
           <span>Sreerang</span><span class="sp">P</span>
         </div>
-        <div class="logo-status" title="Available for opportunities"></div>
+        <div class="logo-status" title="Portfolio status"></div>
       </a>
 
       <ul class="nav-links" role="list">
@@ -1536,10 +1559,7 @@
           <span class="h1-gradient">I build </span><span id="typed-text"></span><span class="typed-cursor" aria-hidden="true"></span>
         </h1>
 
-        <p class="hero-tagline">
-          <strong>Electrical &amp; Computer Engineering</strong> student &amp;
-          <strong>IIT Madras BS Data Science</strong> student building software, data products, and AI systems.
-        </p>
+        <p class="hero-tagline">I study <strong>Electrical &amp; Computer Engineering at TKMCE</strong> and <strong>Data Science at IIT Madras</strong>. I build practical software, developer tools, and AI-powered workflows — from the first idea to a working product.</p>
 
         <div class="hero-cta">
           <a href="#projects" class="btn btn-primary" id="hero-projects-btn">
@@ -1550,6 +1570,7 @@
             <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             Get In Touch
           </a>
+          <a href="mailto:sreerangp.official@gmail.com?subject=Resume%20Request" class="btn btn-outline" id="hero-resume-btn">Request Resume</a>
           <a href="https://github.com/cosmiccoder200x-sys" target="_blank" rel="noopener" class="btn btn-outline" id="hero-github-btn">
             <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
             GitHub ↗
@@ -1626,78 +1647,60 @@
 </header>
 
 <!-- STATS BAR -->
-<div id="stats" aria-label="Quick statistics">
-  <div class="container">
-    <div class="stats-inner reveal">
-      <div class="stat-item">
-        <div class="stat-num" data-count="8">0</div>
-        <div class="stat-label">Projects Built</div>
-        <div class="stat-sub">AI · Web · DevTools</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num" id="stat-repos-counter" data-count="5">5</div>
-        <div class="stat-label">Public Repositories</div>
-        <div class="stat-sub">GitHub Open Source</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num" data-count="2">0</div>
-        <div class="stat-label">Academic Degrees</div>
-        <div class="stat-sub">TKMCE ECE + IIT Madras</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num" data-count="100">0</div>
-        <div class="stat-label">Curiosity &amp; Drive</div>
-        <div class="stat-sub">Always Experimenting</div>
-      </div>
-    </div>
-  </div>
+<div id="stats" aria-label="Portfolio highlights">
+  <div class="container"><div class="stats-inner reveal">
+    <div class="stat-item"><div class="stat-num" data-count="5">0</div><div class="stat-label">Selected Projects</div><div class="stat-sub">Software · AI · Developer Tools</div></div>
+    <div class="stat-item"><div class="stat-num" data-count="2">0</div><div class="stat-label">Academic Programmes</div><div class="stat-sub">TKMCE · IIT Madras</div></div>
+    <div class="stat-item"><div class="stat-num" data-count="1">0</div><div class="stat-label">Published npm Package</div><div class="stat-sub">Local Brain MCP</div></div>
+    <div class="stat-item"><div class="stat-num stat-year">2029</div><div class="stat-label">Expected Graduation</div><div class="stat-sub">B.Tech · TKMCE</div></div>
+  </div></div>
 </div>
 
 <!-- KINETIC TECH MARQUEE (Dual-Track Cyber Streamer) -->
 <div class="marquee-wrapper reveal" aria-hidden="true">
   <div class="marquee-track track-left" id="marquee-track-1">
     <div class="marquee-content">
-      <span class="m-item"><span class="m-dot"></span>NEURAL SYSTEMS</span>
+      <span class="m-item"><span class="m-dot"></span>SOFTWARE ENGINEERING</span>
       <span class="m-item"><span class="m-dot"></span>MODEL CONTEXT PROTOCOL</span>
-      <span class="m-item"><span class="m-dot"></span>AUTONOMOUS AGENTS</span>
-      <span class="m-item"><span class="m-dot"></span>NEXT.JS 15</span>
-      <span class="m-item"><span class="m-dot"></span>PYTHON 3.12</span>
-      <span class="m-item"><span class="m-dot"></span>FASTAPI MICROSERVICES</span>
-      <span class="m-item"><span class="m-dot"></span>DATA PIPELINES</span>
-      <span class="m-item"><span class="m-dot"></span>PYTORCH</span>
-      <span class="m-item"><span class="m-dot"></span>DISTRIBUTED SYSTEMS</span>
+      <span class="m-item"><span class="m-dot"></span>AI WORKFLOWS</span>
+      <span class="m-item"><span class="m-dot"></span>REACT &amp; NEXT.JS</span>
+      <span class="m-item"><span class="m-dot"></span>PYTHON</span>
+      <span class="m-item"><span class="m-dot"></span>DEVELOPER TOOLS</span>
+      <span class="m-item"><span class="m-dot"></span>DATA SCIENCE</span>
+      <span class="m-item"><span class="m-dot"></span>OPEN SOURCE</span>
+      <span class="m-item"><span class="m-dot"></span>PRODUCT BUILDING</span>
     </div>
     <div class="marquee-content" aria-hidden="true">
-      <span class="m-item"><span class="m-dot"></span>NEURAL SYSTEMS</span>
+      <span class="m-item"><span class="m-dot"></span>SOFTWARE ENGINEERING</span>
       <span class="m-item"><span class="m-dot"></span>MODEL CONTEXT PROTOCOL</span>
-      <span class="m-item"><span class="m-dot"></span>AUTONOMOUS AGENTS</span>
-      <span class="m-item"><span class="m-dot"></span>NEXT.JS 15</span>
-      <span class="m-item"><span class="m-dot"></span>PYTHON 3.12</span>
-      <span class="m-item"><span class="m-dot"></span>FASTAPI MICROSERVICES</span>
-      <span class="m-item"><span class="m-dot"></span>DATA PIPELINES</span>
-      <span class="m-item"><span class="m-dot"></span>PYTORCH</span>
-      <span class="m-item"><span class="m-dot"></span>DISTRIBUTED SYSTEMS</span>
+      <span class="m-item"><span class="m-dot"></span>AI WORKFLOWS</span>
+      <span class="m-item"><span class="m-dot"></span>REACT &amp; NEXT.JS</span>
+      <span class="m-item"><span class="m-dot"></span>PYTHON</span>
+      <span class="m-item"><span class="m-dot"></span>DEVELOPER TOOLS</span>
+      <span class="m-item"><span class="m-dot"></span>DATA SCIENCE</span>
+      <span class="m-item"><span class="m-dot"></span>OPEN SOURCE</span>
+      <span class="m-item"><span class="m-dot"></span>PRODUCT BUILDING</span>
     </div>
   </div>
   <div class="marquee-track track-right" id="marquee-track-2">
     <div class="marquee-content">
-      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>FULL-STACK ENGINEERING</span>
+      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>FULL-STACK APPLICATIONS</span>
       <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>VECTOR DATABASES</span>
-      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>POSTGRESQL &amp; REDIS</span>
-      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>DOCKER CONTAINERS</span>
-      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>IIT MADRAS BS DS</span>
-      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>TKMCE ECE</span>
-      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>DEVTOOLS &amp; CLI</span>
+      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>SUPABASE &amp; POSTGRESQL</span>
+      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>API INTEGRATION</span>
+      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>IIT MADRAS BS DATA SCIENCE</span>
+      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>TKMCE ELECTRICAL &amp; COMPUTER ENGINEERING</span>
+      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>DEVELOPER TOOLS</span>
       <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>BROWSER EXTENSIONS</span>
     </div>
     <div class="marquee-content" aria-hidden="true">
-      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>FULL-STACK ENGINEERING</span>
+      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>FULL-STACK APPLICATIONS</span>
       <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>VECTOR DATABASES</span>
-      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>POSTGRESQL &amp; REDIS</span>
-      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>DOCKER CONTAINERS</span>
-      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>IIT MADRAS BS DS</span>
-      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>TKMCE ECE</span>
-      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>DEVTOOLS &amp; CLI</span>
+      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>SUPABASE &amp; POSTGRESQL</span>
+      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>API INTEGRATION</span>
+      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>IIT MADRAS BS DATA SCIENCE</span>
+      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>TKMCE ELECTRICAL &amp; COMPUTER ENGINEERING</span>
+      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>DEVELOPER TOOLS</span>
       <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>BROWSER EXTENSIONS</span>
     </div>
   </div>
@@ -1720,7 +1723,7 @@
       <div>
         <div class="section-head reveal" style="margin-bottom:28px">
           <div class="section-num">02 / Academic Journey</div>
-          <h2 style="font-size:2rem">Education &amp; Work</h2>
+          <h2 style="font-size:2rem">Education &amp; Building</h2>
         </div>
         <div class="timeline reveal reveal-delay-1" id="education-timeline"></div>
       </div>
@@ -1734,7 +1737,7 @@
     <div class="section-head reveal">
       <div class="section-num">03 / Portfolio</div>
       <h2>Featured <span class="h1-gradient">work</span></h2>
-      <p class="section-desc">A selection of curated personal and academic systems spanning AI architectures, full-stack platforms, and developer tools.</p>
+      <p class="section-desc">A curated selection of software products, AI tooling, and full-stack applications. Open a case study to explore the problem, implementation, and technology choices.</p>
     </div>
     <div class="project-filters reveal" id="project-filters" role="group" aria-label="Filter projects by category"></div>
     <div class="projects-grid" id="projects-grid"></div>
@@ -1806,7 +1809,7 @@
     <div class="section-head reveal">
       <div class="section-num">05 / Tech Stack</div>
       <h2>Tech I <span class="h1-gradient">work with</span></h2>
-      <p class="section-desc">A blend of software engineering, ML, and embedded systems expertise.</p>
+      <p class="section-desc">Tools and technologies used across software projects, data work, and AI experiments.</p>
     </div>
     <div class="skills-grid" id="skills-container"></div>
   </div>
@@ -1920,8 +1923,8 @@
   const D = {
     profile: {
       name: "Sreerang P",
-      title: "Software, Data & AI Builder",
-      typedWords: ["software.", "data products.", "AI agents.", "useful tools.", "the future."],
+      title: "Software Developer · AI & Data Systems",
+      typedWords: ["software products.", "developer tools.", "AI workflows.", "data-driven applications."],
       aboutText: [
         "I'm <strong>Sreerang P</strong>, an Electrical &amp; Computer Engineering student at TKM College of Engineering (expected graduation 2029) and a BS Data Science &amp; Applications student at <strong>IIT Madras</strong>. I focus on building software, data products, and AI solutions.",
         "I enjoy programming, data science, machine learning, and designing useful applications. I love open-source collaboration, continuous learning, and experimenting with new technical frameworks."
@@ -1935,7 +1938,7 @@
     skills: {
       languages:    ["Python", "C++", "C", "TypeScript", "JavaScript"],
       software:     ["React", "Next.js", "Vite", "Flask", "Git"],
-      dataAi:       ["Data Science", "NumPy", "Pandas", "Machine Learning", "Computer Vision"],
+      dataAi:       ["Data Science", "NumPy", "Pandas", "Machine Learning"],
       backendCloud: ["Supabase", "SQL", "PostgreSQL", "REST APIs"]
     },
     socials: {

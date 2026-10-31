@@ -1735,8 +1735,8 @@ footer { border-color:rgba(82,255,120,.12) !important; }
               <button type="button" class="term-chip" data-cmd="projects">projects</button>
               <button type="button" class="term-chip" data-cmd="skills">skills</button>
               <button type="button" class="term-chip" data-cmd="heatmap">heatmap</button>
-              <button type="button" class="term-chip" data-cmd="matrix">matrix</button>
-              <button type="button" class="term-chip" data-cmd="bio">bio</button>
+              <button type="button" class="term-chip" data-cmd="architecture">architecture</button>
+              <button type="button" class="term-chip" data-cmd="whoami">whoami</button>
               <button type="button" class="term-chip" data-cmd="clear">clear</button>
             </div>
           </div>
@@ -2236,19 +2236,8 @@ footer { border-color:rgba(82,255,120,.12) !important; }
         addTermLine('>', 'Jumping to GitHub 52-week activity heatmap (zero white, 100% dark obsidian)...');
         document.getElementById('heatmap-section')?.scrollIntoView({ behavior: 'smooth' });
         break;
-      case 'bio':
-        addTermLine('>', 'Rang: Electrical & Computer Engineering @ TKMCE + BS Data Science @ IIT Madras');
-        break;
       case 'npm':
         addTermLine('>', 'Published package: $ npm install -g local-brain-mcp');
-        break;
-      case 'matrix':
-        addTermLine('>', 'MATRIX KINETICS: 3D perspective cyber grid & dual-track streamer activated.');
-        const cf = document.getElementById('cyber-grid-floor');
-        if (cf) {
-          cf.style.opacity = '1';
-          setTimeout(() => { cf.style.opacity = '0.7'; }, 2500);
-        }
         break;
       case 'contact':
         addTermLine('>', 'Email: sreerangp.official@gmail.com | GitHub: cosmiccoder200x-sys');

@@ -214,3 +214,35 @@ single-file architecture.
 - Keep the contribution scale consistent: slate → deep blue → cobalt → electric blue → ice blue. Avoid purple/violet remnants in heatmap cells, hover glows, labels, and legend.
 - The decorative 120 FPS label and live clock were removed to keep navigation free of simulated telemetry.
 - Keep milestone/credential facts tied to the actual public LinkedIn profile/post and retain issuer and issue/expiry dates.
+
+
+## Redesign update — Future Terminal (2026-10-31)
+
+The `redesign/future-terminal` branch now uses the **Future Terminal** visual direction.
+The implementation remains dependency-free and single-file: `index.html` contains
+all styles, markup, and browser interactions. No framework or build step is required.
+
+### Visual system
+- Near-black green-tinted background (`#050806`) with restrained neon-green accents
+  (`#52FF78`, `#A3FFB4`), soft grid texture, and readable muted text.
+- Space Grotesk / Inter / JetBrains Mono typography.
+- Terminal-led hero with a responsive interactive command line.
+- Small mouse-wheel scroll cue that fades after the visitor begins scrolling.
+- Green scroll progress indicator and restrained reveal / hover transitions.
+- Respect `prefers-reduced-motion`.
+
+### Sections and interactions
+- System architecture section with four selectable layers: Interface, Application,
+  Data, and AI & Intelligence. The inspector text updates when a node is selected.
+- Existing curated project cards and case-study modal remain data-driven.
+- Existing GitHub contribution heatmap and contact form are preserved.
+- Terminal commands include `help`, `whoami`, `projects`, `architecture`,
+  `skills`, `heatmap`, `npm`, `contact`, `clear`, and `sudo hire`.
+- Do not add simulated telemetry, fabricated counters, or made-up system status.
+- Mobile layout stacks the architecture diagram and keeps terminal chips touch-friendly.
+
+### Branch and deployment
+- This redesign is committed only to `redesign/future-terminal`.
+- Do not merge or deploy to `main` without explicit approval.
+- The existing GitHub Pages workflow publishes from `main`; a feature-branch
+  preview requires a separate preview deployment or a deliberate Pages source change.

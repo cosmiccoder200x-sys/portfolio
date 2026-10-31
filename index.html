@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Portfolio of Sreerang P — Electrical & Computer Engineering student & IIT Madras BS Data Science student building software, data and AI systems." />
+  <meta name="description" content="Portfolio of Sreerang P — software developer and IIT Madras BS Data Science student building practical software, developer tools, and AI-powered workflows." />
   <meta property="og:title" content="Sreerang P | Software, Data & AI Builder" />
-  <meta property="og:description" content="Electrical & Computer Engineering student at TKMCE and IIT Madras BS Data Science student building software, data products, and AI systems." />
+  <meta property="og:description" content="Software, AI, and data-focused portfolio of Sreerang P, studying at TKM College of Engineering and IIT Madras." />
   <meta property="og:type" content="website" />
   <meta name="theme-color" content="#050508" />
-  <title>Sreerang P | Software, Data &amp; AI Builder</title>
+  <title>Sreerang P | Software Developer · AI &amp; Data Systems</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -21,20 +21,20 @@
     :root {
       --bg:          #050508;
       --bg-2:        #09090f;
-      --surface:     rgba(124,58,237,0.05);
-      --surface-2:   rgba(124,58,237,0.10);
+      --surface:     rgba(37,99,235,0.05);
+      --surface-2:   rgba(37,99,235,0.10);
       --surface-3:   rgba(255,255,255,0.04);
       --border:      rgba(255,255,255,0.07);
-      --border-h:    rgba(124,58,237,0.45);
-      --border-c:    rgba(6,182,212,0.35);
+      --border-h:    rgba(37,99,235,0.45);
+      --border-c:    rgba(56,189,248,0.35);
       --text:        #f8fafc;
       --text-2:      #94a3b8;
       --text-3:      #475569;
-      --violet:      #7c3aed;
-      --violet-2:    #a78bfa;
-      --violet-3:    #c4b5fd;
-      --cyan:        #06b6d4;
-      --cyan-2:      #67e8f9;
+      --violet:      #2563eb;
+      --violet-2:    #60a5fa;
+      --violet-3:    #bfdbfe;
+      --cyan:        #38bdf8;
+      --cyan-2:      #bae6fd;
       --emerald:     #10b981;
       --radius:      14px;
       --radius-lg:   22px;
@@ -69,8 +69,8 @@
     .grid-overlay {
       position: fixed; inset: 0; z-index: 0; pointer-events: none;
       background-image:
-        linear-gradient(rgba(124,58,237,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(124,58,237,0.04) 1px, transparent 1px);
+        linear-gradient(rgba(37,99,235,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(37,99,235,0.04) 1px, transparent 1px);
       background-size: 60px 60px;
       mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.4) 30%, rgba(0,0,0,0.4) 70%, transparent 100%);
     }
@@ -79,8 +79,8 @@
     .cyber-grid-floor {
       position: fixed; inset: -150px -100px; z-index: 0; pointer-events: none;
       background-image:
-        linear-gradient(rgba(124,58,237,0.09) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(6,182,212,0.07) 1px, transparent 1px);
+        linear-gradient(rgba(37,99,235,0.09) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(56,189,248,0.07) 1px, transparent 1px);
       background-size: 50px 50px;
       transform: perspective(650px) rotateX(32deg);
       transform-origin: center 25%;
@@ -98,13 +98,13 @@
     }
     .nebula-1 {
       width: 800px; height: 800px;
-      background: radial-gradient(circle, rgba(124,58,237,0.15), transparent 70%);
+      background: radial-gradient(circle, rgba(37,99,235,0.15), transparent 70%);
       top: -200px; left: -200px;
       animation: drift1 22s ease-in-out infinite alternate;
     }
     .nebula-2 {
       width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(6,182,212,0.10), transparent 70%);
+      background: radial-gradient(circle, rgba(56,189,248,0.10), transparent 70%);
       bottom: -150px; right: -100px;
       animation: drift2 28s ease-in-out infinite alternate;
     }
@@ -121,7 +121,7 @@
 
     #cursor-glow {
       position: fixed; width: 400px; height: 400px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(124,58,237,0.08), transparent 65%);
+      background: radial-gradient(circle, rgba(37,99,235,0.08), transparent 65%);
       pointer-events: none; z-index: 1;
       transform: translate(-50%,-50%);
       transition: opacity .4s ease;
@@ -134,7 +134,7 @@
     #scroll-progress {
       position: fixed; top: 0; left: 0; height: 2px; z-index: 1000; width: 0%;
       background: linear-gradient(90deg, var(--violet), var(--cyan));
-      box-shadow: 0 0 12px var(--violet), 0 0 24px rgba(124,58,237,0.3);
+      box-shadow: 0 0 12px var(--violet), 0 0 24px rgba(37,99,235,0.3);
       transition: width .1s linear;
     }
 
@@ -193,62 +193,6 @@
 
     .nav-right { display: flex; align-items: center; gap: 10px; }
 
-    /* Nav Live Clock */
-    .nav-clock {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-family: var(--mono);
-      font-size: .72rem;
-      color: var(--text-3);
-      background: var(--surface-3);
-      border: 1px solid var(--border);
-      padding: 5px 10px;
-      border-radius: 8px;
-    }
-    .nav-clock-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--cyan);
-      box-shadow: 0 0 6px var(--cyan);
-      animation: pulse 2s infinite;
-    }
-
-    /* Live Telemetry Equalizer */
-    .nav-telemetry {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      font-family: var(--mono);
-      font-size: .7rem;
-      color: var(--cyan);
-      background: rgba(6,182,212,0.07);
-      border: 1px solid rgba(6,182,212,0.2);
-      padding: 5px 9px;
-      border-radius: 8px;
-      user-select: none;
-    }
-    .eq-bars {
-      display: flex;
-      align-items: flex-end;
-      gap: 2px;
-      height: 12px;
-    }
-    .eq-b {
-      width: 2px;
-      background: var(--cyan);
-      border-radius: 1px;
-    }
-    .eq-b.b1 { height: 6px; animation: eqAnim1 1.2s ease-in-out infinite alternate; }
-    .eq-b.b2 { height: 11px; animation: eqAnim2 0.8s ease-in-out infinite alternate; }
-    .eq-b.b3 { height: 4px; animation: eqAnim3 1.5s ease-in-out infinite alternate; }
-    .eq-b.b4 { height: 9px; animation: eqAnim4 1.0s ease-in-out infinite alternate; }
-    @keyframes eqAnim1 { 0% { height: 3px; } 100% { height: 11px; } }
-    @keyframes eqAnim2 { 0% { height: 12px; } 100% { height: 4px; } }
-    @keyframes eqAnim3 { 0% { height: 4px; } 100% { height: 10px; } }
-    @keyframes eqAnim4 { 0% { height: 9px; } 100% { height: 2px; } }
-
     .nav-cmd {
       display: inline-flex; align-items: center; gap: 6px;
       padding: 6px 12px; border-radius: 8px;
@@ -260,7 +204,7 @@
     }
     .nav-cmd:hover { border-color: var(--border-h); color: var(--violet-2); background: var(--surface); }
     .nav-cmd kbd {
-      background: rgba(124,58,237,0.15); border: 1px solid rgba(124,58,237,0.3);
+      background: rgba(37,99,235,0.15); border: 1px solid rgba(37,99,235,0.3);
       border-radius: 4px; padding: 1px 5px; font-family: var(--mono); font-size: .7rem;
       color: var(--violet-2);
     }
@@ -298,7 +242,7 @@
       border: 1px solid var(--border-h);
       border-radius: var(--radius-lg);
       overflow: hidden;
-      box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(124,58,237,0.1) inset;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(37,99,235,0.1) inset;
       animation: cmdIn .2s cubic-bezier(.2,.8,.2,1);
     }
     @keyframes cmdIn { from { opacity: 0; transform: scale(.96) translateY(-8px); } }
@@ -422,11 +366,11 @@
     }
     .btn:hover { transform: translateY(-3px); }
     .btn-primary {
-      background: linear-gradient(135deg, var(--violet), #5b21b6);
+      background: linear-gradient(135deg, var(--violet), #1d4ed8);
       color: #fff; border-color: transparent;
-      box-shadow: 0 0 0 1px rgba(124,58,237,0.3) inset;
+      box-shadow: 0 0 0 1px rgba(37,99,235,0.3) inset;
     }
-    .btn-primary:hover { box-shadow: 0 16px 40px rgba(124,58,237,0.45), 0 0 0 1px rgba(124,58,237,0.3) inset; }
+    .btn-primary:hover { box-shadow: 0 16px 40px rgba(37,99,235,0.45), 0 0 0 1px rgba(37,99,235,0.3) inset; }
     .btn-outline {
       background: transparent; color: var(--text-2);
       border-color: var(--border);
@@ -434,9 +378,9 @@
     .btn-outline:hover { border-color: var(--border-h); color: var(--text); background: var(--surface); }
     .btn-cyan {
       background: transparent; color: var(--cyan);
-      border-color: rgba(6,182,212,0.25);
+      border-color: rgba(56,189,248,0.25);
     }
-    .btn-cyan:hover { border-color: var(--cyan); background: rgba(6,182,212,0.08); box-shadow: 0 0 20px rgba(6,182,212,0.15); }
+    .btn-cyan:hover { border-color: var(--cyan); background: rgba(56,189,248,0.08); box-shadow: 0 0 20px rgba(56,189,248,0.15); }
 
     .hero-socials {
       display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap;
@@ -464,13 +408,13 @@
       border-radius: var(--radius-lg);
       overflow: hidden;
       box-shadow: 0 40px 80px rgba(0,0,0,.5),
-                  0 0 0 1px rgba(124,58,237,0.1) inset,
-                  0 0 60px rgba(124,58,237,0.08);
+                  0 0 0 1px rgba(37,99,235,0.1) inset,
+                  0 0 60px rgba(37,99,235,0.08);
     }
     .terminal-bar {
       display: flex; align-items: center; gap: 8px;
       padding: 12px 16px;
-      background: rgba(124,58,237,0.08);
+      background: rgba(37,99,235,0.08);
       border-bottom: 1px solid var(--border);
     }
     .t-dot { width: 10px; height: 10px; border-radius: 50%; }
@@ -607,8 +551,8 @@
       -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
       transform: rotate(-0.8deg);
       background: rgba(10, 10, 18, 0.6);
-      border-top: 1px solid rgba(124, 58, 237, 0.2);
-      border-bottom: 1px solid rgba(6, 182, 212, 0.2);
+      border-top: 1px solid rgba(37, 99, 235, 0.2);
+      border-bottom: 1px solid rgba(56, 189, 248, 0.2);
       padding: 14px 0;
       backdrop-filter: blur(12px);
     }
@@ -647,25 +591,25 @@
       letter-spacing: 0.08em;
       font-weight: 600;
       color: var(--violet-2);
-      background: rgba(124, 58, 237, 0.08);
-      border: 1px solid rgba(124, 58, 237, 0.22);
+      background: rgba(37, 99, 235, 0.08);
+      border: 1px solid rgba(37, 99, 235, 0.22);
       padding: 6px 14px;
       border-radius: 999px;
       white-space: nowrap;
       transition: border-color .2s, background .2s, transform .2s;
     }
     .m-item:hover {
-      background: rgba(124, 58, 237, 0.18);
+      background: rgba(37, 99, 235, 0.18);
       border-color: var(--violet);
       transform: scale(1.05);
     }
     .m-item.m-alt {
       color: var(--cyan);
-      background: rgba(6, 182, 212, 0.07);
-      border-color: rgba(6, 182, 212, 0.22);
+      background: rgba(56, 189, 248, 0.07);
+      border-color: rgba(56, 189, 248, 0.22);
     }
     .m-item.m-alt:hover {
-      background: rgba(6, 182, 212, 0.16);
+      background: rgba(56, 189, 248, 0.16);
       border-color: var(--cyan);
     }
     .m-dot {
@@ -695,7 +639,7 @@
       height: 2px;
       margin-top: 18px;
       background: linear-gradient(90deg, var(--violet), var(--cyan), transparent);
-      box-shadow: 0 0 8px rgba(124,58,237,0.4);
+      box-shadow: 0 0 8px rgba(37,99,235,0.4);
       transition: width 1.2s cubic-bezier(.2,.8,.2,1);
     }
     .section-head.visible::after {
@@ -731,7 +675,7 @@
        ABOUT SECTION
     ══════════════════════════════════════════ */
     #about {
-      background: linear-gradient(180deg, transparent, rgba(124,58,237,0.02) 50%, transparent);
+      background: linear-gradient(180deg, transparent, rgba(37,99,235,0.02) 50%, transparent);
     }
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
     .about-text p { color: var(--text-2); font-size: 1.05rem; line-height: 1.8; margin-bottom: 18px; }
@@ -758,9 +702,9 @@
     .tl-dot {
       width: 12px; height: 12px; border-radius: 50%;
       background: var(--violet-2); border: 2px solid var(--bg);
-      box-shadow: 0 0 0 3px rgba(124,58,237,0.3); flex-shrink: 0;
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.3); flex-shrink: 0;
     }
-    .tl-line { width: 1px; flex: 1; min-height: 48px; background: linear-gradient(to bottom, rgba(124,58,237,0.4), transparent); margin-top: 4px; }
+    .tl-line { width: 1px; flex: 1; min-height: 48px; background: linear-gradient(to bottom, rgba(37,99,235,0.4), transparent); margin-top: 4px; }
     .tl-body {
       background: var(--surface-3); border: 1px solid var(--border);
       border-radius: var(--radius); padding: 20px 22px;
@@ -789,20 +733,20 @@
     }
     .project-card::before {
       content: ''; position: absolute; inset: 0;
-      background: radial-gradient(circle 320px at var(--sheen-x, 50%) var(--sheen-y, 50%), rgba(124,58,237,0.20), transparent 65%);
+      background: radial-gradient(circle 320px at var(--sheen-x, 50%) var(--sheen-y, 50%), rgba(37,99,235,0.20), transparent 65%);
       opacity: 0; transition: opacity .3s; pointer-events: none;
       z-index: 1;
     }
     .project-card:hover {
       border-color: var(--border-h);
       background: var(--surface);
-      box-shadow: 0 20px 50px rgba(0,0,0,.45), 0 0 35px rgba(124,58,237,0.18);
+      box-shadow: 0 20px 50px rgba(0,0,0,.45), 0 0 35px rgba(37,99,235,0.18);
     }
     .project-card:hover::before { opacity: 1; }
     .project-card.featured {
       grid-column: span 2;
-      background: linear-gradient(135deg, rgba(124,58,237,0.08), rgba(9,9,15,0.9));
-      border-color: rgba(124,58,237,0.3);
+      background: linear-gradient(135deg, rgba(37,99,235,0.08), rgba(9,9,15,0.9));
+      border-color: rgba(37,99,235,0.3);
     }
     .project-num {
       font-family: var(--mono); font-size: .7rem; color: var(--text-3);
@@ -830,7 +774,7 @@
     .tag {
       font-family: var(--mono); font-size: .68rem; font-weight: 600;
       padding: 4px 9px; border-radius: 6px;
-      background: rgba(124,58,237,0.08); border: 1px solid rgba(124,58,237,0.18);
+      background: rgba(37,99,235,0.08); border: 1px solid rgba(37,99,235,0.18);
       color: var(--violet-2);
     }
     .project-links {
@@ -846,13 +790,13 @@
       transition: color .2s, border-color .2s, background .2s;
     }
     .proj-link:hover { color: var(--text); border-color: var(--border-h); background: var(--surface); }
-    .proj-link.primary { color: var(--violet-2); border-color: rgba(124,58,237,0.3); }
+    .proj-link.primary { color: var(--violet-2); border-color: rgba(37,99,235,0.3); }
 
     /* NPM Install Box */
     .npm-box {
       margin-top: 14px;
       background: rgba(5, 5, 8, 0.75);
-      border: 1px dashed rgba(124, 58, 237, 0.35);
+      border: 1px dashed rgba(37, 99, 235, 0.35);
       border-radius: 8px;
       padding: 8px 12px;
       display: flex;
@@ -901,7 +845,7 @@
        GITHUB SECTION & 52-WEEK HEATMAP
     ══════════════════════════════════════════ */
     #github {
-      background: linear-gradient(180deg, transparent, rgba(6,182,212,0.03) 50%, transparent);
+      background: linear-gradient(180deg, transparent, rgba(56,189,248,0.03) 50%, transparent);
     }
     .gh-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 40px; }
     .stats-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 24px; }
@@ -910,7 +854,7 @@
       border-radius: var(--radius); padding: 20px 18px;
       transition: border-color .2s, transform .2s, background .2s;
     }
-    .stat-card:hover { border-color: var(--border-c); transform: translateY(-3px); background: rgba(6,182,212,0.05); }
+    .stat-card:hover { border-color: var(--border-c); transform: translateY(-3px); background: rgba(56,189,248,0.05); }
     .stat-icon { font-size: 1.3rem; margin-bottom: 10px; }
     .stat-number {
       font-family: var(--display);
@@ -960,10 +904,10 @@
     }
     .gh-heatmap-user {
       color: var(--cyan);
-      background: rgba(6,182,212,0.08);
+      background: rgba(56,189,248,0.08);
       padding: 2px 7px;
       border-radius: 4px;
-      border: 1px solid rgba(6,182,212,0.2);
+      border: 1px solid rgba(56,189,248,0.2);
     }
     .gh-heatmap-legend {
       display: flex;
@@ -975,17 +919,17 @@
       height: 10px;
       border-radius: 2px;
     }
-    .heat-box.lvl-0 { background: #141322; border: 1px solid rgba(124, 58, 237, 0.2); }
-    .heat-box.lvl-1 { background: rgba(124, 58, 237, 0.45); border: 1px solid rgba(124, 58, 237, 0.35); }
-    .heat-box.lvl-2 { background: #6d28d9; }
-    .heat-box.lvl-3 { background: #8b5cf6; }
-    .heat-box.lvl-4 { background: #22d3ee; box-shadow: 0 0 6px rgba(34, 211, 238, 0.6); }
+    .heat-box.lvl-0 { background: #142238; border: 1px solid rgba(37, 99, 235, 0.2); }
+    .heat-box.lvl-1 { background: rgba(37, 99, 235, 0.45); border: 1px solid rgba(37, 99, 235, 0.35); }
+    .heat-box.lvl-2 { background: #1d4ed8; }
+    .heat-box.lvl-3 { background: #3b82f6; }
+    .heat-box.lvl-4 { background: #7dd3fc; box-shadow: 0 0 6px rgba(125, 211, 252, 0.6); }
 
     .gh-heatmap-total {
       font-size: .72rem;
       color: var(--violet-2);
-      background: rgba(124, 58, 237, 0.1);
-      border: 1px solid rgba(124, 58, 237, 0.25);
+      background: rgba(37, 99, 235, 0.1);
+      border: 1px solid rgba(37, 99, 235, 0.25);
       padding: 2px 8px;
       border-radius: 4px;
     }
@@ -1000,7 +944,7 @@
       height: 4px;
     }
     .gh-heatmap-scroll::-webkit-scrollbar-thumb {
-      background: rgba(124, 58, 237, 0.35);
+      background: rgba(37, 99, 235, 0.35);
       border-radius: 4px;
     }
     .gh-heatmap-viewport {
@@ -1026,7 +970,7 @@
       cursor: pointer;
     }
     .heat-cell:hover {
-      filter: brightness(1.3) drop-shadow(0 0 5px #7c3aed);
+      filter: brightness(1.3) drop-shadow(0 0 5px #60a5fa);
       transform: scale(1.15);
       transform-origin: center;
     }
@@ -1038,7 +982,7 @@
       display: flex; flex-direction: column; gap: 8px;
       transition: border-color .2s, background .2s, transform .2s;
     }
-    .repo-card:hover { border-color: var(--border-c); background: rgba(6,182,212,0.04); transform: translateY(-2px); }
+    .repo-card:hover { border-color: var(--border-c); background: rgba(56,189,248,0.04); transform: translateY(-2px); }
     .repo-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
     .repo-name { font-weight: 600; font-size: .93rem; display: flex; align-items: center; gap: 6px; }
     .repo-stars { font-family: var(--mono); font-size: .78rem; color: var(--text-3); display: flex; align-items: center; gap: 4px; }
@@ -1075,7 +1019,7 @@
        CONTACT SECTION
     ══════════════════════════════════════════ */
     .contact-card {
-      background: linear-gradient(135deg, rgba(124,58,237,0.08), rgba(6,182,212,0.05));
+      background: linear-gradient(135deg, rgba(37,99,235,0.08), rgba(56,189,248,0.05));
       border: 1px solid var(--border-h);
       border-radius: var(--radius-xl); padding: 72px 56px;
       text-align: center; position: relative; overflow: hidden;
@@ -1084,7 +1028,7 @@
     .contact-card::before {
       content: ''; position: absolute; top: -50%; left: -20%;
       width: 500px; height: 500px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(124,58,237,0.15), transparent 70%);
+      background: radial-gradient(circle, rgba(37,99,235,0.15), transparent 70%);
       pointer-events: none;
     }
     .contact-card p { color: var(--text-2); max-width: 520px; margin: 18px auto 36px; font-size: 1.05rem; line-height: 1.7; }
@@ -1098,10 +1042,10 @@
     }
     .contact-link:hover { border-color: var(--border-h); color: var(--violet-2); background: var(--surface); transform: translateY(-2px); }
     .contact-link.main {
-      background: linear-gradient(135deg, var(--violet), #5b21b6);
+      background: linear-gradient(135deg, var(--violet), #1d4ed8);
       border-color: transparent; color: #fff;
     }
-    .contact-link.main:hover { box-shadow: 0 12px 32px rgba(124,58,237,0.45); }
+    .contact-link.main:hover { box-shadow: 0 12px 32px rgba(37,99,235,0.45); }
 
     .contact-form-wrap {
       max-width: 540px; margin: auto; text-align: left;
@@ -1141,11 +1085,11 @@
       border: 1px solid var(--border-h);
       border-radius: var(--radius-lg);
       overflow: hidden;
-      box-shadow: 0 32px 80px rgba(0,0,0,0.7), 0 0 30px rgba(124,58,237,0.15);
+      box-shadow: 0 32px 80px rgba(0,0,0,0.7), 0 0 30px rgba(37,99,235,0.15);
     }
     .spec-modal-head {
       padding: 14px 20px;
-      background: rgba(124,58,237,0.08);
+      background: rgba(37,99,235,0.08);
       border-bottom: 1px solid var(--border);
       display: flex; justify-content: space-between; align-items: center;
       font-family: var(--mono); font-size: .8rem; color: var(--violet-2);
@@ -1206,7 +1150,7 @@
       .projects-grid { grid-template-columns: 1fr; }
       .project-card.featured { grid-column: span 1; }
       .stats-inner { grid-template-columns: repeat(2,1fr); gap: 24px; }
-      .nav-links, .nav-cmd, .nav-clock { display: none; }
+      .nav-links, .nav-cmd { display: none; }
       .hamburger { display: flex; }
       .mobile-nav { display: flex; }
       .gh-header { flex-direction: column; align-items: flex-start; gap: 14px; }
@@ -1412,7 +1356,41 @@
       #cursor-glow,#particle-canvas { display:none!important; }
       .terminal-frame,.project-card { transform:none!important; }
     }
-  </style>
+  
+    /* Professional content additions */
+    .hero-tagline { max-width:680px; }
+    .hero-cta { gap:12px; }
+    .hero-cta .btn { min-height:46px; }
+    .stat-year { font-size:clamp(1.65rem,3vw,2.2rem);letter-spacing:-.04em; }
+    .spec-detail { margin:18px 0;padding:16px 18px;border:1px solid rgba(148,163,184,.13);border-radius:14px;background:rgba(15,27,49,.52); }
+    .spec-detail strong,.spec-stack strong { display:block;margin-bottom:7px;color:#93c5fd;font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase; }
+    .spec-detail p { margin:0;color:#b8c7dc;line-height:1.75; }
+    .spec-stack { display:flex;flex-direction:column;gap:5px;margin:18px 0;color:#b8c7dc;font-size:.88rem; }
+    .milestones-grid { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px; }
+    .milestone-card { padding:clamp(24px,3vw,34px);border:1px solid rgba(148,163,184,.14);border-radius:22px;background:linear-gradient(145deg,rgba(15,27,49,.78),rgba(7,13,27,.9));box-shadow:0 16px 44px rgba(0,0,0,.18); }
+    .milestone-kicker { color:#7db5ff;font:600 .7rem var(--mono);letter-spacing:.1em; }
+    .milestone-score { margin:18px 0 8px;color:#eff6ff;font:700 clamp(2.2rem,5vw,3.5rem) var(--display);letter-spacing:-.06em; }
+    .milestone-score span { color:#8fa4c0;font-size:.48em;letter-spacing:0; }
+    .milestone-word { font-size:2.35rem; }
+    .milestone-card h3 { margin:8px 0 10px;font:650 1.2rem var(--display);color:#eff6ff; }
+    .milestone-card p { margin:0 0 20px;color:#a8b8ce;line-height:1.75; }
+    .gh-data-state { margin:0;padding:24px;color:#9fb0c8;font-size:.9rem;line-height:1.7; }
+    .repo-loading { min-height:130px; }
+    #form-submit-btn:disabled { opacity:.72;cursor:wait;transform:none; }
+    @media (max-width:860px) { .milestones-grid { grid-template-columns:1fr; } }
+    @media (max-width:520px) { .hero-cta .btn { flex:1 1 calc(50% - 8px);justify-content:center; }.milestone-card { padding:24px 20px; } }
+
+    /* Final palette consistency: midnight navy + electric / ice blue only. */
+    :root { --violet:#2563eb;--violet-2:#60a5fa;--violet-3:#bfdbfe;--cyan:#38bdf8;--cyan-2:#bae6fd;--surface:rgba(37,99,235,.075);--surface-2:rgba(37,99,235,.13);--border-h:rgba(96,165,250,.48);--border-c:rgba(56,189,248,.38); }
+    .section-num,.tl-date,.gh-heatmap-title,.gh-heatmap-total,.cmd-icon,.cmd-item-icon,.footer-link:hover,.skill-pill:hover,.filter-btn[aria-pressed="true"],.proj-link.primary,.npm-copy:hover { color:#93c5fd; }
+    .section-num::before,.tl-dot { background:#60a5fa; }.tl-dot { box-shadow:0 0 0 3px rgba(59,130,246,.24); }.tl-line { background:linear-gradient(to bottom,rgba(96,165,250,.42),transparent); }
+    .tag,.filter-btn[aria-pressed="true"] { background:rgba(37,99,235,.12);border-color:rgba(96,165,250,.28); }
+    .m-item,.m-item.m-alt { color:#bfdbfe;background:rgba(37,99,235,.1);border-color:rgba(96,165,250,.22); }.m-item:hover,.m-item.m-alt:hover { background:rgba(37,99,235,.2);border-color:#60a5fa; }
+    .m-dot,.m-dot.m-dot-cyan { background:#60a5fa;box-shadow:0 0 7px rgba(96,165,250,.7); }
+    .heat-box.lvl-0 { background:#142238;border:1px solid #263c59; }.heat-box.lvl-1 { background:#17406f;border:1px solid #24558a; }.heat-box.lvl-2 { background:#1d4ed8;border:1px solid #3b82f6; }.heat-box.lvl-3 { background:#3b82f6;border:1px solid #60a5fa; }.heat-box.lvl-4 { background:#93c5fd;border:1px solid #bfdbfe; }
+    .gh-heatmap-total { background:rgba(37,99,235,.12);border-color:rgba(96,165,250,.28); }.heat-cell:hover { filter:brightness(1.18) drop-shadow(0 0 5px #60a5fa); }
+    .milestones-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }.milestone-card { min-width:0; }@media (max-width:860px) { .milestones-grid { grid-template-columns:1fr; } }
+</style>
 </head>
 <body>
 
@@ -1445,8 +1423,9 @@
 <nav class="mobile-nav" id="mobile-nav" role="dialog" aria-label="Mobile navigation">
   <a href="#about" onclick="closeMobileNav()">About</a>
   <a href="#projects" onclick="closeMobileNav()">Projects</a>
-  <a href="#github" onclick="closeMobileNav()">GitHub &amp; Heatmap</a>
+  <a href="#github" onclick="closeMobileNav()">Contributions</a>
   <a href="#skills" onclick="closeMobileNav()">Skills</a>
+  <a href="#milestones" onclick="closeMobileNav()">Milestones</a>
   <a href="#contact" onclick="closeMobileNav()">Contact</a>
 </nav>
 
@@ -1458,11 +1437,11 @@
         <div class="logo-mark">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
             <polygon points="12,2 22,8.5 22,15.5 12,22 2,15.5 2,8.5" stroke="url(#hex-grad)" stroke-width="1.8"/>
-            <circle cx="12" cy="12" r="3" fill="#a78bfa"/>
+            <circle cx="12" cy="12" r="3" fill="#60a5fa"/>
             <defs>
               <linearGradient id="hex-grad" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#7c3aed"/>
-                <stop offset="100%" stop-color="#06b6d4"/>
+                <stop offset="0%" stop-color="#2563eb"/>
+                <stop offset="100%" stop-color="#38bdf8"/>
               </linearGradient>
             </defs>
           </svg>
@@ -1470,35 +1449,20 @@
         <div class="logo-text">
           <span>Sreerang</span><span class="sp">P</span>
         </div>
-        <div class="logo-status" title="Available for opportunities"></div>
+        <div class="logo-status" title="Portfolio status"></div>
       </a>
 
       <ul class="nav-links" role="list">
         <li><a href="#about"    id="nav-about">About</a></li>
         <li><a href="#projects" id="nav-projects">Projects</a></li>
-        <li><a href="#github"   id="nav-github">GitHub</a></li>
+        <li><a href="#github"   id="nav-github">Contributions</a></li>
         <li><a href="#skills"   id="nav-skills">Skills</a></li>
+        <li><a href="#milestones" id="nav-milestones">Milestones</a></li>
         <li><a href="#contact"  id="nav-contact">Contact</a></li>
       </ul>
 
       <div class="nav-right">
         <!-- Live Telemetry Equalizer -->
-        <div class="nav-telemetry" id="nav-telemetry" title="Telemetry: Active // 120 FPS">
-          <div class="eq-bars" aria-hidden="true">
-            <span class="eq-b b1"></span>
-            <span class="eq-b b2"></span>
-            <span class="eq-b b3"></span>
-            <span class="eq-b b4"></span>
-          </div>
-          <span class="telemetry-label">120 FPS</span>
-        </div>
-
-        <!-- Live IST Clock in Navigation -->
-        <div class="nav-clock" id="nav-clock" aria-label="Live System Time">
-          <span class="nav-clock-dot"></span>
-          <span id="live-clock">00:00:00 IST</span>
-        </div>
-
         <button type="button" class="nav-cmd" id="nav-cmd-btn" aria-label="Open command palette (Ctrl+K or Cmd+K)">
           <span>Search</span>
           <kbd>⌘K</kbd>
@@ -1534,10 +1498,7 @@
           <span class="h1-gradient">I build </span><span id="typed-text"></span><span class="typed-cursor" aria-hidden="true"></span>
         </h1>
 
-        <p class="hero-tagline">
-          <strong>Electrical &amp; Computer Engineering</strong> student &amp;
-          <strong>IIT Madras BS Data Science</strong> student building software, data products, and AI systems.
-        </p>
+        <p class="hero-tagline">I study <strong>Electrical &amp; Computer Engineering at TKMCE</strong> and <strong>Data Science at IIT Madras</strong>. I build practical software, developer tools, and AI-powered workflows — from the first idea to a working product.</p>
 
         <div class="hero-cta">
           <a href="#projects" class="btn btn-primary" id="hero-projects-btn">
@@ -1548,6 +1509,7 @@
             <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             Get In Touch
           </a>
+          <a href="mailto:sreerangp.official@gmail.com?subject=Resume%20Request" class="btn btn-outline" id="hero-resume-btn">Request Resume</a>
           <a href="https://github.com/cosmiccoder200x-sys" target="_blank" rel="noopener" class="btn btn-outline" id="hero-github-btn">
             <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
             GitHub ↗
@@ -1624,78 +1586,60 @@
 </header>
 
 <!-- STATS BAR -->
-<div id="stats" aria-label="Quick statistics">
-  <div class="container">
-    <div class="stats-inner reveal">
-      <div class="stat-item">
-        <div class="stat-num" data-count="8">0</div>
-        <div class="stat-label">Projects Built</div>
-        <div class="stat-sub">AI · Web · DevTools</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num" id="stat-repos-counter" data-count="5">5</div>
-        <div class="stat-label">Public Repositories</div>
-        <div class="stat-sub">GitHub Open Source</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num" data-count="2">0</div>
-        <div class="stat-label">Academic Degrees</div>
-        <div class="stat-sub">TKMCE ECE + IIT Madras</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num" data-count="100">0</div>
-        <div class="stat-label">Curiosity &amp; Drive</div>
-        <div class="stat-sub">Always Experimenting</div>
-      </div>
-    </div>
-  </div>
+<div id="stats" aria-label="Portfolio highlights">
+  <div class="container"><div class="stats-inner reveal">
+    <div class="stat-item"><div class="stat-num" data-count="5">0</div><div class="stat-label">Selected Projects</div><div class="stat-sub">Software · AI · Developer Tools</div></div>
+    <div class="stat-item"><div class="stat-num" data-count="2">0</div><div class="stat-label">Academic Programmes</div><div class="stat-sub">TKMCE · IIT Madras</div></div>
+    <div class="stat-item"><div class="stat-num" data-count="1">0</div><div class="stat-label">Published npm Package</div><div class="stat-sub">Local Brain MCP</div></div>
+    <div class="stat-item"><div class="stat-num stat-year">2029</div><div class="stat-label">Expected Graduation</div><div class="stat-sub">B.Tech · TKMCE</div></div>
+  </div></div>
 </div>
 
 <!-- KINETIC TECH MARQUEE (Dual-Track Cyber Streamer) -->
 <div class="marquee-wrapper reveal" aria-hidden="true">
   <div class="marquee-track track-left" id="marquee-track-1">
     <div class="marquee-content">
-      <span class="m-item"><span class="m-dot"></span>NEURAL SYSTEMS</span>
+      <span class="m-item"><span class="m-dot"></span>SOFTWARE ENGINEERING</span>
       <span class="m-item"><span class="m-dot"></span>MODEL CONTEXT PROTOCOL</span>
-      <span class="m-item"><span class="m-dot"></span>AUTONOMOUS AGENTS</span>
-      <span class="m-item"><span class="m-dot"></span>NEXT.JS 15</span>
-      <span class="m-item"><span class="m-dot"></span>PYTHON 3.12</span>
-      <span class="m-item"><span class="m-dot"></span>FASTAPI MICROSERVICES</span>
-      <span class="m-item"><span class="m-dot"></span>DATA PIPELINES</span>
-      <span class="m-item"><span class="m-dot"></span>PYTORCH</span>
-      <span class="m-item"><span class="m-dot"></span>DISTRIBUTED SYSTEMS</span>
+      <span class="m-item"><span class="m-dot"></span>AI WORKFLOWS</span>
+      <span class="m-item"><span class="m-dot"></span>REACT &amp; NEXT.JS</span>
+      <span class="m-item"><span class="m-dot"></span>PYTHON</span>
+      <span class="m-item"><span class="m-dot"></span>DEVELOPER TOOLS</span>
+      <span class="m-item"><span class="m-dot"></span>DATA SCIENCE</span>
+      <span class="m-item"><span class="m-dot"></span>OPEN SOURCE</span>
+      <span class="m-item"><span class="m-dot"></span>PRODUCT BUILDING</span>
     </div>
     <div class="marquee-content" aria-hidden="true">
-      <span class="m-item"><span class="m-dot"></span>NEURAL SYSTEMS</span>
+      <span class="m-item"><span class="m-dot"></span>SOFTWARE ENGINEERING</span>
       <span class="m-item"><span class="m-dot"></span>MODEL CONTEXT PROTOCOL</span>
-      <span class="m-item"><span class="m-dot"></span>AUTONOMOUS AGENTS</span>
-      <span class="m-item"><span class="m-dot"></span>NEXT.JS 15</span>
-      <span class="m-item"><span class="m-dot"></span>PYTHON 3.12</span>
-      <span class="m-item"><span class="m-dot"></span>FASTAPI MICROSERVICES</span>
-      <span class="m-item"><span class="m-dot"></span>DATA PIPELINES</span>
-      <span class="m-item"><span class="m-dot"></span>PYTORCH</span>
-      <span class="m-item"><span class="m-dot"></span>DISTRIBUTED SYSTEMS</span>
+      <span class="m-item"><span class="m-dot"></span>AI WORKFLOWS</span>
+      <span class="m-item"><span class="m-dot"></span>REACT &amp; NEXT.JS</span>
+      <span class="m-item"><span class="m-dot"></span>PYTHON</span>
+      <span class="m-item"><span class="m-dot"></span>DEVELOPER TOOLS</span>
+      <span class="m-item"><span class="m-dot"></span>DATA SCIENCE</span>
+      <span class="m-item"><span class="m-dot"></span>OPEN SOURCE</span>
+      <span class="m-item"><span class="m-dot"></span>PRODUCT BUILDING</span>
     </div>
   </div>
   <div class="marquee-track track-right" id="marquee-track-2">
     <div class="marquee-content">
-      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>FULL-STACK ENGINEERING</span>
+      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>FULL-STACK APPLICATIONS</span>
       <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>VECTOR DATABASES</span>
-      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>POSTGRESQL &amp; REDIS</span>
-      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>DOCKER CONTAINERS</span>
-      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>IIT MADRAS BS DS</span>
-      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>TKMCE ECE</span>
-      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>DEVTOOLS &amp; CLI</span>
+      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>SUPABASE &amp; POSTGRESQL</span>
+      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>API INTEGRATION</span>
+      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>IIT MADRAS BS DATA SCIENCE</span>
+      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>TKMCE ELECTRICAL &amp; COMPUTER ENGINEERING</span>
+      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>DEVELOPER TOOLS</span>
       <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>BROWSER EXTENSIONS</span>
     </div>
     <div class="marquee-content" aria-hidden="true">
-      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>FULL-STACK ENGINEERING</span>
+      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>FULL-STACK APPLICATIONS</span>
       <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>VECTOR DATABASES</span>
-      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>POSTGRESQL &amp; REDIS</span>
-      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>DOCKER CONTAINERS</span>
-      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>IIT MADRAS BS DS</span>
-      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>TKMCE ECE</span>
-      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>DEVTOOLS &amp; CLI</span>
+      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>SUPABASE &amp; POSTGRESQL</span>
+      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>API INTEGRATION</span>
+      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>IIT MADRAS BS DATA SCIENCE</span>
+      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>TKMCE ELECTRICAL &amp; COMPUTER ENGINEERING</span>
+      <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>DEVELOPER TOOLS</span>
       <span class="m-item m-alt"><span class="m-dot m-dot-cyan"></span>BROWSER EXTENSIONS</span>
     </div>
   </div>
@@ -1709,7 +1653,7 @@
         <div class="section-head reveal">
           <div class="section-num">01 / Introduction</div>
           <h2>Passionate about<br><span class="h1-gradient">crafting solutions</span></h2>
-          <p class="section-desc">Electrical &amp; Computer Engineering student &amp; IIT Madras BS Data Science student building software, data and AI systems.</p>
+          <p class="section-desc">Studying Electrical &amp; Computer Engineering at TKMCE and Data Science at IIT Madras while building software, developer tools, and AI workflows.</p>
         </div>
         <div class="about-text reveal reveal-delay-1" id="about-text"></div>
         <div class="skills-cloud reveal reveal-delay-2" id="about-skills-cloud"></div>
@@ -1718,7 +1662,7 @@
       <div>
         <div class="section-head reveal" style="margin-bottom:28px">
           <div class="section-num">02 / Academic Journey</div>
-          <h2 style="font-size:2rem">Education &amp; Work</h2>
+          <h2 style="font-size:2rem">Education &amp; Building</h2>
         </div>
         <div class="timeline reveal reveal-delay-1" id="education-timeline"></div>
       </div>
@@ -1732,7 +1676,7 @@
     <div class="section-head reveal">
       <div class="section-num">03 / Portfolio</div>
       <h2>Featured <span class="h1-gradient">work</span></h2>
-      <p class="section-desc">A selection of curated personal and academic systems spanning AI architectures, full-stack platforms, and developer tools.</p>
+      <p class="section-desc">A curated selection of software products, AI tooling, and full-stack applications. Open a case study to explore the problem, implementation, and technology choices.</p>
     </div>
     <div class="project-filters reveal" id="project-filters" role="group" aria-label="Filter projects by category"></div>
     <div class="projects-grid" id="projects-grid"></div>
@@ -1741,62 +1685,7 @@
 </section>
 
 <!-- GITHUB ACTIVITY & 52-WEEK HEATMAP -->
-<section id="github">
-  <div class="container">
-    <div class="gh-header">
-      <div class="section-head reveal" style="margin-bottom:0">
-        <div class="section-num">04 / GitHub Activity</div>
-        <h2>Live <span class="h1-gradient">stats</span></h2>
-        <p class="section-desc">Real data fetched live from the GitHub API and contribution graph.</p>
-      </div>
-      <a href="https://github.com/cosmiccoder200x-sys" target="_blank" rel="noopener" class="btn btn-outline reveal" id="view-github-btn">
-        View Profile
-        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </a>
-    </div>
-
-    <div class="stats-row reveal">
-      <div class="stat-card"><div class="stat-icon">📁</div><div class="stat-number" id="gh-repos">—</div><div class="stat-label">Public Repos</div></div>
-      <div class="stat-card"><div class="stat-icon">⭐</div><div class="stat-number" id="gh-stars">—</div><div class="stat-label">Total Stars</div></div>
-      <div class="stat-card"><div class="stat-icon">👥</div><div class="stat-number" id="gh-followers">—</div><div class="stat-label">Followers</div></div>
-      <div class="stat-card"><div class="stat-icon">🔱</div><div class="stat-number" id="gh-following">—</div><div class="stat-label">Following</div></div>
-    </div>
-
-    <!-- 52-Week Contribution Heatmap Matrix -->
-    <div class="gh-heatmap-card reveal" id="heatmap-section">
-      <div class="gh-heatmap-header">
-        <div class="gh-heatmap-title">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-          <span>CONTRIBUTION_MATRIX // 52_WEEKS_ACTIVITY</span>
-        </div>
-        <div class="gh-heatmap-meta">
-          <span class="gh-heatmap-total" id="gh-total-contribs">246 contributions</span>
-          <span class="gh-heatmap-user">@cosmiccoder200x-sys</span>
-          <div class="gh-heatmap-legend" aria-hidden="true">
-            <span>Less</span>
-            <span class="heat-box lvl-0" title="0 commits"></span>
-            <span class="heat-box lvl-1" title="1-3 commits"></span>
-            <span class="heat-box lvl-2" title="4-6 commits"></span>
-            <span class="heat-box lvl-3" title="7-9 commits"></span>
-            <span class="heat-box lvl-4" title="10+ commits"></span>
-            <span>More</span>
-          </div>
-        </div>
-      </div>
-      <div class="gh-heatmap-scroll">
-        <div class="gh-heatmap-viewport" id="gh-heatmap-container">
-          <!-- Rendered in pure dark Cyber-Violet SVG by loadHeatmap() - zero white -->
-        </div>
-      </div>
-    </div>
-
-    <div class="repos-grid reveal reveal-delay-1" id="repos-grid">
-      <div class="repo-card"><div class="repo-top"><div class="repo-name loading-skeleton" style="width:120px;height:1em"></div></div><div class="repo-desc loading-skeleton" style="height:2em;margin-top:8px"></div></div>
-      <div class="repo-card"><div class="repo-top"><div class="repo-name loading-skeleton" style="width:140px;height:1em"></div></div><div class="repo-desc loading-skeleton" style="height:2em;margin-top:8px"></div></div>
-    </div>
-    <p class="gh-note" id="gh-note">Fetching live data from GitHub API…</p>
-  </div>
-</section>
+<section id="github"><div class="container"><div class="gh-header"><div class="section-head reveal" style="margin-bottom:0"><div class="section-num">04 / GitHub Contributions</div><h2>Building in <span class="h1-gradient">public</span></h2><p class="section-desc">A year of visible coding activity. This is the only live GitHub element on this portfolio.</p></div><a href="https://github.com/cosmiccoder200x-sys" target="_blank" rel="noopener" class="btn btn-outline reveal" id="view-github-btn">View GitHub ↗</a></div><div class="gh-heatmap-card reveal" id="heatmap-section"><div class="gh-heatmap-header"><div class="gh-heatmap-title">CONTRIBUTION_HISTORY // LAST_52_WEEKS</div><div class="gh-heatmap-meta"><span class="gh-heatmap-total" id="gh-total-contribs">Loading contribution history…</span><span class="gh-heatmap-user">@cosmiccoder200x-sys</span><div class="gh-heatmap-legend" aria-hidden="true"><span>Less</span><span class="heat-box lvl-0"></span><span class="heat-box lvl-1"></span><span class="heat-box lvl-2"></span><span class="heat-box lvl-3"></span><span class="heat-box lvl-4"></span><span>More</span></div></div></div><div class="gh-heatmap-scroll"><div class="gh-heatmap-viewport" id="gh-heatmap-container"><p class="gh-data-state">Loading contribution history…</p></div></div><p class="gh-note">Contribution history is loaded from a public contribution-data endpoint. Counts may differ slightly from GitHub's own display.</p></div></div></section>
 
 <!-- SKILLS -->
 <section id="skills">
@@ -1804,19 +1693,28 @@
     <div class="section-head reveal">
       <div class="section-num">05 / Tech Stack</div>
       <h2>Tech I <span class="h1-gradient">work with</span></h2>
-      <p class="section-desc">A blend of software engineering, ML, and embedded systems expertise.</p>
+      <p class="section-desc">Tools and technologies used across software projects, data work, and AI experiments.</p>
     </div>
     <div class="skills-grid" id="skills-container"></div>
   </div>
 </section>
 
+<!-- MILESTONES & LINKEDIN HIGHLIGHTS -->
+<section id="milestones"><div class="container"><div class="section-head reveal"><div class="section-num">06 / Selected Milestones</div><h2>Learning by <span class="h1-gradient">building</span></h2><p class="section-desc">Selected work, learning milestones, and credentials shared on LinkedIn.</p></div><div class="milestones-grid">
+<article class="milestone-card reveal"><div class="milestone-kicker">HACKERRANK · OCTOBER 2026</div><div class="milestone-score">2,798 <span>/ 4,096</span></div><h3>AI Orchestrator Challenge</h3><p>Built a first AI orchestrator using free tools and API keys. The exercise involved AI orchestration, API integration, automation, and iterative problem-solving. This is the challenge score, not a leaderboard rank.</p><a href="https://www.hackerrank.com/" target="_blank" rel="noopener" class="proj-link">HackerRank ↗</a></article>
+<article class="milestone-card reveal reveal-delay-1"><div class="milestone-kicker">OPEN SOURCE · NPM</div><div class="milestone-score milestone-word">Published</div><h3>Local Brain MCP</h3><p>Published a local-first Model Context Protocol server that gives coding agents persistent repository context using Git history and a local SQLite-backed vector store.</p><a href="https://www.npmjs.com/package/local-brain-mcp" target="_blank" rel="noopener" class="proj-link">npm package ↗</a></article>
+<article class="milestone-card reveal"><div class="milestone-kicker">PRODUCT BUILD · LINKEDIN</div><div class="milestone-score milestone-word">Launched</div><h3>TKM Notes</h3><p>Shared the launch of an open-source, exam-focused learning platform built around the KTU 2024 Scheme, with TKMCE branch coverage, PYQs, revision workflows, and a Learn CS area.</p><a href="https://www.linkedin.com/posts/sreerang-p_prep-less-prioritize-better-activity-7510762916741070848-i4PF" target="_blank" rel="noopener" class="proj-link">Read launch post ↗</a><a href="https://tkm-notes.vercel.app/" target="_blank" rel="noopener" class="proj-link">Open TKM Notes ↗</a></article>
+<article class="milestone-card reveal reveal-delay-1"><div class="milestone-kicker">GOOGLE · JUNE 2026</div><div class="milestone-score milestone-word">Completed</div><h3>5-Day AI Agents Course</h3><p>5-Day AI Agents: Intensive Vibe Coding Course With Google. Issued June 2026.</p><a href="https://www.linkedin.com/in/sreerang-p" target="_blank" rel="noopener" class="proj-link">View LinkedIn credentials ↗</a></article>
+<article class="milestone-card reveal"><div class="milestone-kicker">GOOGLE FOR EDUCATION · 2026–2029</div><div class="milestone-score milestone-word">Certified</div><h3>Gemini Certified University Student</h3><p>Credential issued April 2026 and valid through April 2029.</p><a href="https://www.linkedin.com/in/sreerang-p" target="_blank" rel="noopener" class="proj-link">View LinkedIn credentials ↗</a></article>
+</div></div></section>
+
 <!-- CONTACT -->
 <section id="contact">
   <div class="container">
     <div class="contact-card reveal">
-      <div class="section-num" style="justify-content:center">06 / Transmission</div>
+      <div class="section-num" style="justify-content:center">07 / Contact</div>
       <h2>Let's build something<br><span class="h1-gradient">incredible together</span></h2>
-      <p>Whether you have a project, an internship opportunity, or just want to chat about technology — send a message or reach out directly.</p>
+      <p>For project collaborations, internships, engineering discussions, or a quick introduction, send a message or reach out directly.</p>
       <div class="contact-links">
         <a href="mailto:sreerangp.official@gmail.com" class="contact-link main" id="email-btn">
           <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -1850,7 +1748,7 @@
             <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
             <span>Send Message</span>
           </button>
-          <div id="form-status" class="form-status" role="alert"></div>
+          <div id="form-status" class="form-status" role="status" aria-live="polite"></div>
         </form>
         <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(window.submitted){window.onFormSubmitted();}"></iframe>
       </div>
@@ -1874,7 +1772,7 @@
   <div class="container">
     <div class="footer-inner">
       <div class="footer-left">
-        <strong>Sreerang P</strong> · Built with passion · <span id="footer-year">2026</span> · <span id="footer-clock">00:00:00 IST</span>
+        <strong>Sreerang P</strong> · Built with passion · <span id="footer-year">2026</span>
       </div>
       <nav class="footer-right" id="footer-links" aria-label="Footer navigation"></nav>
     </div>
@@ -1891,11 +1789,11 @@
   const D = {
     profile: {
       name: "Sreerang P",
-      title: "Software, Data & AI Builder",
-      typedWords: ["software.", "data products.", "AI agents.", "useful tools.", "the future."],
+      title: "Software Developer · AI & Data Systems",
+      typedWords: ["software products.", "developer tools.", "AI workflows.", "data-driven applications."],
       aboutText: [
-        "I'm <strong>Sreerang P</strong>, an Electrical &amp; Computer Engineering student at TKM College of Engineering (expected graduation 2029) and a BS Data Science &amp; Applications student at <strong>IIT Madras</strong>. I focus on building software, data products, and AI solutions.",
-        "I enjoy programming, data science, machine learning, and designing useful applications. I love open-source collaboration, continuous learning, and experimenting with new technical frameworks."
+        "I'm <strong>Sreerang P</strong>, studying Electrical &amp; Computer Engineering at TKM College of Engineering and pursuing the BS in Data Science &amp; Applications at <strong>IIT Madras</strong>. Alongside my studies, I build software products, developer tools, and practical AI workflows.",
+        "I enjoy taking ideas from problem definition to working software — learning through implementation, debugging, and iteration. My current interests include full-stack development, AI systems, data science, and open-source tools."
       ]
     },
     education: [
@@ -1906,7 +1804,7 @@
     skills: {
       languages:    ["Python", "C++", "C", "TypeScript", "JavaScript"],
       software:     ["React", "Next.js", "Vite", "Flask", "Git"],
-      dataAi:       ["Data Science", "NumPy", "Pandas", "Machine Learning", "Computer Vision"],
+      dataAi:       ["Data Science", "NumPy", "Pandas", "Machine Learning"],
       backendCloud: ["Supabase", "SQL", "PostgreSQL", "REST APIs"]
     },
     socials: {
@@ -1917,7 +1815,7 @@
     projects: [
       {
         name: "Modulr",
-        description: "An adaptive exam-learning platform for TKM College of Engineering (KTU 2024 Scheme, S3–S8) that turns syllabus, previous-year questions, mastery, and mistakes into personalized, high-yield study sessions — shipped as a fully static site.",
+        description: "A focused exam-preparation platform for TKM College of Engineering that connects the KTU 2024 syllabus, previous-year questions, and mistake tracking into structured study sessions.",
         technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Vitest"],
         github: "https://github.com/cosmiccoder200x-sys/Modulr",
         demo: "https://tkm-notes.vercel.app/",
@@ -1927,6 +1825,8 @@
         spec: {
           title: "Modulr // Adaptive Learning Architecture",
           overview: "Client-side exam mastery platform mapping KTU syllabus trees directly to past question distributions.",
+          problem: "Students need a clear connection between syllabus coverage, previous-year questions, and revision priorities.",
+          approach: "Maps syllabus topics to question practice and supports targeted revision through mastery and mistake tracking.",
           stack: "Next.js 15, TypeScript, Tailwind CSS, Vitest",
           diagram: `[User Request] ──► [Syllabus Graph] ──► [Weight Matrix]
                        │
@@ -1947,6 +1847,8 @@
         spec: {
           title: "Local Brain MCP // Local-First Agent Memory",
           overview: "MCP standard protocol implementation providing local sqlite-vss vector retrieval to Claude & Gemini agents.",
+          problem: "AI coding sessions can lose important repository context and engineering decisions between sessions.",
+          approach: "Indexes Git history and engineering decisions into a local SQLite-backed vector store exposed through the Model Context Protocol.",
           stack: "Node.js, TypeScript, Model Context Protocol SDK, SQLite vector extension",
           diagram: `[AI Agent / IDE] ◄──(JSON-RPC / stdio)──► [Local Brain MCP]
                                                    │
@@ -1956,33 +1858,57 @@
       },
       {
         name: "FocusFlow Extension",
-        description: "A Chrome productivity extension for tracking website usage, blocking distracting sites, Pomodoro sessions, productivity statistics, coding-platform tracking, dark mode, tasks, notes, achievements, and reports.",
+        description: "A Chrome productivity extension that combines website-usage tracking, distraction blocking, Pomodoro sessions, coding-platform tracking, tasks, notes, and activity reports.",
         technologies: ["JavaScript", "HTML", "CSS", "Chrome Extension APIs"],
         github: "https://github.com/cosmiccoder200x-sys/Focusflow",
         demo: null,
         featured: false,
         icon: "⚡",
-        category: "productivity"
+        category: "productivity",
+        spec: {
+          title: "FocusFlow // Browser Productivity Workflow",
+          overview: "A browser-based workspace for understanding browsing habits and structuring focused work sessions.",
+          problem: "Distractions, fragmented tasks, and untracked browsing make it harder to maintain consistent focus.",
+          approach: "Combines site usage tracking, blocklists, Pomodoro sessions, coding-platform tracking, tasks, notes, and reports in one Chrome extension.",
+          stack: "JavaScript, HTML, CSS, Chrome Extension APIs",
+          diagram: "[Browser Activity] -> [Usage Tracking]\n        |                    |\n        v                    v\n [Focus / Blocklist] -> [Reports]\n        |\n        v\n [Pomodoro / Tasks / Notes]"
+        }
       },
       {
         name: "E--learning",
-        description: "A full-stack e-learning platform with class management, live sessions, course materials, assignments, submissions, and grading — a React frontend backed by a Flask REST API and Supabase.",
+        description: "A full-stack learning platform for managing classes, live sessions, course materials, assignments, submissions, and grading.",
         technologies: ["React", "TypeScript", "Vite", "Flask", "Supabase"],
         github: "https://github.com/cosmiccoder200x-sys/E--learning",
         demo: null,
         featured: false,
         icon: "📚",
-        category: "web"
+        category: "web",
+        spec: {
+          title: "E-learning // Course Management Platform",
+          overview: "A full-stack application that brings core teaching and learning workflows into one platform.",
+          problem: "Course delivery involves connected workflows: classes, materials, assignments, submissions, and grading.",
+          approach: "Uses a React and TypeScript frontend, a Flask REST API, and Supabase as the backend service layer.",
+          stack: "React, TypeScript, Vite, Flask, Supabase",
+          diagram: "Learner / Instructor -> React + TypeScript UI -> Flask REST API -> Supabase -> Courses, assignments, grades"
+        }
       },
       {
         name: "Gullylabs",
-        description: "A production e-commerce platform for physical and digital products — storefront with search, cart, coupons, and Razorpay checkout, plus real-time order tracking, returns, support chat, and a full admin console.",
+        description: "An e-commerce application for physical and digital products, with a storefront, search, cart, coupons, Razorpay checkout, order tracking, returns, support chat, and an admin console.",
         technologies: ["React", "TanStack Start", "Tailwind CSS", "Supabase", "Razorpay"],
         github: "https://github.com/cosmiccoder200x-sys/Gullylabs",
-        demo: "https://gullylab.vercel.app",
+        demo: null,
         featured: false,
         icon: "🛍️",
-        category: "web"
+        category: "web",
+        spec: {
+          title: "Gullylabs // Commerce Platform",
+          overview: "An end-to-end commerce experience covering customer shopping flows and administrative operations.",
+          problem: "An online store needs checkout, order visibility, returns, customer support, and administration to work together.",
+          approach: "Combines a storefront and cart experience with coupon handling, Razorpay checkout, order tracking, returns, support chat, and an admin console.",
+          stack: "React, TanStack Start, Tailwind CSS, Supabase, Razorpay",
+          diagram: "Storefront -> Search + Cart -> Razorpay Checkout -> Order Tracking; supporting flows: Returns, Support Chat, Admin Console"
+        }
       }
     ]
   };
@@ -2020,7 +1946,9 @@
       body.innerHTML = `
         <h4>${esc(p.spec.title)}</h4>
         <p>${esc(p.spec.overview)}</p>
-        <div style="margin: 12px 0; color:var(--cyan); font-size:0.8rem;">Stack: ${esc(p.spec.stack)}</div>
+        ${p.spec.problem ? '<div class="spec-detail"><strong>Problem</strong><p>' + esc(p.spec.problem) + '</p></div>' : ''}
+        ${p.spec.approach ? '<div class="spec-detail"><strong>Implementation</strong><p>' + esc(p.spec.approach) + '</p></div>' : ''}
+        <div class="spec-stack"><strong>Technology</strong><span>${esc(p.spec.stack)}</span></div>
         <div class="spec-ascii">${esc(p.spec.diagram)}</div>
         <div style="margin-top:14px; display:flex; gap:10px;">
           <a href="${esc(p.github)}" target="_blank" rel="noopener" class="proj-link primary">View Source ↗</a>
@@ -2102,7 +2030,7 @@
         break;
       case 'telemetry':
       case 'stats':
-        addTermLine('>', 'TELEMETRY: 246 commits/year · 22 GitHub repos · 120 FPS audio wave active.');
+        addTermLine('>', 'TELEMETRY: 246 commits/year · 22 GitHub repos ·  audio wave active.');
         break;
       case 'contact':
         addTermLine('>', 'Email: sreerangp.official@gmail.com | GitHub: cosmiccoder200x-sys');
@@ -2159,7 +2087,7 @@
         this.r = Math.random()*1.4 + 0.3;
         this.vx = (Math.random()-0.5)*0.35;
         this.vy = (Math.random()-0.5)*0.35;
-        this.color = Math.random()>0.6 ? 'rgba(167,139,250,' : 'rgba(6,182,212,';
+        this.color = Math.random()>0.6 ? 'rgba(96,165,250,' : 'rgba(56,189,248,';
         this.alpha = Math.random()*0.5 + 0.2;
       }
       update() {
@@ -2186,7 +2114,7 @@
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(124,58,237,${(1 - d/110) * 0.08})`;
+            ctx.strokeStyle = `rgba(37,99,235,${(1 - d/110) * 0.08})`;
             ctx.lineWidth = 0.6;
             ctx.stroke();
           }
@@ -2272,7 +2200,7 @@
         ctx.beginPath();
         ctx.moveTo(a[0], a[1]);
         ctx.lineTo(b[0], b[1]);
-        ctx.strokeStyle = isViolet ? `rgba(124,58,237,${alpha})` : `rgba(6,182,212,${alpha*0.7})`;
+        ctx.strokeStyle = isViolet ? `rgba(37,99,235,${alpha})` : `rgba(56,189,248,${alpha*0.7})`;
         ctx.lineWidth = 0.8;
         ctx.stroke();
       });
@@ -2282,13 +2210,13 @@
         ctx.beginPath();
         ctx.arc(p[0], p[1], 1.5 * p[3], 0, Math.PI*2);
         const isViolet = i % 2 === 0;
-        ctx.fillStyle = isViolet ? `rgba(167,139,250,${0.4 + depth*0.4})` : `rgba(103,232,249,${0.3 + depth*0.3})`;
+        ctx.fillStyle = isViolet ? `rgba(96,165,250,${0.4 + depth*0.4})` : `rgba(103,232,249,${0.3 + depth*0.3})`;
         ctx.fill();
       });
 
       const grd = ctx.createRadialGradient(CW()/2, CH()/2, 0, CW()/2, CH()/2, 28 + Math.sin(t)*5);
-      grd.addColorStop(0, 'rgba(167,139,250,0.35)');
-      grd.addColorStop(1, 'rgba(124,58,237,0)');
+      grd.addColorStop(0, 'rgba(96,165,250,0.35)');
+      grd.addColorStop(1, 'rgba(37,99,235,0)');
       ctx.beginPath();
       ctx.arc(CW()/2, CH()/2, 28 + Math.sin(t)*5, 0, Math.PI*2);
       ctx.fillStyle = grd;
@@ -2313,24 +2241,6 @@
 
   /* ══════════════════════════════════════════
      LIVE CLOCK
-  ══════════════════════════════════════════ */
-  function updateClock(){
-    const now = new Date();
-    const ist = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }));
-    const h = String(ist.getHours()).padStart(2, '0');
-    const m = String(ist.getMinutes()).padStart(2, '0');
-    const s = String(ist.getSeconds()).padStart(2, '0');
-    const str = `${h}:${m}:${s} IST`;
-    const el1 = document.getElementById('live-clock');
-    const el2 = document.getElementById('footer-clock');
-    if (el1) el1.textContent = str;
-    if (el2) el2.textContent = str;
-  }
-  updateClock();
-  setInterval(updateClock, 1000);
-
-  /* ══════════════════════════════════════════
-     TYPED TEXT EFFECT
   ══════════════════════════════════════════ */
   (function(){
     const el = document.getElementById('typed-text');
@@ -2609,7 +2519,7 @@
         let links = '';
         if (p.github) links += `<a href="${esc(p.github)}" target="_blank" rel="noopener" class="proj-link primary" aria-label="View ${esc(p.name)} on GitHub"><svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>Source</a>`;
         if (p.demo) links += `<a href="${esc(p.demo)}" target="_blank" rel="noopener" class="proj-link" aria-label="Open ${esc(p.name)} live demo"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Live ↗</a>`;
-        if (p.spec) links += `<button type="button" class="proj-link" onclick="openSpecModal(${i})" aria-label="View spec for ${esc(p.name)}">Spec &para;</button>`;
+        if (p.spec) links += `<button type="button" class="proj-link" onclick="openSpecModal(${i})" aria-label="View spec for ${esc(p.name)}">Case Study ↗</button>`;
 
         let npmHtml = '';
         if (p.npmPackage) {
@@ -2745,13 +2655,13 @@
       const leftMargin = 32;
       const topMargin = 22;
 
-      // Dark Cyber-Violet colors: Level 0 is deep obsidian dark slate, NEVER white
+      // Five distinct midnight-blue activity levels, from slate to ice blue.
       const colors = {
-        0: { fill: '#141322', stroke: 'rgba(124, 58, 237, 0.16)' },
-        1: { fill: 'rgba(124, 58, 237, 0.45)', stroke: 'rgba(124, 58, 237, 0.35)' },
-        2: { fill: '#6d28d9', stroke: '#7c3aed' },
-        3: { fill: '#8b5cf6', stroke: '#a78bfa' },
-        4: { fill: '#22d3ee', stroke: '#67e8f9' }
+        0: { fill: '#142238', stroke: '#263c59' },
+        1: { fill: '#17406f', stroke: '#24558a' },
+        2: { fill: '#1d4ed8', stroke: '#3b82f6' },
+        3: { fill: '#3b82f6', stroke: '#60a5fa' },
+        4: { fill: '#93c5fd', stroke: '#bfdbfe' }
       };
 
       const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -2788,11 +2698,11 @@
       const svgWidth = leftMargin + totalCols * colPitch + 16;
       const svgHeight = topMargin + 7 * rowPitch + 14;
 
-      const monthTexts = monthLabels.map(ml => `<text x="${ml.x}" y="14" fill="#64748b" font-family="'JetBrains Mono', monospace" font-size="9">${ml.text}</text>`).join('');
+      const monthTexts = monthLabels.map(ml => `<text x="${ml.x}" y="14" fill="#8fa4c0" font-family="'JetBrains Mono', monospace" font-size="9">${ml.text}</text>`).join('');
       const dayTexts = `
-        <text x="6" y="${topMargin + 1 * rowPitch + 9}" fill="#64748b" font-family="'JetBrains Mono', monospace" font-size="9">Mon</text>
-        <text x="6" y="${topMargin + 3 * rowPitch + 9}" fill="#64748b" font-family="'JetBrains Mono', monospace" font-size="9">Wed</text>
-        <text x="6" y="${topMargin + 5 * rowPitch + 9}" fill="#64748b" font-family="'JetBrains Mono', monospace" font-size="9">Fri</text>
+        <text x="6" y="${topMargin + 1 * rowPitch + 9}" fill="#8fa4c0" font-family="'JetBrains Mono', monospace" font-size="9">Mon</text>
+        <text x="6" y="${topMargin + 3 * rowPitch + 9}" fill="#8fa4c0" font-family="'JetBrains Mono', monospace" font-size="9">Wed</text>
+        <text x="6" y="${topMargin + 5 * rowPitch + 9}" fill="#8fa4c0" font-family="'JetBrains Mono', monospace" font-size="9">Fri</text>
       `;
 
       return `<svg viewBox="0 0 ${svgWidth} ${svgHeight}" class="gh-calendar-svg" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
@@ -2802,115 +2712,32 @@
       </svg>`;
     }
 
-    // Default dark fallback (246 contributions distribution, 0 white)
-    function generateFallbackData() {
-      const days = [];
-      const now = new Date('2026-10-28T00:00:00');
-      for (let i = 370; i >= 0; i--) {
-        const d = new Date(now);
-        d.setDate(d.getDate() - i);
-        const y = d.getFullYear();
-        const m = String(d.getMonth() + 1).padStart(2, '0');
-        const day = String(d.getDate()).padStart(2, '0');
-        const dateStr = `${y}-${m}-${day}`;
-        const isContrib = (i % 6 === 0 || i % 7 === 0 || (i > 100 && i < 180 && i % 2 === 0));
-        const count = isContrib ? (i % 3 === 0 ? 12 : (i % 2 === 0 ? 4 : 2)) : 0;
-        const level = count > 10 ? 4 : (count > 5 ? 3 : (count > 2 ? 2 : (count > 0 ? 1 : 0)));
-        days.push({ date: dateStr, count, level });
-      }
-      return days;
-    }
-
-    // Immediate dark render
-    const initialDays = generateFallbackData();
-    container.innerHTML = `<div class="gh-heatmap-svg">${buildSvg(initialDays)}</div>`;
+    // Render only contribution data returned by the live source; never synthesize activity.
+    container.innerHTML = '<p class="gh-data-state">Loading contribution history…</p>';
 
     try {
       const res = await fetch('https://github-contributions-api.jogruber.de/v4/cosmiccoder200x-sys');
       if (!res.ok) throw new Error();
       const data = await res.json();
       if (data && data.contributions && data.contributions.length > 0) {
-        const total = (data.total && (data.total['2026'] || data.total['2025'])) ? (data.total['2026'] || data.total['2025']) : 246;
+        const year = String(new Date().getFullYear());
+        const total = data.total && data.total[year] != null
+          ? data.total[year]
+          : data.contributions.filter(item => String(item.date).startsWith(year)).reduce((sum, item) => sum + (Number(item.count) || 0), 0);
         container.innerHTML = `<div class="gh-heatmap-svg">${buildSvg(data.contributions)}</div>`;
-        if (totalEl) totalEl.textContent = `${total} contributions in 2026`;
+        if (totalEl) totalEl.textContent = `${total} contributions in ${year}`;
+      } else {
+        container.innerHTML = '<p class="gh-data-state">No public contribution history was returned by the data source.</p>';
+        if (totalEl) totalEl.textContent = "No contribution data";
       }
     } catch (_) {
-      // Retain dark fallback
+      container.innerHTML = '<p class="gh-data-state">Contribution history is temporarily unavailable. View the live activity on GitHub.</p>';
+      if (totalEl) totalEl.textContent = 'Live data unavailable';
     }
   }
   loadHeatmap();
 
-  /* ══════════════════════════════════════════
-     GITHUB API
-  ══════════════════════════════════════════ */
-  fetch('https://api.github.com/users/cosmiccoder200x-sys')
-    .then(r => { if (!r.ok) throw new Error(); return r.json(); })
-    .then(u => {
-      if (u.public_repos != null) {
-        const setVal = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
-        setVal('gh-repos', u.public_repos);
-        setVal('gh-followers', u.followers);
-        setVal('gh-following', u.following);
-        setVal('stat-repos-counter', u.public_repos);
-      }
-    }).catch(() => {
-      const setVal = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
-      setVal('gh-repos', D.projects.length);
-      setVal('gh-followers', '—');
-      setVal('gh-following', '—');
-    });
-
-  fetch('https://api.github.com/users/cosmiccoder200x-sys/repos?per_page=100')
-    .then(r => { if (!r.ok) throw new Error(); return r.json(); })
-    .then(repos => {
-      if (Array.isArray(repos)) {
-        const totalStars = repos.reduce((acc, r) => acc + (r.stargazers_count || 0), 0);
-        const starsEl = document.getElementById('gh-stars');
-        if (starsEl) starsEl.textContent = totalStars;
-
-        const prioritized = ['Modulr', 'local-brain-mcp', 'Focusflow', 'E--learning', 'Gullylabs'];
-        const sorted = [...repos].sort((a, b) => {
-          const ia = prioritized.indexOf(a.name);
-          const ib = prioritized.indexOf(b.name);
-          if (ia !== -1 && ib !== -1) return ia - ib;
-          if (ia !== -1) return -1;
-          if (ib !== -1) return 1;
-          return (b.stargazers_count || 0) - (a.stargazers_count || 0);
-        });
-
-        const rGrid = document.getElementById('repos-grid');
-        if (rGrid) {
-          rGrid.innerHTML = sorted.slice(0, 4).map(r => `
-            <a href="${esc(r.html_url)}" target="_blank" rel="noopener" class="repo-card">
-              <div class="repo-top">
-                <span class="repo-name">📦 ${esc(r.name)}</span>
-                <span class="repo-stars">★ ${r.stargazers_count || 0}</span>
-              </div>
-              <div class="repo-desc">${esc(r.description || 'Open source repository.')}</div>
-              <div class="repo-lang">${r.language ? `<span class="lang-dot lang-${lc(r.language)}"></span>${esc(r.language)}` : ''}</div>
-            </a>
-          `).join('');
-        }
-        const noteEl = document.getElementById('gh-note');
-        if (noteEl) noteEl.textContent = 'Synced with GitHub API · ' + new Date().toLocaleDateString();
-      }
-    }).catch(() => {
-      const noteEl = document.getElementById('gh-note');
-      if (noteEl) noteEl.textContent = 'Showing offline cached projects.';
-      const rGrid = document.getElementById('repos-grid');
-      if (rGrid) {
-        rGrid.innerHTML = D.projects.slice(0, 4).map(p => `
-          <a href="${esc(p.github)}" target="_blank" rel="noopener" class="repo-card">
-            <div class="repo-top">
-              <span class="repo-name">📦 ${esc(p.name)}</span>
-              <span class="repo-stars">★ verified</span>
-            </div>
-            <div class="repo-desc">${esc(p.description)}</div>
-            <div class="repo-lang"><span class="lang-dot lang-${lc(p.technologies[0])}"></span>${esc(p.technologies[0])}</div>
-          </a>
-        `).join('');
-      }
-    });
+  // No live GitHub profile or repository counters are fetched.
 
   /* ══════════════════════════════════════════
      CONTACT FORM
@@ -2924,29 +2751,30 @@
     if (!window.submitted) return;
     if (submitBtn) {
       submitBtn.disabled = false;
-      submitBtn.innerHTML = `
-        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-        <span>Send Message</span>
-      `;
+      submitBtn.removeAttribute("aria-busy");
+      submitBtn.textContent = "Send Message";
     }
     if (formStatus) {
-      formStatus.className = 'form-status success';
-      formStatus.innerHTML = '🎉 Thank you! Your message has been sent successfully.';
+      formStatus.className = "form-status success";
+      formStatus.textContent = "Google Forms returned a response to the submission. For direct follow-up, email me.";
     }
     if (contactForm) contactForm.reset();
     window.submitted = false;
   };
 
   if (contactForm) {
-    contactForm.addEventListener('submit', function(){
+    contactForm.addEventListener("submit", function(){
+      if (!contactForm.reportValidity()) return;
       window.submitted = true;
+      if (formStatus) {
+        formStatus.className = "form-status";
+        formStatus.textContent = "Sending your message to Google Forms…";
+      }
       if (submitBtn) {
         submitBtn.disabled = true;
-        submitBtn.innerHTML = '<span>Sending transmission...</span>';
+        submitBtn.setAttribute("aria-busy", "true");
+        submitBtn.textContent = "Sending message…";
       }
-      setTimeout(() => {
-        if (window.submitted) window.onFormSubmitted();
-      }, 1600);
     });
   }
 

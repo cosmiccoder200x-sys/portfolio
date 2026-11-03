@@ -214,3 +214,44 @@ single-file architecture.
 - Keep the contribution scale consistent: slate → deep blue → cobalt → electric blue → ice blue. Avoid purple/violet remnants in heatmap cells, hover glows, labels, and legend.
 - The decorative 120 FPS label and live clock were removed to keep navigation free of simulated telemetry.
 - Keep milestone/credential facts tied to the actual public LinkedIn profile/post and retain issuer and issue/expiry dates.
+
+## Premium motion upgrade — 2026-11-03
+
+The `feat/premium-motion-upgrade` branch adds a restrained interaction layer without
+changing the dependency-free, single-file architecture or the existing midnight-blue
+visual identity.
+
+### Motion and interaction changes
+
+- Project cards reveal implementation notes, technology stack, and architecture diagrams
+  on hover or keyboard focus; the preview remains visible on touch layouts.
+- Existing pointer-following card tilt is limited to fine-pointer devices and disabled
+  when reduced motion is requested.
+- Hero name and section headings receive subtle entrance transitions.
+- Education timeline connectors animate when their section becomes visible.
+- Skill cards receive restrained ambient hover lighting.
+- The Milestones section is included in active navigation highlighting.
+- Particle and hero-hex canvas loops do not start when `prefers-reduced-motion: reduce`
+  is enabled.
+
+### Constraints
+
+- Keep all project content sourced from `PORTFOLIO_DATA`; do not hard-code card content.
+- Continue escaping interpolated content with `esc()`.
+- Do not add animation libraries, dependencies, frameworks, build steps, or API calls.
+- Keep the architecture preview keyboard-accessible and visible on touch devices.
+- Preserve all existing sections, links, modals, filters, contact form, and contribution
+  heatmap behavior.
+- Keep all new motion optional and respect `prefers-reduced-motion`.
+
+### Verification
+
+- Run `node --check` against the inline script.
+- Confirm five curated project cards still render and each case-study card shows its
+  architecture preview.
+- Confirm project filters, case-study modal, mobile navigation, and contact form remain
+  functional.
+- Confirm the Milestones nav item becomes active while scrolling.
+- Inspect touch layouts and reduced-motion behavior.
+- Do not merge or deploy until visual QA is completed and the user approves.
+
